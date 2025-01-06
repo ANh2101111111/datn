@@ -1,7 +1,9 @@
-import React from 'react'
-
-export default function Headers() {
+const Header: React.FC = () => {
   return (
-    <div>Headers</div>
-  )
-}
+    <header className="bg-gray-800 text-white text-center py-4">
+      Header
+    </header>
+  );
+};
+
+export default Header;
