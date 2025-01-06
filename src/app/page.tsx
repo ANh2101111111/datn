@@ -1,12 +1,24 @@
-const TestColors: React.FC = () => {
+import React from "react";
+import TextColor from "@/uis/system-design/TextColor";
+
+export default function Home() {
   return (
-    <div className="text-center space-y-4">
-      <p className="text-brand-primary text-2xl font-bold">Xin chào </p>
-      <p className="text-system-success text-2xl font-bold">Xin chào </p>
-      <p className="text-scale-color1 text-2xl font-bold">Xin chào </p>
-      <p className="text-text-heading text-2xl font-bold">Xin chào </p>
+    <div >
+      
+      <TextColor text="Brand Color 1" className="text-brand-primary " />
+      <TextColor text="Brand Color 2" className="text-brand-secondary " />
+
+      <TextColor text="Scale Color 1" className="text-scale-color1" />
+      <TextColor text="Scale Color 2" className="text-scale-color2" />
+      <TextColor text="Scale Color 3" className="text-scale-color3" />
+      <TextColor text="Scale Color 4" className="text-scale-color4" />
+
+      <TextColor text="System Success" className="text-system-success" />
+      <TextColor text="System Danger" className="text-system-danger" />
+      <TextColor text="System Info" className="text-system-info" />
+      
+      <TextColor text="Heading" className="text-text-heading" />
+      <TextColor text="Body" className="text-text-body" />
     </div>
   );
-};
-
-export default TestColors;
+}
