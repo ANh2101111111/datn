@@ -51,10 +51,7 @@ module.exports = {
         'text-small': ['14px', { lineHeight: '21px', letterSpacing: '0px' }],
         'text-xs': ['12px', { lineHeight: '18px', letterSpacing: '0px' }],
       },
-      fontWeight: {
-        bold: '700', 
-        medium: '500'
-      },
+      
     },
   },
   plugins: [],
