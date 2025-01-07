@@ -7,9 +7,9 @@ export default function Home() {
     <div >
       
       <TextColor text="Brand Color 1" className="text-brand-primary font-lato " />
-      <TextColor text="Brand Color 2" className="text-brand-secondary font-quicksand " />
+      <TextColor text="Brand Color 2" className="text-brand-secondary font-quicksand text-heading-1 font-medium " />
 
-      <TextColor text="Scale Color 1" className="text-scale-color1" />
+      <TextColor text="Scale Color 1" className="text-scale-color1 font-medium" />
       <TextColor text="Scale Color 2" className="text-scale-color2" />
       <TextColor text="Scale Color 3" className="text-scale-color3" />
       <TextColor text="Scale Color 4" className="text-scale-color4" />
