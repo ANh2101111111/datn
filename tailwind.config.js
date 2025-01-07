@@ -32,6 +32,10 @@ module.exports = {
           body: '#7e7e7e',
         },
       },
+      fontFamily: {
+        lato: ['var(--font-lato)', 'sans-serif'],
+        quicksand: ['var(--font-quicksand)', 'sans-serif'],
+      },
     },
   },
   plugins: [],

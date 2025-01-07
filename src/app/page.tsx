@@ -1,12 +1,13 @@
 import React from "react";
 import TextColor from "@/uis/system-design/TextColor";
 
+
 export default function Home() {
   return (
     <div >
       
-      <TextColor text="Brand Color 1" className="text-brand-primary " />
-      <TextColor text="Brand Color 2" className="text-brand-secondary " />
+      <TextColor text="Brand Color 1" className="text-brand-primary font-lato " />
+      <TextColor text="Brand Color 2" className="text-brand-secondary font-quicksand " />
 
       <TextColor text="Scale Color 1" className="text-scale-color1" />
       <TextColor text="Scale Color 2" className="text-scale-color2" />
