@@ -1,4 +1,5 @@
 export const DATA = [
+
     {
       title: "Company",
       texts: [
