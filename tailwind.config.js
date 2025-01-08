@@ -30,6 +30,7 @@ module.exports = {
         text: {
           heading: '#1b1b1b',
           body: '#7e7e7e',
+          footer: '#253D4E'
         },
       },
       fontFamily: {
