@@ -12,9 +12,12 @@ const BoxFooter: FC<Props> = ({ title, texts }) => {
         {title}
       </div>
       {/* Hiển thị danh sách */}
-      <div className="space-y-[10px]"> 
+      <div className="space-y-[10px]">
         {texts.map((item, index) => (
-          <div key={index} className="text-text-medium font-lato font-normal text-text-footer"   >
+          <div
+            key={index}
+            className="text-text-medium font-lato font-normal text-text-footer"
+          >
             {item}
           </div>
         ))}

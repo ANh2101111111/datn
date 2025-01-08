@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Lato, Quicksand } from 'next/font/google';
+import { Lato, Quicksand } from "next/font/google";
 import { Header } from "@/layout";
 import Footer from "../layout/Footer";
 import "./globals.css";
 
 const lato = Lato({
-  subsets: ['latin'],
-  variable: '--font-lato',
-  weight: ['400', '700'], 
+  subsets: ["latin"],
+  variable: "--font-lato",
+  weight: ["400", "700"],
 });
 
 const quicksand = Quicksand({
-  subsets: ['latin'],
-  variable: '--font-quicksand',
-  weight: ['400', '700'], 
+  subsets: ["latin"],
+  variable: "--font-quicksand",
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -28,12 +28,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${lato.variable} ${quicksand.variable} antialiased`}
-      >
+      <body className={`${lato.variable} ${quicksand.variable} antialiased`}>
         <Header />
-        {children} 
-        <Footer/>
+        {children}
+        <Footer />
       </body>
     </html>
   );

@@ -6,7 +6,11 @@ const Footer: React.FC = () => {
   return (
     <footer className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
       {DATA.map((section, index) => (
-        <BoxFooterInfo key={index} title={section.title} texts={section.texts} />
+        <BoxFooterInfo
+          key={index}
+          title={section.title}
+          texts={section.texts}
+        />
       ))}
     </footer>
   );
