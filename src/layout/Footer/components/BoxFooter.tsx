@@ -1,0 +1,29 @@
+import React, { FC } from "react";
+
+interface Props {
+  title: string;
+  texts: string[];
+}
+
+const BoxFooter: FC<Props> = ({ title, texts }) => {
+  return (
+    <div>
+      <div className="text-heading-4 font-quicksand text-text-footer mb-[28.58px] font-semibold">
+        {title}
+      </div>
+      {/* Hiển thị danh sách */}
+      <div className="space-y-[10px]">
+        {texts.map((item, index) => (
+          <div
+            key={index}
+            className="text-text-medium font-lato font-normal text-text-footer"
+          >
+            {item}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default BoxFooter;
