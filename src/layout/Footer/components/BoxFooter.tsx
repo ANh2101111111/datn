@@ -5,7 +5,7 @@ interface Props {
   texts: string[];
 }
 
-const BoxFooterInfo: FC<Props> = ({ title, texts }) => {
+const BoxFooter: FC<Props> = ({ title, texts }) => {
   return (
     <div>
       <div className="text-heading-4 font-quicksand text-text-heading mb-[28.58px] font-semibold">
@@ -23,4 +23,4 @@ const BoxFooterInfo: FC<Props> = ({ title, texts }) => {
   );
 };
 
-export default BoxFooterInfo;
+export default BoxFooter;

@@ -1,5 +1,5 @@
 import React from "react";
-import BoxFooterInfo from "./components/BoxFooterInfo";
+import BoxFooterInfo from "./components/BoxFooter";
 import { DATA } from "./components/data";
 
 const Footer: React.FC = () => {
