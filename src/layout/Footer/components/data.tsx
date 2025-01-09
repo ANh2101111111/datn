@@ -1,3 +1,8 @@
+import { IconAddress} from "@/layout/assets/icons";
+import IconCall from "@/layout/assets/icons/IconCall";
+import IconEmail from "@/layout/assets/icons/IconEmail";
+import IconTime from "@/layout/assets/icons/IconTime";
+
 export const DATA = [
   {
     title: "Company",
@@ -24,12 +29,8 @@ export const DATA = [
     ],
   },
   {
-    title: "Account",
+    title: "Settings",
     texts: [
-      "Sign In",
-      "View Cart",
-      "My Wishlist",
-      "Track My Order",
       "Setting Account",
       "View All Order",
       "Collection",
@@ -47,3 +48,27 @@ export const DATA = [
     ],
   },
 ];
+
+export const LOGO_DATA = [
+  {
+    icon: <IconAddress />,
+    title: "Address: ",
+    description: "5171 W Campbell Ave undefined Kent, Utah 53127 United States"
+  },
+  {
+    icon: <IconCall />,
+    title: "Call Us: ",
+    description: " (+91) - 540-025-124553 "
+  },
+  {
+    icon: <IconEmail />,
+    title: "Email: ",
+    description: "Email: contact@nestmart.com"
+  },
+  {
+    icon: <IconTime />,
+    title: "Hours: ",
+    description: "10:00 - 18:00, Mon - Sat "
+  }
+]
+

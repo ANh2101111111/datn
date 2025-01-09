@@ -26,7 +26,7 @@ module.exports = {
         },
         // Text Colors
         text: {
-          heading: "#1b1b1b",
+          heading: "#253D4E", 
           body: "#7e7e7e",
           footer: "#253D4E",
         },
