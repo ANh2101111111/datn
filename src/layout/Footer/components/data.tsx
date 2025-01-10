@@ -1,8 +1,7 @@
-import { IconAddress} from "@/layout/assets/icons";
+import { IconAddress } from "@/layout/assets/icons";
 import IconCall from "@/layout/assets/icons/IconCall";
 import IconEmail from "@/layout/assets/icons/IconEmail";
 import IconTime from "@/layout/assets/icons/IconTime";
-
 
 export const DATA = [
   {
@@ -31,11 +30,7 @@ export const DATA = [
   },
   {
     title: "Settings",
-    texts: [
-      "Setting Account",
-      "View All Order",
-      "Collection",
-    ],
+    texts: ["Setting Account", "View All Order", "Collection"],
   },
   {
     title: "Information",
@@ -54,25 +49,24 @@ export const LOGO_DATA = [
   {
     icon: <IconAddress />,
     title: "Address: ",
-    description: "5171 W Campbell Ave undefined Kent, Utah 53127 United States"
+    description: "5171 W Campbell Ave undefined Kent, Utah 53127 United States",
   },
   {
     icon: <IconCall />,
     title: "Call Us: ",
-    description: " (+91) - 540-025-124553 "
+    description: " (+91) - 540-025-124553 ",
   },
   {
     icon: <IconEmail />,
     title: "Email: ",
-    description: "Email: contact@nestmart.com"
+    description: "Email: contact@nestmart.com",
   },
   {
     icon: <IconTime />,
     title: "Hours: ",
-    description: "10:00 - 18:00, Mon - Sat "
-  }
-]
-
+    description: "10:00 - 18:00, Mon - Sat ",
+  },
+];
 
 // PAYMENT
 export const APP_PAYMENT_DATA = {
@@ -84,17 +78,14 @@ export const APP_PAYMENT_DATA = {
       alt: "App Store",
     },
     {
-      image: "/GooglePlay.svg", 
+      image: "/GooglePlay.svg",
       alt: "Google Play",
     },
   ],
   paymentGateways: [
     {
-      image: "/payment-method.svg", 
+      image: "/payment-method.svg",
       alt: "Visa",
-    }
+    },
   ],
 };
-
-
-
