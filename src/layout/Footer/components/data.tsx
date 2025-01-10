@@ -3,6 +3,7 @@ import IconCall from "@/layout/assets/icons/IconCall";
 import IconEmail from "@/layout/assets/icons/IconEmail";
 import IconTime from "@/layout/assets/icons/IconTime";
 
+
 export const DATA = [
   {
     title: "Company",
@@ -71,4 +72,29 @@ export const LOGO_DATA = [
     description: "10:00 - 18:00, Mon - Sat "
   }
 ]
+
+
+// PAYMENT
+export const APP_PAYMENT_DATA = {
+  title: "App & Payment",
+  description: "Install NetMart App from App Store or Google Play",
+  apps: [
+    {
+      image: "/AppStoteImage.svg",
+      alt: "App Store",
+    },
+    {
+      image: "/GooglePlay.svg", 
+      alt: "Google Play",
+    },
+  ],
+  paymentGateways: [
+    {
+      image: "/payment-method.svg", 
+      alt: "Visa",
+    }
+  ],
+};
+
+
 
