@@ -7,7 +7,7 @@ import BoxCopyRight from "./components/BoxCopyRight";
 const Footer: React.FC = () => {
   return (
     <footer className=" ">
-      <div className="flex justify-between  pb-6  ">
+      <div className="grid md:grid-cols-20 grid-cols-2">
         <BoxLogo />
         {DATA.map((section, index) => (
           <BoxFooterInfo

@@ -5,7 +5,7 @@ import { APP_PAYMENT_DATA } from "./data";
 
 const BoxPayment: React.FC = () => {
   return (
-    <div className="flex flex-col gap-3 w-[281.43px] h-[255px] ">
+    <div className="col-span-2 md:col-span-4 flex flex-col gap-3 w-[281.43px] h-[255px]">
       <h3 className="text-heading-4 font-quicksand text-text-footer  font-semibold">
         {APP_PAYMENT_DATA.title}
       </h3>

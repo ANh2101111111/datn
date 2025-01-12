@@ -20,7 +20,7 @@ const Information: FC<IInformationProps> = ({ icon, title, description }) => {
 };
 const BoxLogo: FC = ({}) => {
   return (
-    <div className="w-full max-w-[346px] h-auto flex flex-col gap-[23.41px]">
+    <div className="md:col-span-4 col-span-2 w-full h-auto flex flex-col gap-[23.41px]">
       <div>
         <IconLogo />
       </div>
