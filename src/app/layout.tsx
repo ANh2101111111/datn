@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Lato, Quicksand } from "next/font/google";
-import { Header } from "@/layout";
+import Header from "@/layout/Header";
 import Footer from "../layout/Footer";
 import "./globals.css";
 
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lato.variable} ${quicksand.variable} antialiased container`} >
-        <Header />
+        <Header/>
         {children}
         <Footer />
       </body>
