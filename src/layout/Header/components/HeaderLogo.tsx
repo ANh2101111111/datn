@@ -7,11 +7,16 @@ interface LogoProps {
   height: number;
 }
 
-const HeaderLogo: React.FC<LogoProps> = ({ logoSrc, alt,width, height }) => {
+const HeaderLogo: React.FC<LogoProps> = ({ logoSrc, alt, width, height }) => {
   return (
     <div className="">
-      <Image src={logoSrc} alt={alt} className="h-12 w-auto "width={width}
-            height={height} />
+      <Image
+        src={logoSrc}
+        alt={alt}
+        className="object-contain max-w-none"
+        width={width}
+        height={height}
+      />
     </div>
   );
 };

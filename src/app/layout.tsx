@@ -28,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} ${quicksand.variable} antialiased container`} >
+      <body className={`${lato.variable} ${quicksand.variable} antialiased container overflow-x-hidden `} >
         <Header/>
         {children}
         <Footer />
