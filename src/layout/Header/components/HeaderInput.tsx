@@ -12,7 +12,7 @@ interface SearchProps {
 
 const HeaderInput: React.FC<SearchProps> = ({ categories, icons }) => {
   const searchIcon = icons.find((icon) => icon.key === "search")?.icon;
-
+ 
   return (
     <div className="flex items-center border-2 border-[#BCE3C9] rounded-sm w-[700px] h-[37px]">
       <div className="flex items-center px-2">

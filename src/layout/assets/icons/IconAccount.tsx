@@ -1,18 +1,18 @@
 import * as React from "react";
 
-const IconWishlist: React.FC<React.SVGProps<SVGSVGElement>> = () => (
-    <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="25"
-    height="23"
-    fill="none"
-    viewBox="0 0 25 23"
-  >
-    <path
-      fill="#253D4E"
-      d="M17.607.284a6.4 6.4 0 0 0-5.5 3.3 6.4 6.4 0 0 0-5.5-3.3 6.8 6.8 0 0 0-6.5 7.05c0 6.775 10.956 14.6 11.422 14.932l.578.409.578-.41c.466-.33 11.422-8.157 11.422-14.931a6.8 6.8 0 0 0-6.5-7.05m-5.5 19.928c-3.253-2.43-10-8.4-10-12.878a4.8 4.8 0 0 1 4.5-5.05 4.8 4.8 0 0 1 4.5 5.05h2a4.8 4.8 0 0 1 4.5-5.05 4.8 4.8 0 0 1 4.5 5.05c0 4.48-6.747 10.449-10 12.878"
-    ></path>
-  </svg>
+const IconAccount: React.FC<React.SVGProps<SVGSVGElement>> = () => (
+  <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="18"
+  height="25"
+  fill="none"
+  viewBox="0 0 18 25"
+>
+  <path
+    fill="#253D4E"
+    d="M18 24.367h-2v-5.044a2.96 2.96 0 0 0-2.957-2.957H4.957A2.96 2.96 0 0 0 2 19.324v5.043H0v-5.042a4.963 4.963 0 0 1 4.957-4.958h8.086A4.963 4.963 0 0 1 18 19.325zM9 12.367a6 6 0 1 1 0-12 6 6 0 0 1 0 12m0-10a4 4 0 1 0 0 8 4 4 0 0 0 0-8"
+  ></path>
+</svg>
 );
 
-export default IconWishlist;
+export default IconAccount;
