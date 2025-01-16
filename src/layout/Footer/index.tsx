@@ -4,21 +4,27 @@ import BoxLogo from "./components/BoxLogo";
 import { DATA } from "./components/data";
 import BoxPayment from "./components/BoxPayment";
 import BoxCopyRight from "./components/BoxCopyRight";
+
 const Footer: React.FC = () => {
   return (
-    <footer className=" ">
-      <div className="grid md:grid-cols-20 grid-cols-2">
-        <BoxLogo />
+    <footer className="">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="col-span-2 md:col-span-1">
+          <BoxLogo />
+        </div>
+
         {DATA.map((section, index) => (
-          <BoxFooterInfo
-            key={index}
-            title={section.title}
-            texts={section.texts}
-          />
+          <div key={index} className="col-span-1">
+            <BoxFooterInfo title={section.title} texts={section.texts} />
+          </div>
         ))}
-        <BoxPayment />
+
+        <div className="col-span-2 md:col-span-1">
+          <BoxPayment />
+        </div>
       </div>
-      <div>
+
+      <div className="mt-8">
         <BoxCopyRight />
       </div>
     </footer>

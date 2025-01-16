@@ -7,7 +7,7 @@ interface Props {
 
 const BoxFooter: FC<Props> = ({ title, texts }) => {
   return (
-    <div className="md:col-span-3 col-span-1">
+    <div className="md:col-span-3 col-span-1 gap-x-4">
       <div className="text-heading-4 font-quicksand text-text-footer  font-semibold">
         {title}
       </div>
