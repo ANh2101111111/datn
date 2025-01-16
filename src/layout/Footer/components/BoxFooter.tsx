@@ -7,12 +7,12 @@ interface Props {
 
 const BoxFooter: FC<Props> = ({ title, texts }) => {
   return (
-    <div className="md:col-span-3 col-span-1 gap-x-4">
-      <div className="text-heading-4 font-quicksand text-text-footer  font-semibold">
+    <div className="md:col-span-3 col-span-1 gap-4">
+      <div className="text-heading-4 font-quicksand text-text-footer font-semibold">
         {title}
       </div>
       {/* Hiển thị danh sách */}
-      <div className="space-y-[10px]">
+      <div className="space-y-[10px] ">
         {texts.map((item, index) => (
           <div
             key={index}

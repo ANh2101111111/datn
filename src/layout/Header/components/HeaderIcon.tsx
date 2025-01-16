@@ -11,15 +11,18 @@ interface IconsProps {
 
 const HeaderIcons: React.FC<IconsProps> = ({ icons }) => {
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-4 md:gap-6">
       {icons.map((item, index) => {
         const IconComponent = item.icon;
         return (
-          <div key={index} className="flex flex-row items-center  gap-2">
-            <span className="text-lg">
+          <div key={index} className="flex items-center gap-2 group">
+            <span className="text-base md:text-lg">
               <IconComponent />
             </span>
-            <span className="font-lato  text-text-body">{item.label}</span>
+            {/* Label hidden on mobile, shown on larger screens */}
+            <span className="text-sm font-lato text-gray-700 group-hover:text-green-500 transition-all duration-300">
+              {item.label}
+            </span>
           </div>
         );
       })}

@@ -25,7 +25,7 @@ export default function RootLayout({
       <body
         className={`${lato.variable} ${quicksand.variable} antialiased container`}
       >
-        <div className="container mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-[1280px] px-4 ">
           <Header />
           {children}
           <Footer />

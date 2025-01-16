@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+
 interface LogoProps {
   logoSrc: string;
   alt: string;
@@ -9,13 +10,14 @@ interface LogoProps {
 
 const HeaderLogo: React.FC<LogoProps> = ({ logoSrc, alt, width, height }) => {
   return (
-    <div className="">
+    <div className="flex items-center">
       <Image
         src={logoSrc}
         alt={alt}
-        className="object-contain max-w-none"
+        className="object-contain"
         width={width}
         height={height}
+        priority
       />
     </div>
   );
