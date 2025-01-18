@@ -1,12 +1,25 @@
 import React from "react";
+import Button from "../common/button";
+import { IconAddress } from "@/layout/assets/icons";
+import IconAccount from "@/layout/assets/icons/IconAccount";
 
-interface TextColorProps {
-  text: string;
-  className: string;
+export default function TextColor() {
+  return (
+    <div>
+      <Button
+        variant="primary"
+        size="small"
+        prefixIcon={<IconAddress width="10px" />}
+      >
+        Ha Tinh
+      </Button>
+      <Button
+        variant="secondary"
+        size="medium"
+        prefixIcon={<IconAccount width="10px" />}
+      >
+        Ha Tinh
+      </Button>
+    </div>
+  );
 }
-
-const TextColor: React.FC<TextColorProps> = ({ text, className }) => {
-  return <p className={className}>{text}</p>;
-};
-
-export default TextColor;
