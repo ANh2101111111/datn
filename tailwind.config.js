@@ -53,12 +53,12 @@ module.exports = {
       container: {
         center: true,
         screens: {
-          '2xl': '1584px',
-        }
+          xl: "1280px",
+        },
       },
       gridTemplateColumns: {
-        '20': 'repeat(20, minmax(0, 1fr))',
-      }
+        20: "repeat(20, minmax(0, 1fr))",
+      },
     },
   },
   plugins: [],
