@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Lato, Quicksand } from "next/font/google";
-import { Header } from "@/layout";
 import Footer from "../layout/Footer";
 import "./globals.css";
+import Header from "@/layout/Header";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -31,9 +31,11 @@ export default function RootLayout({
       <body
         className={`${lato.variable} ${quicksand.variable} antialiased container overflow-x-hidden`}
       >
-        <Header />
-        {children}
-        <Footer />
+       <div className="container mx-auto max-w-[1280px] px-4 ">
+          <Header />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

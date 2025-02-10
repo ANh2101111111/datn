@@ -1,8 +1,9 @@
+import IconWishlist from "@/layout/assets/icons/IconAccount";
 import IconAccount from "@/layout/assets/icons/IconAccount";
 import IconCart from "@/layout/assets/icons/IconCart";
 import IconCompare from "@/layout/assets/icons/IconCompare";
+import IconHumburger from "@/layout/assets/icons/IconHamburger";
 import IconSearch from "@/layout/assets/icons/IconSearch";
-import IconWishlist from "@/layout/assets/icons/IconWishlist";
 
 export const DATA = {
   logoSrc: "/logo.svg",
@@ -22,3 +23,4 @@ export const SEARCH_DATA = {
   categories: ["All Categories", "Xe dap 1", "Xe dap 2"],
   icons: [{ key: "search", icon: IconSearch }],
 };
+export const HEADER_MOBILE_DATA = [{ icon: IconHumburger }];

@@ -17,6 +17,7 @@ const HeaderLogo: React.FC<LogoProps> = ({ logoSrc, alt, width, height }) => {
         className="object-contain"
         width={width}
         height={height}
+        priority
       />
     </div>
   );
