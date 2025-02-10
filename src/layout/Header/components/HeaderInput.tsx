@@ -37,7 +37,9 @@ const HeaderInput: React.FC<SearchProps> = ({ categories, icons }) => {
       {/* Search Button */}
       {searchIcon && (
         <button className="text-gray-600 hover:text-gray-800 px-3 md:px-4 py-2 flex items-center">
-          {React.createElement(searchIcon, { className: "w-4 h-4 md:w-5 md:h-5" })}
+          {React.createElement(searchIcon, {
+            className: "w-4 h-4 md:w-5 md:h-5",
+          })}
         </button>
       )}
     </div>
