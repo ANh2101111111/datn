@@ -26,7 +26,7 @@ module.exports = {
         },
         // Text Colors
         text: {
-          heading: "#1b1b1b",
+          heading: "#253D4E",
           body: "#7e7e7e",
           footer: "#253D4E",
         },
@@ -50,6 +50,15 @@ module.exports = {
         "text-small": ["14px", { lineHeight: "21px", letterSpacing: "0px" }],
         "text-xs": ["12px", { lineHeight: "18px", letterSpacing: "0px" }],
       },
+      container: {
+        center: true,
+        screens: {
+          '2xl': '1584px',
+        }
+      },
+      gridTemplateColumns: {
+        '20': 'repeat(20, minmax(0, 1fr))',
+      }
     },
   },
   plugins: [],
