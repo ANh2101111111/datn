@@ -11,12 +11,12 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants = {
-  primary: "text-white",
-  secondary: "bg-[#81B13D] text-white",
+  primary: "text-white bg-[#3BB77E]",
+  secondary: "bg-[#3BB77E] text-white",
   outline:
     "border border-solid border-brand-primary bg-transparent text-brand-primary",
   shadow: "",
-  rounded: "rounded-[30px]",
+  rounded: "bg-[#3BB77E] rounded-[30px]",
 };
 
 const sizes = {
@@ -31,7 +31,7 @@ const Button = React.forwardRef<HTMLButtonElement, IButtonProps>(
       className,
       variant = "primary",
       size = "small",
-      prefixIcon, 
+      prefixIcon,
       suffixIcon,
       fullWidth = false,
       children,
@@ -43,10 +43,10 @@ const Button = React.forwardRef<HTMLButtonElement, IButtonProps>(
       <button
         ref={ref}
         className={twMerge(
-          "font-medium font-lato bg-brand-primary shadow-shadow-btn rounded-lg hover:bg-red-500 flex gap-2 items-center justify-center",
+          "font-medium font-lato bg-brand-primary shadow-shadow-btn rounded-lg hover:bg-[#81B13D] flex gap-2 items-center justify-center",
           variants[variant],
           sizes[size],
-          fullWidth ? 'w-full' : 'w-auto',
+          fullWidth ? "w-full" : "w-auto",
           className
         )}
         {...props}
