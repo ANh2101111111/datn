@@ -3,8 +3,8 @@ import React from "react";
 import { DATA, SEARCH_DATA, HEADER_MOBILE_DATA } from "./components/data";
 import HeaderLogo from "./components/HeaderLogo";
 import HeaderInput from "./components/HeaderInput";
-import useWindowSize from "./hooks/useWindowSize";
 import HeaderIcons from "./components/HeaderIcon";
+import useWindowSize from "@/hooks/useWindowSize";
 
 const Header: React.FC = () => {
   const { width } = useWindowSize();
