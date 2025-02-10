@@ -7,8 +7,8 @@ import BoxCopyRight from "./components/BoxCopyRight";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <footer className="w-full">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
         <div className="col-span-2 md:col-span-1">
           <BoxLogo />
         </div>
@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
           </div>
         ))}
 
-        <div className="col-span-2 md:col-span-1">
+        <div className="col-span-2 md:col-span-1 w-10">
           <BoxPayment />
         </div>
       </div>
