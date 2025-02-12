@@ -2,9 +2,9 @@ import IconNgo from "../../assets/icons/iconNgo";
 const productData = [
   {
     id: 1,
-    name: "",
+    name: "All Natural Italian-Style Chicken Meatballs",
     imageUrl: <IconNgo />,
-    rating: 4,
+    rating: 5,
     originalPrice: 2.8,
     discountedPrice: 2.51,
     weight: "500 gram",
