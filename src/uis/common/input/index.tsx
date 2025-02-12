@@ -29,7 +29,7 @@ const Input = React.forwardRef<HTMLInputElement, IInputProps>(
       <div className="flex flex-col gap-1">
         {label && (
           <label
-            className="text-sm font-medium text-gray-700"
+            className="text-text-medium font-medium text-gray-700 font-lato"
             onClick={() => inputRef.current?.focus()}
           >
             {label}
@@ -41,7 +41,7 @@ const Input = React.forwardRef<HTMLInputElement, IInputProps>(
           <input
             ref={inputRef}
             className={twMerge(
-              "w-full px-4 py-2 rounded-lg outline-none transition-colors",
+              "w-full px-4 py-2 h-16 rounded-lg outline-none transition-colors",
               "placeholder:text-gray-400 text-gray-900",
               "focus:ring-2 focus:ring-green-500 focus:border-transparent",
               variants[variant],

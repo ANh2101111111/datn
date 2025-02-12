@@ -8,12 +8,12 @@ export default function Home() {
     <div className="flex flex-col flex-col-2  ">
       <h1 className="text-2xl font-semibold mb-4">Test Button Component</h1>
 
-      <Input label="username" variant="normal" />
       <Input
         id="email"
         type="email"
         label="Email"
         variant="normal"
+        placeholder="email"
         required
         error="Email không hợp lệ"
       />
