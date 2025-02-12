@@ -47,11 +47,13 @@ const BoxListProduct: FC<IBoxListProductProps> = ({
         {/* Đánh giá sao */}
         <div className="flex items-center">
           <div className="flex items-center space-x-1 mr-2">
-            {renderStars(rating)}
+            {renderStars(rating)}{" "}
+            {/* Render stars dynamically based on rating */}
           </div>
           <p className="text-text-body text-xs font-lato">
             ({rating.toFixed(1)})
-          </p>
+          </p>{" "}
+          {/* Hiển thị rating thực tế */}
         </div>
 
         {/* Trọng lượng */}

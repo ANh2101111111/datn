@@ -51,6 +51,5 @@ const productData = [
     weight: "500 gram",
     brand: "Hodo Foods",
   },
-  
 ];
 export default productData;
