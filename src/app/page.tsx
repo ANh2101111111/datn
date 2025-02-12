@@ -1,4 +1,5 @@
 import IconAccount from "@/layout/assets/icons/IconAccount";
+import PopularProducts from "@/layout/PopularProducts";
 import Button from "@/uis/common/button";
 import React from "react";
 
@@ -36,6 +37,10 @@ export default function Home() {
         <Button prefixIcon={<IconAccount />} suffixIcon={<IconAccount />}>
           Button with Icons
         </Button>
+      </div>
+
+      <div>
+        <PopularProducts/>
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ export default function RootLayout({
       <body
         className={`${lato.variable} ${quicksand.variable} antialiased container overflow-x-hidden`}
       >
-       <div className="container mx-auto max-w-[1280px] px-4 ">
+        <div className="container mx-auto max-w-[1280px] px-4 ">
           <Header />
           {children}
           <Footer />
