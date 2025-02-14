@@ -1,5 +1,5 @@
 import React from "react";
-import BoxListProduct from "./components/BoxListProduct"; 
+import BoxListProduct from "./components/BoxListProduct";
 import productData from "./components/data";
 
 const PopularProducts = () => {
@@ -15,6 +15,8 @@ const PopularProducts = () => {
             weight={product.weight}
             originalPrice={product.originalPrice}
             discountedPrice={product.discountedPrice}
+            type={product.type}
+            textType={product.textType}
           />
         </div>
       ))}

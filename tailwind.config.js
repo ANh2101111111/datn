@@ -29,8 +29,17 @@ module.exports = {
           heading: "#253D4E",
           body: "#7e7e7e",
           footer: "#253D4E",
+          brand1: "#3BB77E",
+        },
+        colorButton: {
+          brand1: "#DEF9EC",
+          brand1hover: "#FDC040",
+        },
+        border: {
+          color1: "#E5E5E5"
         },
       },
+
       fontFamily: {
         lato: ["var(--font-lato)", "sans-serif"],
         quicksand: ["var(--font-quicksand)", "sans-serif"],
