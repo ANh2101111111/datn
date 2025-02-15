@@ -5,7 +5,7 @@ import BoxListLable from "../Lables/BoxListLable";
 
 const PopularProducts = () => {
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 mb-4">
       <div className="flex flex-row items-center justify-between w-full ">
         <h2 className="text-heading-3 text-text-heading font-quicksand font-bold">
           Popular Products

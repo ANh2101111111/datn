@@ -82,7 +82,7 @@ const BoxListProduct: FC<IBoxListProductProps> = ({
       </div>
 
       {/* Nút Add */}
-      <div className="flex items-center justify-between px-5 pb-5 mt-[11px]">
+      <div className="flex items-center justify-between px-5 mt-[11px]">
         <div className="flex items-center">
           <span className="text-xl font-semibold text-text-brand1">
             ${discountedPrice.toFixed(2)}

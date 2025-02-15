@@ -25,7 +25,7 @@ const BoxListLable: React.FC<LableListProps> = ({ selectedIds }) => {
         {filteredLable.map((lable) => (
           <li
             key={lable.id}
-            className="text-text-medium text-text-heading font-lato cursor-pointer hover:text-red-500  "
+            className="text-text-medium text-text-heading font-lato cursor-pointer hover:text-text-brand1  "
           >
             {lable.name}
           </li>
