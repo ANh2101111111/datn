@@ -1,10 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { FC } from "react";
 import IconStar from "@/layout/assets/icons/IconStar";
 import Button from "@/uis/common/button";
 import IconCart from "@/layout/assets/icons/IconCart";
+import BoxBadge from "./BoxBadge";
 
 interface IBoxListProductSellerProps {
-  image: React.ReactNode;
+  image: string;
   name: string;
   brand: string;
   rating: number;
@@ -13,6 +15,8 @@ interface IBoxListProductSellerProps {
   discountedPrice: number;
   sold: number;
   stock: number;
+  type?: string;
+  textType?: string;
 }
 
 const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
@@ -25,6 +29,8 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
   discountedPrice,
   sold,
   stock,
+  type,
+  textType,
 }) => {
   const renderStars = (rating: number) => {
     return [...Array(5)].map((_, index) => (
@@ -33,18 +39,32 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
         className={`w-5 h-5 ${
           index < rating ? "text-yellow-500" : "text-gray-400"
         }`}
+        fill={index < 4 ? "#FDC040" : "#CDCDCD"}
       />
     ));
   };
 
+  const getBadgeColor = (type: string) => {
+    const colors: Record<string, string> = {
+      HOT: "bg-red-400",
+      NEW: "bg-blue-400",
+      SALE: "bg-green-400",
+    };
+    return colors[type] || "bg-yellow-400";
+  };
+
   return (
     <div className="bg-white w-[298px] h-[500px] border border-[#E5E5E5] rounded-[4px] overflow-hidden flex flex-col relative">
-      {/* Biểu ngữ giảm giá */}
-
-      <div className="flex justify-center mx-5 mt-[45px] mb-4">{image}</div>
+      <div className="flex justify-center mt-[60px] mb-4">
+        <img
+          src={image}
+          alt="product"
+          className="w-[200px] h-[150px] object-cover"
+        />
+      </div>
 
       {/* Chi tiết sản phẩm */}
-      <div>
+      <div className="mt-4">
         <div className="px-4 flex flex-col gap-1">
           <p className="text-xs font-lato font-normal text-text-body">
             {brand}
@@ -77,25 +97,28 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
               ${originalPrice.toFixed(2)}
             </span>
           </div>
-          <div className="w-full bg-gray-200 h-2 rounded-md mt-1">
+          <div className="w-full bg-gray-200 h-2 rounded-md mt-2">
             <div
               className="bg-green-500 h-2 rounded-md"
               style={{ width: `${(sold / stock) * 100}%` }}
             ></div>
           </div>
           <div>
-            <p className="text-xs mt-2 text-gray-500">
+            <p className="text-xs mt-3 text-gray-500">
               Sold: {sold}/{stock}
             </p>
           </div>
         </div>
       </div>
 
-      <div className=" ml-5 mb-4">
-        <Button variant="primary" size="large" className="  h-[40px] flex">
+      <div className=" ml-5 mt-2">
+        <Button variant="primary" size="large" className="  h-[40px] flex ">
           <IconCart /> Add to cart
         </Button>
       </div>
+      {type && (
+        <BoxBadge text={textType || type} className={getBadgeColor(type)} />
+      )}
     </div>
   );
 };

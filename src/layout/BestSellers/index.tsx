@@ -15,8 +15,10 @@ const BoxBestSellers = () => {
             weight={product.weight}
             originalPrice={product.originalPrice}
             discountedPrice={product.discountedPrice}
-            sold={product.sold} 
-            stock={product.stock} 
+            sold={product.sold}
+            stock={product.stock}
+            type={product.type}
+            textType={product.textType}
           />
         </div>
       ))}
