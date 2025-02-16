@@ -1,13 +1,19 @@
 import React from "react";
-import BoxListProductSeller from "./components/BoxBestSeller";
+import BestSellerCard from "./components/BoxSellerShop";
 import productSellerData from "./components/data";
+import BoxListProductSeller from "./components/BoxBestSeller";
 
-const BoxBestSellers = () => {
+const BestSellers = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-[24px] mt-4 mb-4">
-      {productSellerData.map((product) => (
-        <div key={product.id} className="flex justify-center">
+    <div className="grid grid-cols-1 md:grid-cols-12  items-start mt-5 mb-5 gap-[24px]">
+      <div className="md:col-span-3 gap-[24px]">
+        <BestSellerCard />
+      </div>
+
+      <div className="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[24px]">
+        {productSellerData.slice(0, 4).map((product) => (
           <BoxListProductSeller
+            key={product.id}
             image={product.imageUrl}
             name={product.name}
             brand={product.brand}
@@ -20,10 +26,10 @@ const BoxBestSellers = () => {
             type={product.type}
             textType={product.textType}
           />
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
 
-export default BoxBestSellers;
+export default BestSellers;

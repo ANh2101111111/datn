@@ -37,24 +37,25 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
       <IconStar
         key={index}
         className={`w-5 h-5 ${
-          index < rating ? "text-yellow-500" : "text-gray-400"
+          index < rating ? "text-brand-secondary" : "text-icon-star"
         }`}
-        fill={index < 4 ? "#FDC040" : "#CDCDCD"}
+        // fill không thể dùng classname
+        fill={index < 3 ? "#FDC040" : "#CDCDCD"}
       />
     ));
   };
 
   const getBadgeColor = (type: string) => {
     const colors: Record<string, string> = {
-      HOT: "bg-red-400",
-      NEW: "bg-blue-400",
-      SALE: "bg-green-400",
+      HOT: "bg-badge-Danger",
+      NEW: "bg-badge-brand-1",
+      SALE: "bg-badge-brand-2",
     };
-    return colors[type] || "bg-yellow-400";
+    return colors[type] || "bg-badge-Danger";
   };
 
   return (
-    <div className="bg-white w-[298px] h-[500px] border border-[#E5E5E5] rounded-[4px] overflow-hidden flex flex-col relative">
+    <div className="bg-white w-full h-[512px] border border-[#E5E5E5] rounded-[4px] overflow-hidden flex flex-col relative">
       <div className="flex justify-center mt-[60px] mb-4">
         <img
           src={image}
@@ -111,8 +112,12 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
         </div>
       </div>
 
-      <div className=" ml-5 mt-2">
-        <Button variant="primary" size="large" className="  h-[40px] flex ">
+      <div className="  mt-2 flex justify-center">
+        <Button
+          variant="primary"
+          size="large"
+          className="  h-[40px] w-[200px] "
+        >
           <IconCart /> Add to cart
         </Button>
       </div>

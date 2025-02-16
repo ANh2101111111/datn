@@ -8,6 +8,7 @@ module.exports = {
         brand: {
           primary: "#81B13D",
           secondary: "#FDC040",
+          thrid: "#FFFFFF",
         },
         // Scale Colors
         scale: {
@@ -29,8 +30,25 @@ module.exports = {
           heading: "#253D4E",
           body: "#7e7e7e",
           footer: "#253D4E",
+          brand1: "#3BB77E",
+        },
+        colorButton: {
+          brand1: "#DEF9EC",
+          brand1hover: "#FDC040",
+        },
+        border: {
+          color1: "#E5E5E5",
+        },
+        badge: {
+          "Danger": "#FD6E6E",
+          "brand-1": "#3BB77E",
+          "brand-2": "#FDC040",
+        },
+        icon: {
+          star: "#CDCDCD",
         },
       },
+
       fontFamily: {
         lato: ["var(--font-lato)", "sans-serif"],
         quicksand: ["var(--font-quicksand)", "sans-serif"],

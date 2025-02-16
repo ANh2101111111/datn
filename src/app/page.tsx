@@ -1,10 +1,10 @@
-import BoxBestSellers from "@/layout/BestSellers";
+import SystemDesign from "@/uis/systemDesign/systemDesign";
 import React from "react";
 
 export default function Home() {
   return (
     <div>
-      <BoxBestSellers />
+      <SystemDesign />
     </div>
   );
 }
