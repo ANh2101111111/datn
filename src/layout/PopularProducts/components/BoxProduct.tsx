@@ -17,7 +17,7 @@ interface IBoxListProductProps {
 }
 
 // Component BoxListProduct
-const BoxListProduct: FC<IBoxListProductProps> = ({
+const BoxProduct: FC<IBoxListProductProps> = ({
   image,
   name,
   brand,
@@ -34,8 +34,9 @@ const BoxListProduct: FC<IBoxListProductProps> = ({
       <IconStar
         key={index}
         className={`w-5 h-5 ${
-          index < rating ? "text-yellow-500" : "text-gray-400"
+          index < rating ? "text-brand-secondary" : "text-icon-star"
         }`}
+        // fill không thể dùng classname
         fill={index < 4 ? "#FDC040" : "#CDCDCD"}
       />
     ));
@@ -43,11 +44,11 @@ const BoxListProduct: FC<IBoxListProductProps> = ({
 
   const getBadgeColor = (type: string) => {
     const colors: Record<string, string> = {
-      HOT: "bg-red-400",
-      NEW: "bg-blue-400",
-      SALE: "bg-green-400",
+      HOT: "bg-badge-Danger",
+      NEW: "bg-badge-brand-1",
+      SALE: "bg-badge-brand-2",
     };
-    return colors[type] || "bg-yellow-400";
+    return colors[type] || "bg-badge-Danger";
   };
 
   return (
@@ -63,7 +64,7 @@ const BoxListProduct: FC<IBoxListProductProps> = ({
       {/* Chi tiết sản phẩm */}
       <div className="px-4 flex flex-col gap-1">
         <p className="text-xs font-lato font-normal text-text-body">{brand}</p>
-        <h2 className="font-quicksand text-sm font-bold text-gray-800">
+        <h2 className="font-quicksand text-sm font-bold text-text-heading">
           {name}
         </h2>
 
@@ -82,12 +83,12 @@ const BoxListProduct: FC<IBoxListProductProps> = ({
       </div>
 
       {/* Nút Add */}
-      <div className="flex items-center justify-between px-5 mt-[11px]">
+      <div className="flex items-center justify-between px-5  mt-[11px]">
         <div className="flex items-center">
           <span className="text-xl font-semibold text-text-brand1">
             ${discountedPrice.toFixed(2)}
           </span>
-          <span className="text-sm text-gray-500 line-through ml-2">
+          <span className="text-sm font-bold text-text-body line-through ml-2">
             ${originalPrice.toFixed(2)}
           </span>
         </div>
@@ -102,4 +103,4 @@ const BoxListProduct: FC<IBoxListProductProps> = ({
   );
 };
 
-export default BoxListProduct;
+export default BoxProduct;

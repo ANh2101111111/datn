@@ -1,10 +1,10 @@
-import PopularProducts from "@/layout/PopularProducts";
+import SystemDesign from "@/uis/systemDesign/systemDesign";
 import React from "react";
 
 export default function Home() {
   return (
     <div>
-      <PopularProducts />
+      <SystemDesign />
     </div>
   );
 }
