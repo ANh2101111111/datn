@@ -6,7 +6,7 @@ import BoxProduct from "./components/BoxProduct";
 const PopularProducts = () => {
   return (
     <div className="container mx-auto px-4 mb-4">
-      <div className="flex flex-row items-center justify-between w-full ">
+      <div className="flex flex-row items-center justify-between w-full mb-4 ">
         <h2 className="text-heading-3 text-text-heading font-quicksand font-bold">
           Popular Products
         </h2>
