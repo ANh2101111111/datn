@@ -12,7 +12,7 @@ const BestSellers = () => {
         <h2 className="text-heading-3 text-text-heading font-quicksand font-bold">
           Best Sellers
         </h2>
-        <BoxListLable selectedIds={[2, 5]} />
+        <BoxListLable selectedIds={[2,5]} />
       </div>
 
       {/* Best Seller Card */}

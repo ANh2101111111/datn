@@ -11,7 +11,7 @@ const PopularProducts = () => {
         <h2 className="text-heading-3 text-text-heading font-quicksand font-bold">
           Popular Products
         </h2>
-        <BoxListLable />
+        <BoxListLable/>
       </div>
 
       {/* Product Grid */}
