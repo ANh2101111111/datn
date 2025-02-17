@@ -55,7 +55,7 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
   };
 
   return (
-    <div className="bg-white w-full h-[512px] border-border-color1 rounded-[4px] overflow-hidden flex flex-col relative">
+    <div className="bg-white w-full h-[512px] border border-border-color1 rounded-[4px] overflow-hidden flex flex-col relative">
       <div className="flex justify-center mt-[60px] mb-4">
         <img
           src={image}
