@@ -40,7 +40,7 @@ module.exports = {
           color1: "#E5E5E5",
         },
         badge: {
-          "Danger": "#FD6E6E",
+          Danger: "#FD6E6E",
           "brand-1": "#3BB77E",
           "brand-2": "#FDC040",
         },
@@ -76,6 +76,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         20: "repeat(20, minmax(0, 1fr))",
+        15: "repeat(15, minmax(0, 1fr))",
       },
     },
   },
