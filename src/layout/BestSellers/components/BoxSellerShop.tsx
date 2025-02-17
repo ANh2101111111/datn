@@ -1,5 +1,6 @@
 import React from "react";
 import { bestSellerShopData } from "./data";
+import Button from "@/uis/common/button";
 
 const BestSellerCard = () => {
   return (
@@ -10,12 +11,16 @@ const BestSellerCard = () => {
           backgroundImage: `url('${bestSellerShopData.imageSrc}')`,
         }}
       >
-        <h2 className="mt-[38px]  text-lg font-semibold text-gray-900 drop-shadow-lg">
+        <h2 className=" ml-4 mt-[38px] mr-10  text-lg font-quicksand font-bold text-text-heading drop-shadow-lg">
           {bestSellerShopData.title}
         </h2>
-        <button className="flex items-center justify-center ml-[48px] p mb-[48px] w-[108px] bg-green-400 text-white px-2 py-1 rounded-md shadow-md hover:bg-green-500 transition self-start ">
-          <p className="mr-1"> Shop Now </p> {bestSellerShopData.icon}
-        </button>
+        <Button
+          variant="primary"
+          className="flex items-center justify-center ml-4 p mb-[48px] w-[120px] bg-text-brand1 text-brand-thrid px-2 py-1 rounded-md shadow-md hover:bg-colorButton-brand1hover transition self-start "
+        >
+          <p className="pr-0"> Shop Now </p>{" "}
+          <span>{bestSellerShopData.icon}</span>
+        </Button>
       </div>
     </div>
   );

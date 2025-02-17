@@ -50,7 +50,7 @@ const productSellerData = [
 export default productSellerData;
 
 export const bestSellerShopData = {
-  title: "Bring nature into your home",
+  title: "Bring nature into you drive go home now , goodbye!!",
   imageSrc:
     "https://media.istockphoto.com/id/1340499883/photo/yellow-mountain-bike-on-yellow-background.jpg?s=612x612&w=is&k=20&c=2_Cbhx_knZy96uhejTg_-NgKQxRpU7hADtn_9tNl0tQ=",
   icon: <IconArrow />,

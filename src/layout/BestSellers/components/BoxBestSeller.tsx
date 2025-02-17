@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import IconStar from "@/layout/assets/icons/IconStar";
 import Button from "@/uis/common/button";
 import IconCart from "@/layout/assets/icons/IconCart";
-import BoxBadge from "./BoxBadge";
+import BoxBadge from "@/layout/Badge/BoxBadge";
 
 interface IBoxListProductSellerProps {
   image: string;
@@ -40,7 +40,7 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
           index < rating ? "text-brand-secondary" : "text-icon-star"
         }`}
         // fill không thể dùng classname
-        fill={index < 3 ? "#FDC040" : "#CDCDCD"}
+        fill={index < 5 ? "#FDC040" : "#CDCDCD"}
       />
     ));
   };
@@ -55,7 +55,7 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
   };
 
   return (
-    <div className="bg-white w-full h-[512px] border border-[#E5E5E5] rounded-[4px] overflow-hidden flex flex-col relative">
+    <div className="bg-white w-full h-[512px] border-border-color1 rounded-[4px] overflow-hidden flex flex-col relative">
       <div className="flex justify-center mt-[60px] mb-4">
         <img
           src={image}
@@ -70,7 +70,7 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
           <p className="text-xs font-lato font-normal text-text-body">
             {brand}
           </p>
-          <h2 className="font-quicksand text-sm font-bold text-gray-800">
+          <h2 className="font-quicksand  text-sm font-bold text-text-heading">
             {name}
           </h2>
 
@@ -91,21 +91,21 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
         {/* Giá và tiến trình bán */}
         <div className="px-4 pb-2 mt-2">
           <div className="flex items-center">
-            <span className="text-xl font-semibold text-green-500">
+            <span className="text-xl font-semibold text-badge-brand-1">
               ${discountedPrice.toFixed(2)}
             </span>
-            <span className="text-sm text-gray-500 line-through ml-2">
+            <span className="text-sm text-text-body line-through ml-2">
               ${originalPrice.toFixed(2)}
             </span>
           </div>
-          <div className="w-full bg-gray-200 h-2 rounded-md mt-2">
+          <div className="w-full bg-border-color1 h-2 rounded-md mt-2">
             <div
-              className="bg-green-500 h-2 rounded-md"
+              className="bg-text-brand1 h-2 rounded-md"
               style={{ width: `${(sold / stock) * 100}%` }}
             ></div>
           </div>
           <div>
-            <p className="text-xs mt-3 text-gray-500">
+            <p className="text-xs mt-3 font-lato text-text-heading">
               Sold: {sold}/{stock}
             </p>
           </div>
@@ -116,7 +116,7 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
         <Button
           variant="primary"
           size="large"
-          className="  h-[40px] w-[200px] "
+          className="  h-[40px] w-[238px] hover:bg-colorButton-brand1hover text-brand-thrid "
         >
           <IconCart /> Add to cart
         </Button>

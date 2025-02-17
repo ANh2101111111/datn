@@ -2,7 +2,7 @@
 "use client";
 import React, { FC } from "react";
 import IconStar from "@/layout/assets/icons/IconStar";
-import BoxBadge from "./BoxBadge";
+import BoxBadge from "@/layout/Badge/BoxBadge";
 
 interface IBoxListProductProps {
   image: string;
@@ -52,7 +52,7 @@ const BoxProduct: FC<IBoxListProductProps> = ({
   };
 
   return (
-    <div className="relative bg-brand-thrid w-[298px] h-[402px] border border-border-color1 rounded-[4px] overflow-hidden flex flex-col">
+    <div className="relative bg-white w-[298px] h-[402px] border border-border-color1 rounded-[4px] overflow-hidden flex flex-col">
       <div className="flex justify-center mt-[65px] mb-4">
         <img
           src={image}
