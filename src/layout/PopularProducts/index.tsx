@@ -7,7 +7,7 @@ const PopularProducts = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-[24px] mt-4 mb-4">
       <div className="col-span-full flex flex-row items-center justify-between w-full">
-        <h2 className="text-heading-3 text-text-heading font-quicksand font-bold">
+        <h2 className="md:text-text-heading-4 text-heading-3 text-text-heading font-quicksand font-bold">
           Popular Products
         </h2>
         <BoxListLable />
