@@ -11,7 +11,7 @@ const BestSellerCard: FC<IBestSellerShopProps> = ({ name, image }) => {
   return (
     <div>
       <div
-        className="relative w-full h-[510px] rounded overflow-hidden bg-cover bg-center flex flex-col justify-between"
+        className="relative w-full h-[510px] rounded overflow-hidden bg-cover bg-center border border-border-color1 flex flex-col justify-between"
         style={{
           backgroundImage: `url('${image || bestSellerShopData.imageSrc}')`,
         }}
