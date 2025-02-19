@@ -1,12 +1,13 @@
 import IconAccount from "@/layout/assets/icons/IconAccount";
+import Banner from "@/layout/banner";
 import Button from "@/uis/common/button";
 import React from "react";
 
 export default function Home() {
   return (
     <div className="flex flex-col flex-col-2  ">
+      <Banner />
       <h1 className="text-2xl font-semibold mb-4">Test Button Component</h1>
-
       <div className="mb-4">
         <Button variant="primary" size="large">
           Primary Button
