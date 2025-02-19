@@ -17,7 +17,10 @@ const BestSellers = () => {
       <div className="md:col-span-12 grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Best Seller Card */}
         <div className="md:col-span-3 flex flex-col gap-6">
-          <BestSellerCard />
+          <BestSellerCard
+            name={productSellerData?.[2]?.name}
+            image={productSellerData?.[0]?.imageUrl}
+          />
         </div>
 
         {/* Product Grid */}
