@@ -31,8 +31,25 @@ module.exports = {
           heading: "#253D4E",
           body: "#7e7e7e",
           footer: "#253D4E",
+          brand1: "#3BB77E",
         },
+        colorButton: {
+          brand1: "#DEF9EC",
+          brand1hover: "#FDC040",
+        },
+        border: {
+          color1: "#E5E5E5"
+        },
+        badge: {
+          "Danger": "#FD6E6E",
+          "brand-1":"#3BB77E",
+          "brand-2": "#FDC040"
+        },
+        icon: {
+          "star": "#CDCDCD"
+        }
       },
+
       fontFamily: {
         lato: ["var(--font-lato)", "sans-serif"],
         quicksand: ["var(--font-quicksand)", "sans-serif"],
@@ -49,7 +66,7 @@ module.exports = {
         "heading-sm": ["14px", { lineHeight: "16px", letterSpacing: "0px" }],
         "text-large": ["18px", { lineHeight: "26px", letterSpacing: "0px" }],
         "text-medium": ["16px", { lineHeight: "24px", letterSpacing: "0px" }],
-        "text-small": ["14px", { lineHeight: "21px", letterSpacing: "0px" }],
+        "text-small": ["14px", { lineHeight: "20px", letterSpacing: "0px" }],
         "text-xs": ["12px", { lineHeight: "18px", letterSpacing: "0px" }],
       },
       container: {
