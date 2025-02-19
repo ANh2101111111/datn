@@ -47,6 +47,14 @@ module.exports = {
         icon: {
           star: "#CDCDCD",
         },
+        badge: {
+          "Danger": "#FD6E6E",
+          "brand-1":"#3BB77E",
+          "brand-2": "#FDC040"
+        },
+        icon: {
+          "star": "#CDCDCD"
+        }
       },
 
       fontFamily: {
