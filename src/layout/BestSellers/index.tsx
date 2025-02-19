@@ -7,7 +7,6 @@ import BoxListLable from "../lables/BoxListLable";
 const BestSellers = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
-      {/* Div thứ nhất: Best Sellers */}
       <div className="md:col-span-12 flex flex-row items-center justify-between w-full">
         <h2 className="md:text-text-heading-4 text-heading-3 text-text-heading font-quicksand font-bold">
           Best Sellers
@@ -15,7 +14,6 @@ const BestSellers = () => {
         <BoxListLable selectedIds={[2, 5]} />
       </div>
 
-      {/* Div thứ hai: Best Seller Card và Product Grid */}
       <div className="md:col-span-12 grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Best Seller Card */}
         <div className="md:col-span-3 flex flex-col gap-6">
