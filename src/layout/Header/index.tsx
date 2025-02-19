@@ -11,7 +11,7 @@ const Header: React.FC = () => {
   const isMobile = width <= 768;
 
   return (
-    <header className="fixed top-0 left-0 w-full z-10 shadow-md flex items-center justify-between px-4 py-2 border-b border-gray-200 bg-white">
+    <header className="flex items-center justify-between px-4 py-2 border-b border-gray-200 bg-white">
       {/* Hamburger Menu chỉ hiển thị trên màn hình nhỏ */}
       {isMobile &&
         HEADER_MOBILE_DATA.map((data, index) => {
