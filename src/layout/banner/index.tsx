@@ -1,6 +1,6 @@
 import React from 'react';
-import BoxBanner from './components/Boxbanner';
 import { bannerData } from './components/data';
+import BoxBanner from './components/BoxBanner';
 
 const Banner: React.FC = () => {
   return (
