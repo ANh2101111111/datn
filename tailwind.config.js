@@ -8,7 +8,7 @@ module.exports = {
         brand: {
           primary: "#81B13D",
           secondary: "#FDC040",
-          thrid: "#FFFFFF"
+          third: "#ffffff"
         },
         // Scale Colors
         scale: {
@@ -16,6 +16,7 @@ module.exports = {
           color2: "#3A882B",
           color3: "#227226",
           color4: "#1A5D2C",
+          color5: "#3BB77E"
         },
         // System Colors
         system: {
