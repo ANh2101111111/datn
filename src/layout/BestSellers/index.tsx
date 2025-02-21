@@ -10,7 +10,6 @@ const BestSellers = () => {
       <div className="md:col-span-12 flex flex-row items-center justify-between w-full">
         <h2 className="md:text-text-heading-4 text-heading-3 text-text-heading font-quicksand font-bold">
           Best Sellers
-          
         </h2>
         <BoxListLable selectedIds={[2, 5]} />
       </div>

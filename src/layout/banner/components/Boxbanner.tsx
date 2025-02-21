@@ -25,7 +25,7 @@ const BoxBanner: React.FC<IBannerProps> = ({
           {description}
         </p>
 
-        <div className="mt-4 w-[350px] h-[50px] flex items-center rounded-[30px] bg-brand-third p-2 border ">
+        <div className="mt-4 w-[350px] h-[50px] flex items-center rounded-[30px] bg-brand-thrid p-2 border ">
           <span className="ml-2">{icon}</span>
 
           <input
