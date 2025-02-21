@@ -8,7 +8,7 @@ module.exports = {
         brand: {
           primary: "#81B13D",
           secondary: "#FDC040",
-          third: "#ffffff",
+          thrid: "#FFFFFF",
         },
         // Scale Colors
         scale: {
@@ -40,6 +40,21 @@ module.exports = {
         },
         border: {
           color1: "#E5E5E5",
+        },
+        badge: {
+          Danger: "#FD6E6E",
+          "brand-1": "#3BB77E",
+          "brand-2": "#FDC040",
+        },
+        icon: {
+          star: "#CDCDCD",
+        },
+        colorButton: {
+          brand1: "#DEF9EC",
+          brand1hover: "#FDC040",
+        },
+        border: {
+          color1: "#E5E5E5"
         },
         badge: {
           Danger: "#FD6E6E",
@@ -86,6 +101,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         20: "repeat(20, minmax(0, 1fr))",
+        15: "repeat(15, minmax(0, 1fr))",
       },
     },
   },

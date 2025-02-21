@@ -2,7 +2,7 @@
 "use client";
 import React, { FC } from "react";
 import IconStar from "@/layout/assets/icons/IconStar";
-import BoxBadge from "./BoxBadge";
+import BoxBadge from "@/layout/Badge/BoxBadge";
 
 interface IBoxListProductProps {
   image: string;
