@@ -1,7 +1,7 @@
 import React from "react";
+import BoxListLable from "../lables/BoxListLable";
 import productData from "./components/data";
 import BoxProduct from "./components/BoxProduct";
-import BoxListLable from "../lables/BoxListLable";
 
 const PopularProducts = () => {
   return (

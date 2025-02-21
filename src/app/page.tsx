@@ -1,10 +1,12 @@
-import SystemDesign from "@/uis/systemDesign/systemDesign";
+import Banner from "@/layout/banner";
+import PopularProducts from "@/layout/PopularProducts";
 import React from "react";
 
 export default function Home() {
   return (
-    <div>
-      <SystemDesign />
+    <div className="">
+      <Banner />
+      <PopularProducts/>
     </div>
   );
 }
