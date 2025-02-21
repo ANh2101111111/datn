@@ -38,7 +38,15 @@ module.exports = {
           brand1hover: "#FDC040",
         },
         border: {
-          color1: "#E5E5E5"
+          color1: "#E5E5E5",
+        },
+        badge: {
+          "Danger": "#FD6E6E",
+          "brand-1": "#3BB77E",
+          "brand-2": "#FDC040",
+        },
+        icon: {
+          star: "#CDCDCD",
         },
         badge: {
           "Danger": "#FD6E6E",
