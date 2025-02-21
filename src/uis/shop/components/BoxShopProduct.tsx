@@ -1,4 +1,4 @@
-import BoxListLable from "@/layout/Lables/BoxListLable";
+import BoxListLable from "@/layout/lables/BoxListLable";
 import BoxProduct from "@/layout/PopularProducts/components/BoxProduct";
 import productData from "@/layout/PopularProducts/components/data";
 

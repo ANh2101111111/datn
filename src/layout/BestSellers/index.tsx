@@ -6,7 +6,7 @@ import BoxListLable from "../lables/BoxListLable";
 
 const BestSellers = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-4">
       <div className="md:col-span-12 flex flex-row items-center justify-between w-full">
         <h2 className="md:text-text-heading-4 text-heading-3 text-text-heading font-quicksand font-bold">
           Best Sellers
