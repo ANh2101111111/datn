@@ -47,7 +47,7 @@ const BoxBanner: React.FC<IBannerProps> = ({
         <img
           src={image}
           alt="Fruits in a bag"
-          className=" rounded-xl bg-transparent  lg:w-full"
+          className=" rounded-xl bg-transparent  md:w-1/2 lg:w-full"
         />
       </div>
     </div>
