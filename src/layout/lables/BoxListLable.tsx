@@ -20,8 +20,8 @@ const BoxListLable: React.FC<LableListProps> = ({ selectedIds }) => {
     : listLableData;
 
   return (
-    <div className="hidden lg:block items-center  justify-between  p-4">
-      <ul className="flex space-x-6 ">
+    <div className=" hidden lg:block   items-center  justify-between  p-4">
+      <ul className="flex space-x-6">
         {filteredLable.map((lable) => (
           <li
             key={lable.id}
