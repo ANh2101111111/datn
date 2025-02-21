@@ -1,11 +1,12 @@
 import Banner from "@/layout/banner";
+import PopularProducts from "@/layout/PopularProducts";
 import React from "react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-col-2  ">
-      
+    <div className="">
       <Banner />
+      <PopularProducts/>
     </div>
   );
 }

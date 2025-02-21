@@ -8,7 +8,7 @@ module.exports = {
         brand: {
           primary: "#81B13D",
           secondary: "#FDC040",
-          third: "#ffffff"
+          third: "#ffffff",
         },
         // Scale Colors
         scale: {
@@ -16,7 +16,8 @@ module.exports = {
           color2: "#3A882B",
           color3: "#227226",
           color4: "#1A5D2C",
-          color5: "#3BB77E"
+          color5: "#3BB77E",
+          color6: "#FD6E6E",
         },
         // System Colors
         system: {
@@ -41,7 +42,7 @@ module.exports = {
           color1: "#E5E5E5",
         },
         badge: {
-          "Danger": "#FD6E6E",
+          Danger: "#FD6E6E",
           "brand-1": "#3BB77E",
           "brand-2": "#FDC040",
         },
@@ -49,13 +50,13 @@ module.exports = {
           star: "#CDCDCD",
         },
         badge: {
-          "Danger": "#FD6E6E",
-          "brand-1":"#3BB77E",
-          "brand-2": "#FDC040"
+          Danger: "#FD6E6E",
+          "brand-1": "#3BB77E",
+          "brand-2": "#FDC040",
         },
         icon: {
-          "star": "#CDCDCD"
-        }
+          star: "#CDCDCD",
+        },
       },
 
       fontFamily: {

@@ -16,7 +16,7 @@ const BoxBanner: React.FC<IBannerProps> = ({
   icon,
 }) => {
   return (
-    <div className="bg-blue-100 p-6 rounded-xl flex flex-col md:flex-row items-center mb-4">
+    <div className="bg-orange-100 p-6 rounded-xl flex flex-col md:flex-row items-center mb-4 mt-6">
       <div className="flex-1">
         <h2 className=" lg:text-heading-1 md:text-heading-3 sm:text-heading-5  font-bold mb-5 font-quicksand text-text-heading">
           {title}
@@ -47,7 +47,7 @@ const BoxBanner: React.FC<IBannerProps> = ({
         <img
           src={image}
           alt="Fruits in a bag"
-          className=" rounded-xl bg-transparent  lg:w-full"
+          className=" rounded-xl bg-transparent md:w-1/2 lg:w-full"
         />
       </div>
     </div>
