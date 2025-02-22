@@ -3,6 +3,7 @@ import BestSellerCard from "./components/BoxSellerShop";
 import productSellerData from "./components/data";
 import BoxListProductSeller from "./components/BoxBestSeller";
 import BoxListLable from "../lables/BoxListLable";
+import { listLableData } from "../lables/type";
 
 const BestSellers = () => {
   return (
@@ -11,7 +12,7 @@ const BestSellers = () => {
         <h2 className="md:text-text-heading-4 text-heading-3 text-text-heading font-quicksand font-bold">
           Best Sellers
         </h2>
-        <BoxListLable selectedIds={[2, 5]} />
+        <BoxListLable data={listLableData.slice(0, 2)}/>
       </div>
 
       <div className="md:col-span-12 grid grid-cols-1 md:grid-cols-12 gap-6">
