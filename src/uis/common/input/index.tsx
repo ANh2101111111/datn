@@ -1,53 +1,62 @@
-// import React, { InputHTMLAttributes, forwardRef } from 'react';
+'use client'
+import React from "react";
+import { twMerge } from "tailwind-merge";
 
-// interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-//   label?: string;
-//   error?: string;
-//   required?: boolean;
-//   muted?: boolean;
-// }
+interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  variant?: "normal" | "muted" | "focus" | "error";
+  label?: string;
+  error?: string;
+  required?: boolean;
+}
 
-// const Input = forwardRef<HTMLInputElement, InputProps>(
-//   ({ className, label, error, required, muted, disabled, ...props }, ref) => {
-//     const baseStyles = "w-[540px] h-16 px-4 bg-white border rounded-[10px] focus:outline-none";
-//     const states = {
-//       normal: "border-[#E5E5E5] focus:border-blue-500",
-//       muted: "bg-gray-50 border-[#E5E5E5] text-gray-500",
-//       error: "border-red-500 focus:border-red-500",
-//       focus: "border-blue-500",
-//       disabled: "bg-gray-100 cursor-not-allowed",
-//     };
+const variants = {
+  normal: "border border-gray-200 bg-white",
+  muted: "border border-gray-100 bg-gray-50",
+  focus: "border border-green-500 ring-1 ring-green-500",
+  error: "border border-red-500 bg-red-50",
+};
 
-//     const inputStyles = cn(
-//       baseStyles,
-//       states.normal,
-//       muted && states.muted,
-//       error && states.error,
-//       disabled && states.disabled,
-//       className
-//     );
+const Input = React.forwardRef<HTMLInputElement, IInputProps>(
+  (
+    { className, variant = "normal", label, error, required = false, ...props },
+    ref
+  ) => {
+    const inputRef = React.useRef<HTMLInputElement>(null);
 
-//     return (
-//       <div className="relative">
-//         {label && (
-//           <label className="block text-sm font-medium text-gray-700 mb-1">
-//             {label}
-//             {required && <span className="text-red-500 ml-1">*</span>}
-//           </label>
-//         )}
-//         <input
-//           ref={ref}
-//           disabled={disabled}
-//           className={inputStyles}
-//           {...props}
-//         />
-//         {error && (
-//           <div className="text-red-500 text-sm mt-1">{error}</div>
-//         )}
-//       </div>
-//     );
-//   }
-// );
+    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
 
-// Input.displayName = 'Input';
+    return (
+      <div className="flex flex-col gap-1">
+        {label && (
+          <label
+            className="text-text-medium font-medium text-gray-700 font-lato"
+            onClick={() => inputRef.current?.focus()}
+          >
+            {label}
+            {required && <span className="text-red-500 ml-1">*</span>}
+          </label>
+        )}
 
+        <div className="relative">
+          <input
+            ref={inputRef}
+            className={twMerge(
+              "w-full px-4 py-2 h-16 rounded-lg outline-none transition-colors",
+              "placeholder:text-gray-400 text-gray-900",
+              "focus:ring-2 focus:ring-green-500 focus:border-transparent",
+              variants[variant],
+              className
+            )}
+            {...props}
+          />
+        </div>
+
+        {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
+      </div>
+    );
+  }
+);
+
+Input.displayName = "Input";
+
+export default Input;
