@@ -8,6 +8,7 @@ module.exports = {
         brand: {
           primary: "#81B13D",
           secondary: "#FDC040",
+          thrid: "#FFFFFF",
         },
         // Scale Colors
         scale: {
@@ -15,6 +16,8 @@ module.exports = {
           color2: "#3A882B",
           color3: "#227226",
           color4: "#1A5D2C",
+          color5: "#3BB77E",
+          color6: "#FD6E6E",
         },
         // System Colors
         system: {
@@ -29,8 +32,48 @@ module.exports = {
           heading: "#253D4E",
           body: "#7e7e7e",
           footer: "#253D4E",
+          brand1: "#3BB77E",
+        },
+        colorButton: {
+          brand1: "#DEF9EC",
+          brand1hover: "#FDC040",
+        },
+        border: {
+          color1: "#E5E5E5",
+        },
+        badge: {
+          Danger: "#FD6E6E",
+          "brand-1": "#3BB77E",
+          "brand-2": "#FDC040",
+        },
+        icon: {
+          star: "#CDCDCD",
+        },
+        colorButton: {
+          brand1: "#DEF9EC",
+          brand1hover: "#FDC040",
+        },
+        border: {
+          color1: "#E5E5E5"
+        },
+        badge: {
+          Danger: "#FD6E6E",
+          "brand-1": "#3BB77E",
+          "brand-2": "#FDC040",
+        },
+        icon: {
+          star: "#CDCDCD",
+        },
+        badge: {
+          Danger: "#FD6E6E",
+          "brand-1": "#3BB77E",
+          "brand-2": "#FDC040",
+        },
+        icon: {
+          star: "#CDCDCD",
         },
       },
+
       fontFamily: {
         lato: ["var(--font-lato)", "sans-serif"],
         quicksand: ["var(--font-quicksand)", "sans-serif"],
@@ -47,7 +90,7 @@ module.exports = {
         "heading-sm": ["14px", { lineHeight: "16px", letterSpacing: "0px" }],
         "text-large": ["18px", { lineHeight: "26px", letterSpacing: "0px" }],
         "text-medium": ["16px", { lineHeight: "24px", letterSpacing: "0px" }],
-        "text-small": ["14px", { lineHeight: "21px", letterSpacing: "0px" }],
+        "text-small": ["14px", { lineHeight: "20px", letterSpacing: "0px" }],
         "text-xs": ["12px", { lineHeight: "18px", letterSpacing: "0px" }],
       },
       container: {
@@ -58,6 +101,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         20: "repeat(20, minmax(0, 1fr))",
+        15: "repeat(15, minmax(0, 1fr))",
       },
     },
   },
