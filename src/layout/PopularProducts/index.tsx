@@ -2,6 +2,7 @@ import React from "react";
 import productData from "./components/data";
 import BoxProduct from "./components/BoxProduct";
 import BoxListLable from "../lables/BoxListLable";
+import { listLableData } from "../lables/type";
 
 const PopularProducts = () => {
   return (
@@ -10,7 +11,7 @@ const PopularProducts = () => {
         <h2 className="md:text-text-heading-4 text-heading-3 text-text-heading font-quicksand font-bold">
           Popular Products
         </h2>
-        <BoxListLable />
+        <BoxListLable data={listLableData}/>
       </div>
       {productData.map((product) => (
         <div key={product.id} className="flex justify-center">
