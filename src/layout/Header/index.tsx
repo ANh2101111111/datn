@@ -5,6 +5,8 @@ import HeaderLogo from "./components/HeaderLogo";
 import HeaderInput from "./components/HeaderInput";
 import useWindowSize from "./hooks/useWindowSize";
 import HeaderIcons from "./components/HeaderIcon";
+import Link from "next/link";
+import { Route } from "@/types/route";
 
 const Header: React.FC = () => {
   const { width } = useWindowSize();
@@ -25,12 +27,14 @@ const Header: React.FC = () => {
 
       {/* Logo */}
       <div className="flex items-center  mr-6">
-        <HeaderLogo
-          logoSrc={DATA.logoSrc}
-          alt={DATA.alt}
-          width={DATA.logoWidth}
-          height={DATA.logoHeight}
-        />
+        <Link href={Route.HOME}>
+          <HeaderLogo
+            logoSrc={DATA.logoSrc}
+            alt={DATA.alt}
+            width={DATA.logoWidth}
+            height={DATA.logoHeight}
+          />
+        </Link>
       </div>
 
       {!isMobile ? (
