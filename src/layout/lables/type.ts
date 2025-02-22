@@ -3,7 +3,7 @@ export interface ILabel {
   name: string;
 }
 
-export const listLableData: ILabel[] = [
+export  const listLableData: ILabel[] = [
   { id: 1, name: "tất cả" },
   { id: 2, name: "xe dap 1" },
   { id: 3, name: "xe đạp 2" },

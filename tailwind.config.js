@@ -33,6 +33,7 @@ module.exports = {
           body: "#7e7e7e",
           footer: "#253D4E",
           brand1: "#3BB77E",
+          muted: '#B6B6B6'
         },
         colorButton: {
           brand1: "#DEF9EC",
