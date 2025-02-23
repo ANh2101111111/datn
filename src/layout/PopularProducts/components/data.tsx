@@ -1,3 +1,17 @@
+export interface IProductDetail {
+  id: number;
+  name: string;
+  imageUrl: string;
+  rating: number;
+  originalPrice: number;
+  discountedPrice: number;
+  weight: string;
+  brand: string;
+  type: string;
+  textType: string;
+  description: React.ReactNode;
+}
+
 const productData = [
   {
     id: 1,
@@ -11,6 +25,28 @@ const productData = [
     brand: "Hodo Foods",
     type: "NEW",
     textType: "HOT",
+    description: (
+      <>
+        Uninhibited carnally hired played in whimpered dear gorilla koala
+        depending and much yikes off far quetzal goodness and from for grimaced
+        goodness unaccountably and meadowlark near unblushingly crucial scallop
+        tightly neurotic hungrily some and dear furiously this apart.
+        <br />
+        <br />
+        Spluttered narrowly yikes left moth in yikes bowed this that grizzly
+        much hello on spoon-fed that alas rethought much decently richly and wow
+        against the frequent fluidly at formidable acceptably flapped besides
+        and much circa far over the bucolically hey precarious goldfinch
+        mastodon goodness gnashed a jellyfish and one however because.
+        <br />
+        <br />
+        Less lion goodness that euphemistically robin expeditiously bluebird
+        smugly scratched far while thus cackled sheepishly rigid after due one
+        assenting regarding censorious while occasional or this more crane went
+        more as this less much amid overhung anathematic because much held one
+        exuberantly sheep goodness so where rat wry well concomitantly.
+      </>
+    ),
   },
   {
     id: 2,
@@ -23,6 +59,28 @@ const productData = [
     brand: "Hodo Foods",
     type: "HOT",
     textType: "HOT",
+    description: (
+      <>
+        Uninhibited carnally hired played in whimpered dear gorilla koala
+        depending and much yikes off far quetzal goodness and from for grimaced
+        goodness unaccountably and meadowlark near unblushingly crucial scallop
+        tightly neurotic hungrily some and dear furiously this apart.
+        <br />
+        <br />
+        Spluttered narrowly yikes left moth in yikes bowed this that grizzly
+        much hello on spoon-fed that alas rethought much decently richly and wow
+        against the frequent fluidly at formidable acceptably flapped besides
+        and much circa far over the bucolically hey precarious goldfinch
+        mastodon goodness gnashed a jellyfish and one however because.
+        <br />
+        <br />
+        Less lion goodness that euphemistically robin expeditiously bluebird
+        smugly scratched far while thus cackled sheepishly rigid after due one
+        assenting regarding censorious while occasional or this more crane went
+        more as this less much amid overhung anathematic because much held one
+        exuberantly sheep goodness so where rat wry well concomitantly.
+      </>
+    ),
   },
   {
     id: 3,
@@ -35,6 +93,28 @@ const productData = [
     brand: "Hodo Foods",
     type: "HOT",
     textType: "HOT",
+    description: (
+      <>
+        Uninhibited carnally hired played in whimpered dear gorilla koala
+        depending and much yikes off far quetzal goodness and from for grimaced
+        goodness unaccountably and meadowlark near unblushingly crucial scallop
+        tightly neurotic hungrily some and dear furiously this apart.
+        <br />
+        <br />
+        Spluttered narrowly yikes left moth in yikes bowed this that grizzly
+        much hello on spoon-fed that alas rethought much decently richly and wow
+        against the frequent fluidly at formidable acceptably flapped besides
+        and much circa far over the bucolically hey precarious goldfinch
+        mastodon goodness gnashed a jellyfish and one however because.
+        <br />
+        <br />
+        Less lion goodness that euphemistically robin expeditiously bluebird
+        smugly scratched far while thus cackled sheepishly rigid after due one
+        assenting regarding censorious while occasional or this more crane went
+        more as this less much amid overhung anathematic because much held one
+        exuberantly sheep goodness so where rat wry well concomitantly.
+      </>
+    ),
   },
   {
     id: 4,
@@ -47,6 +127,28 @@ const productData = [
     brand: "Hodo Foods",
     type: "HOT",
     textType: "HOT",
+    description: (
+      <>
+        Uninhibited carnally hired played in whimpered dear gorilla koala
+        depending and much yikes off far quetzal goodness and from for grimaced
+        goodness unaccountably and meadowlark near unblushingly crucial scallop
+        tightly neurotic hungrily some and dear furiously this apart.
+        <br />
+        <br />
+        Spluttered narrowly yikes left moth in yikes bowed this that grizzly
+        much hello on spoon-fed that alas rethought much decently richly and wow
+        against the frequent fluidly at formidable acceptably flapped besides
+        and much circa far over the bucolically hey precarious goldfinch
+        mastodon goodness gnashed a jellyfish and one however because.
+        <br />
+        <br />
+        Less lion goodness that euphemistically robin expeditiously bluebird
+        smugly scratched far while thus cackled sheepishly rigid after due one
+        assenting regarding censorious while occasional or this more crane went
+        more as this less much amid overhung anathematic because much held one
+        exuberantly sheep goodness so where rat wry well concomitantly.
+      </>
+    ),
   },
   {
     id: 5,
@@ -60,6 +162,28 @@ const productData = [
     brand: "Hodo Foods",
     type: "SALE",
     textType: "50%",
+    description: (
+      <>
+        Uninhibited carnally hired played in whimpered dear gorilla koala
+        depending and much yikes off far quetzal goodness and from for grimaced
+        goodness unaccountably and meadowlark near unblushingly crucial scallop
+        tightly neurotic hungrily some and dear furiously this apart.
+        <br />
+        <br />
+        Spluttered narrowly yikes left moth in yikes bowed this that grizzly
+        much hello on spoon-fed that alas rethought much decently richly and wow
+        against the frequent fluidly at formidable acceptably flapped besides
+        and much circa far over the bucolically hey precarious goldfinch
+        mastodon goodness gnashed a jellyfish and one however because.
+        <br />
+        <br />
+        Less lion goodness that euphemistically robin expeditiously bluebird
+        smugly scratched far while thus cackled sheepishly rigid after due one
+        assenting regarding censorious while occasional or this more crane went
+        more as this less much amid overhung anathematic because much held one
+        exuberantly sheep goodness so where rat wry well concomitantly.
+      </>
+    ),
   },
 ];
 export default productData;

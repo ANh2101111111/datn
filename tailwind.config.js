@@ -33,7 +33,7 @@ module.exports = {
           body: "#7e7e7e",
           footer: "#253D4E",
           brand1: "#3BB77E",
-          muted: '#B6B6B6'
+          muted: "#B6B6B6",
         },
         colorButton: {
           brand1: "#DEF9EC",
@@ -41,6 +41,7 @@ module.exports = {
         },
         border: {
           color1: "#E5E5E5",
+          "grey": "#F2F3F4",
         },
         badge: {
           Danger: "#FD6E6E",
@@ -55,7 +56,7 @@ module.exports = {
           brand1hover: "#FDC040",
         },
         border: {
-          color1: "#E5E5E5"
+          color1: "#E5E5E5",
         },
         badge: {
           Danger: "#FD6E6E",

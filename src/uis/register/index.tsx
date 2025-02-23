@@ -5,7 +5,7 @@ const Register = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-1 max-w-[400px] w-full mx-auto gap-12 my-16">
       <div className="col-span-1">
-        <p className="text-heading-2 text-text-heading font-semibold mb-8 font-sans">
+        <p className="text-heading-2 text-text-heading font-semibold mb-8 font-quicksand">
           Create an Account
         </p>
         <p className="text-text-muted text-xs mb-8">
