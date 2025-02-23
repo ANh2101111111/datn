@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -7,6 +7,7 @@ interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
   required?: boolean;
+  inputSize?: "small" | "medium" | "large";
 }
 
 const variants = {
@@ -16,9 +17,23 @@ const variants = {
   error: "border border-red-500 bg-red-50",
 };
 
+const inputSizes = {
+  small: "h-8",
+  medium: "h-12",
+  large: "h-16",
+};
+
 const Input = React.forwardRef<HTMLInputElement, IInputProps>(
   (
-    { className, variant = "normal", label, error, required = false, ...props },
+    {
+      className,
+      variant = "normal",
+      inputSize = "large",
+      label,
+      error,
+      required = false,
+      ...props
+    },
     ref
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
@@ -45,7 +60,8 @@ const Input = React.forwardRef<HTMLInputElement, IInputProps>(
               "placeholder:text-gray-400 text-gray-900",
               "focus:ring-2 focus:ring-green-500 focus:border-transparent",
               variants[variant],
-              className
+              className,
+              inputSizes[inputSize]
             )}
             {...props}
           />
