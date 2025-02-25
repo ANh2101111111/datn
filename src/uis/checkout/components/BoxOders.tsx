@@ -15,12 +15,16 @@ const BoxOrders: React.FC<BoxOrdersProps> = ({ orders }) => {
           key={item.id}
           className="flex justify-between items-center border-b py-2"
         >
-          <img src={item.image} alt={item.name} className="w-[90px] h-[90px] rounded" />
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-[90px] h-[90px] rounded"
+          />
           <div className="flex-1 ml-4">
             <p className="font-quicksand text-heading-6 ">{item.name}</p>
-            <p className="text-gray-600">x {item.quantity}</p>
+            <p className="text-text-muted">x {item.quantity}</p>
           </div>
-          <span className="font-bold text-green-500">
+          <span className="font-bold text-text-brand1">
             ${item.price.toFixed(2)}
           </span>
         </div>

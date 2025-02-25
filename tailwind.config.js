@@ -41,7 +41,7 @@ module.exports = {
         },
         border: {
           color1: "#E5E5E5",
-          "grey": "#F2F3F4",
+          grey: "#F2F3F4",
         },
         badge: {
           Danger: "#FD6E6E",

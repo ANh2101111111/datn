@@ -7,7 +7,7 @@ interface PaymentProps {
 
 const Payment: React.FC<PaymentProps> = ({ methods }) => {
   return (
-    <div className="border p-4 shadow-md">
+    <div className="mt-[20px]">
       <h3 className="font-bold text-heading-4 mb-4">Payment</h3>
       {methods.map((method) => (
         <div key={method.id} className="flex items-center space-x-2 py-1">
@@ -17,7 +17,9 @@ const Payment: React.FC<PaymentProps> = ({ methods }) => {
           </label>
         </div>
       ))}
-      <Button  variant ="primary" className=" p-2 mt-4 w-full rounded">Place on Order </Button>
+      <Button variant="primary" className=" p-2 mt-4 w-full rounded">
+        Place on Order{" "}
+      </Button>
     </div>
   );
 };
