@@ -8,7 +8,9 @@ const Checkout = () => {
   return (
     <div className="container mx-auto p-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
       <div>
-        <h2 className="text-heading-2 text-text-heading font-quicksand font-bold mb-4">Checkout</h2>
+        <h2 className="text-heading-2 text-text-heading font-quicksand font-bold mb-4">
+          Checkout
+        </h2>
         <BillingDetails />
       </div>
       <div className="grid grid-cols-1 ">

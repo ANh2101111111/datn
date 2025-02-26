@@ -4,7 +4,9 @@ import React from "react";
 const BillingDetails: React.FC = () => {
   return (
     <div className="border p-4 shadow-md">
-      <h3 className="font-bold text-heading-4 font-quicksand  mb-4">Billing Details</h3>
+      <h3 className="font-bold text-heading-4 font-quicksand  mb-4">
+        Billing Details
+      </h3>
       <form className="grid grid-cols-2 gap-4">
         <Input
           type="text"

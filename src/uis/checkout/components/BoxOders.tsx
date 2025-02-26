@@ -8,27 +8,43 @@ interface BoxOrdersProps {
 
 const BoxOrders: React.FC<BoxOrdersProps> = ({ orders }) => {
   return (
-    <div className="border p-4 shadow-md">
-      <h3 className="font-bold text-lg mb-4">Your Orders</h3>
-      {orders.map((item) => (
-        <div
-          key={item.id}
-          className="flex justify-between items-center border-b py-2"
-        >
-          <img
-            src={item.image}
-            alt={item.name}
-            className="w-[90px] h-[90px] rounded"
-          />
-          <div className="flex-1 ml-4">
-            <p className="font-quicksand text-heading-6 ">{item.name}</p>
-            <p className="text-text-muted">x {item.quantity}</p>
+    <div className="border p-6 shadow-lg rounded-lg bg-brand-thrid">
+      {/* Header */}
+      <div className="flex justify-between items-center border-b pb-3 mb-3">
+        <h3 className="font-bold text-heading-4 text-text-heading font-quicksand">
+          Your Orders
+        </h3>
+        <span className="text-text-muted font-quicksand text-sm">Subtotal</span>
+      </div>
+
+      <div className="space-y-4">
+        {orders.map((item) => (
+          <div
+            key={item.id}
+            className="flex items-center border-b last:border-b-0 pb-3"
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              className="w-16 h-16 rounded-lg object-cover shadow-md"
+            />
+
+            <div className="flex-1 pl-4">
+              <p className=" text-text-medium font-bold font-quicksand text-text-heading leading-tight">
+                {item.name}
+              </p>
+            </div>
+
+            <div className="w-12 text-center flex items-center justify-center font-bold text-heading-4 text-text-muted text-lg">
+              x {item.quantity}
+            </div>
+
+            <span className="font-bold text-heading-4 font-quicksand text-scale-color5">
+              ${item.price.toFixed(2)}
+            </span>
           </div>
-          <span className="font-bold text-text-brand1">
-            ${item.price.toFixed(2)}
-          </span>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
