@@ -1,6 +1,6 @@
 import ShopPage from "@/uis/shop";
 import React from "react";
 
-export default function Product() {
+export default function Shop() {
   return  <ShopPage/> ;
 }
