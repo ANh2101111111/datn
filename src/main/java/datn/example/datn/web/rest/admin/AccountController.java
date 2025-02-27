@@ -10,12 +10,15 @@ import datn.example.datn.service.CustomUserDetailsService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 
 @RequestMapping(value ="/admin")
@@ -25,13 +28,11 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
     @Autowired
     private final AuthService authService;
-    @PostMapping("/register")
-    public ResponseEntity<AuthResponse> adminregister(@Validated @RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authService.register(request));
-    }
+
     @PostMapping("/login")
-    public ResponseEntity<String> adminlogin(@Validated @RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+    public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
+        String token = authService.login(request.get("username"), request.get("password"));
+        return ResponseEntity.ok(Map.of("token", token));
     }
 
 }

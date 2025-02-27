@@ -8,12 +8,13 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.Map;
 
 @RequestMapping(value ="/user")
 @RestController("userAccountController")
@@ -29,10 +30,11 @@ public class AccountController {
     public ResponseEntity<AuthResponse> register(@Validated @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }
-
     @PostMapping("/login")
-    public ResponseEntity<String> login(@Validated @RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+    public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
+        String token = authService.login(request.get("username"), request.get("password"));
+        return ResponseEntity.ok(Map.of("token", token));
     }
+
 
 }

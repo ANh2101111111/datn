@@ -15,7 +15,6 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    // Khóa bí mật phải có độ dài hợp lệ (ít nhất 256 bit = 32 ký tự)
     private static final String SECRET_KEY = "mySuperSecretKeyForJWTmySuperSecretKeyForJWT";
 
     private SecretKey getSigningKey() {
@@ -25,18 +24,23 @@ public class JwtService {
 
     public String generateToken(UserDetails user) {
         return Jwts.builder()
-                .subject(user.getUsername())
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // Hết hạn sau 1 giờ
-                .signWith(getSigningKey()) // Không cần SignatureAlgorithm vì mặc định là HS256
+                .setSubject(user.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1h
+                .signWith(getSigningKey())
                 .compact();
     }
 
+
     public boolean validateToken(String token, UserDetails userDetails) {
+        if (token == null || token.isBlank()) {
+            throw new RuntimeException("Token is missing or empty");
+        }
         try {
-            return extractUsername(token).equals(userDetails.getUsername()) && !isTokenExpired(token);
+            String username = extractUsername(token);
+            return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
         } catch (JwtException e) {
-            return false;
+            throw new RuntimeException("Invalid JWT token", e);
         }
     }
 
@@ -50,7 +54,7 @@ public class JwtService {
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         Claims claims = Jwts.parser()
-                .verifyWith(getSigningKey()) // verifyWith thay thế cho setSigningKey()
+                .verifyWith(getSigningKey())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();

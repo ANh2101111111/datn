@@ -1,11 +1,13 @@
 package datn.example.datn.repository;
 
 import datn.example.datn.entity.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
+@Data
 public class UserDetailsImpl implements UserDetails {
     private final User user;
 
