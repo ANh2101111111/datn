@@ -3,8 +3,9 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-<property name="now" value="now()" dbms="h2"/>
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
     <property name="floatType" value="float4" dbms="h2"/>
     <property name="uuidType" value="uuid" dbms="h2"/>
     <property name="datetimeType" value="datetime(6)" dbms="h2"/>
@@ -17,8 +18,9 @@
     <property name="uuidType" value="uuid" dbms="postgresql"/>
     <property name="datetimeType" value="datetime" dbms="postgresql"/>
 
- <include file="changelog/20252602-204500-remote_cloumn_description_permissions.sql" relativeToChangelogFile="true"/>
+    <include file="changelog/20252602-204500-remote_cloumn_description_permissions.sql" relativeToChangelogFile="true"/>
     <include file="changelog/20252602-234600-remote_cloumn_description_role.sql" relativeToChangelogFile="true"/>
     <include file="changelog/20252702-120900-drop_user_role.sql" relativeToChangelogFile="true"/>
     <include file="changelog/20252702-1201000-add_role_id_in_user.sql" relativeToChangelogFile="true"/>
+    <include file="changelog/20252702-150300-update_product.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

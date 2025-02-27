@@ -27,4 +27,8 @@ public class Promotion {
 
     @Column(nullable = false)
     private Date endDate;
+    public boolean isActive() {
+        Date now = new Date();
+        return now.after(startDate) && now.before(endDate);
+    }
 }
