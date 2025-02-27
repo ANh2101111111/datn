@@ -6,7 +6,7 @@ import IconHumburger from "@/layout/assets/icons/IconHamburger";
 import IconSearch from "@/layout/assets/icons/IconSearch";
 
 export const DATA = {
-  logoSrc: "/logo.svg",
+  logoSrc: "/LogoBike.svg",
   alt: "logo",
   logoWidth: 215,
   logoHeight: 66,

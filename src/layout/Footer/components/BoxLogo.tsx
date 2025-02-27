@@ -22,7 +22,7 @@ const BoxLogo: FC = ({}) => {
   return (
     <div className="md:col-span-4 col-span-2 w-full h-auto flex flex-col gap-[23.41px]">
       <div>
-        <IconLogo />
+        <IconLogo/>
       </div>
       <div>
         <p className="font-lato text-text-medium text-text-heading">
