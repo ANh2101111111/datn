@@ -32,15 +32,21 @@ public class AuthService {
     private  CustomUserDetailsService customUserDetailsService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthService(AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService, UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
+    public AuthService(AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService, UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager =authenticationManager;
         this.customUserDetailsService =customUserDetailsService;
+        this.roleRepository = roleRepository;
     }
 
     public AuthResponse register(RegisterRequest request) {
+        // Kiểm tra mật khẩu và mật khẩu xác nhận
+        if (!request.getPassword().equals(request.getConfirmPassword())) {
+            throw new IllegalArgumentException("Passwords do not match"); // Hoặc xử lý lỗi theo cách khác
+        }
+
         // Kiểm tra Role "USER" đã tồn tại chưa
         Role defaultRole = roleRepository.findByRoleName("USER")
                 .orElseGet(() -> {
@@ -72,7 +78,6 @@ public class AuthService {
 
         return response;
     }
-
     public String login(String username, String password) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 

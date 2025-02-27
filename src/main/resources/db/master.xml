@@ -23,4 +23,5 @@
     <include file="changelog/20252702-120900-drop_user_role.sql" relativeToChangelogFile="true"/>
     <include file="changelog/20252702-1201000-add_role_id_in_user.sql" relativeToChangelogFile="true"/>
     <include file="changelog/20252702-150300-update_product.sql" relativeToChangelogFile="true"/>
+    <include file="changelog/20252702-225500-insert_table_password_reset_requests.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

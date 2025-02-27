@@ -12,6 +12,7 @@ public class RegisterRequest {
     private String username;
     private String email;
     private String password;
+    private String confirmPassword;
     private Boolean status;
     private List<RoleResponse> roles;
     private LocalDateTime createdAt;
