@@ -22,17 +22,15 @@ public class Product {
     private Double rating;
     @Column(name = "type")
     private String type;
+    @Column(name = "original_price")
+    private BigDecimal originalPrice;
+    @Column(nullable = false)
+    private int quantity;
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-    @Column(name = "original_price")
-    private BigDecimal originalPrice;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Review> reviews;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<Promotion> promotions;
-    @Column(nullable = false)
-    private int quantity;
     public boolean isOutOfStock() {
         return this.quantity <= 0;
     }

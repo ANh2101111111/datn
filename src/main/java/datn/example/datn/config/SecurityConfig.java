@@ -32,6 +32,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/user/**").authenticated()
                         .requestMatchers("/api/user/categories/**").authenticated() // yêu cầu xác thực cho người dùng
                                 .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
+
                         .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

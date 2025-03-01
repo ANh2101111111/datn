@@ -27,4 +27,5 @@
     <include file="changelog/20252802-074500-add_column_quantity_product.sql" relativeToChangelogFile="true"/>
     <include file="changelog/20252802-083000-drop_cloums_product.sql" relativeToChangelogFile="true"/>
     <include file="changelog/20252802-083800-drop_cloumn_image.sql" relativeToChangelogFile="true"/>
+    <include file="changelog/20250103-110000-drop_cloum_promotions.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
