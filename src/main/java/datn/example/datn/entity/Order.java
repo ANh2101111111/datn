@@ -32,4 +32,9 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails;
+    public void calculateTotalAmount() {
+        totalAmount = orderDetails.stream()
+                .map(OrderDetail::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 }

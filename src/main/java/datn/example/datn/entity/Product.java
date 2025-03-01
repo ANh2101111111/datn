@@ -26,6 +26,8 @@ public class Product {
     private BigDecimal originalPrice;
     @Column(nullable = false)
     private int quantity;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted = false;
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
