@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { FC } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter
 import IconStar from "@/layout/assets/icons/IconStar";
 import BoxBadge from "@/layout/Badge/BoxBadge";
 
@@ -16,7 +17,7 @@ interface IBoxListProductProps {
   textType?: string;
 }
 
-// Component BoxListProduct
+// Component BoxProduct
 const BoxProduct: FC<IBoxListProductProps> = ({
   image,
   name,
@@ -28,7 +29,12 @@ const BoxProduct: FC<IBoxListProductProps> = ({
   type,
   textType,
 }) => {
-  // Hàm tạo sao
+  const router = useRouter();
+
+  const handleImageClick = () => {
+    router.push("/product");
+  };
+
   const renderStars = (rating: number) => {
     return [...Array(5)].map((_, index) => (
       <IconStar
@@ -36,7 +42,6 @@ const BoxProduct: FC<IBoxListProductProps> = ({
         className={`w-5 h-5 ${
           index < rating ? "text-brand-secondary" : "text-icon-star"
         }`}
-        // fill không thể dùng classname
         fill={index < 4 ? "#FDC040" : "#CDCDCD"}
       />
     ));
@@ -53,11 +58,14 @@ const BoxProduct: FC<IBoxListProductProps> = ({
 
   return (
     <div className="relative bg-brand-thrid w-[298px] h-[402px] border border-border-color1 rounded-[4px] overflow-hidden flex flex-col">
-      <div className="flex justify-center mt-[65px] mb-4">
+      <div
+        className="flex justify-center mt-[65px] mb-4 cursor-pointer"
+        onClick={handleImageClick}
+      >
         <img
           src={image}
           alt="product"
-          className="w-[200px] h-[150px] object-cover"
+          className="w-[200px] h-[150px] object-cover transition-transform transform hover:scale-105"
         />
       </div>
 
@@ -83,7 +91,7 @@ const BoxProduct: FC<IBoxListProductProps> = ({
       </div>
 
       {/* Nút Add */}
-      <div className="flex items-center justify-between px-5  mt-[11px]">
+      <div className="flex items-center justify-between px-5 mt-[11px]">
         <div className="flex items-center">
           <span className="text-xl font-semibold text-text-brand1">
             ${discountedPrice.toFixed(2)}
@@ -96,6 +104,7 @@ const BoxProduct: FC<IBoxListProductProps> = ({
           Add +
         </button>
       </div>
+
       {type && (
         <BoxBadge text={textType || type} className={getBadgeColor(type)} />
       )}

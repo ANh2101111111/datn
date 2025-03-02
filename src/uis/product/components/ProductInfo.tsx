@@ -1,14 +1,21 @@
+"use client";
 import IconStar from "@/layout/assets/icons/IconStar";
 import { IProductDetail } from "@/layout/PopularProducts/components/data";
 import Button from "@/uis/common/button";
-import Input from "@/uis/common/input";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 interface IProductInfoProps {
   data: IProductDetail;
 }
 
 const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
+  const [quantity, setQuantity] = useState(1);
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value);
+    setQuantity(value >= 1 ? value : 1)
+  };
+
   const renderStars = (rating: number) => {
     return [...Array(5)].map((_, index) => (
       <IconStar
@@ -16,11 +23,11 @@ const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
         className={`w-5 h-5 ${
           index < rating ? "text-brand-secondary" : "text-icon-star"
         }`}
-        // fill không thể dùng classname
         fill={index < 4 ? "#FDC040" : "#CDCDCD"}
       />
     ));
   };
+
   return (
     <div className="max-w-[1000px] w-full mx-auto mt-16 mb-10">
       <div className="grid grid-cols-2 gap-10">
@@ -46,20 +53,28 @@ const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
           <div className="text-text-large text-text-body font-lato mb-8 h-[230px] overflow-hidden">
             {data.description}
           </div>
-          <div className="flex items-center gap-2">
-            <Input
-              type="number"
-              className="w-[120px] pl-8"
-              variant="focus"
-              value={1}
-              inputSize="medium"
-            />
-            <Button size="medium" variant="primary" className="text-white">
-              Add To Cart
-            </Button>
+          <div className="flex items-center  ">
+            {/* Phần tăng giảm số lượng */}
+            <div className="flex items-center mr-7 ">
+              <input
+                type="number"
+                className="w-[60px] text-center border rounded-md px-2 py-1"
+                value={quantity}
+                onChange={handleQuantityChange}
+              />
+            </div>
+
+            {/* Nút Add to Cart */}
+            <div className="">
+              <Button size="medium" variant="primary" className="text-white">
+                Add To Cart
+              </Button>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Phần mô tả sản phẩm */}
       <div className="border border-border-grey p-10 rounded-2xl mt-10">
         <div className="text-text-heading text-heading-4 font-quicksand font-bold mb-4">
           Description
