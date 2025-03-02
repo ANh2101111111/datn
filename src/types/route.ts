@@ -4,6 +4,7 @@ export enum Route {
   REGISTER = "/register",
   DASHBOARD = "/dashboard",
   SHOP = "shop",
+  PRODUCTREVIEW = "/productReview",
   FORGOTPASSWORD ="/forgotPassword",
   PROFILE = "/profile",
   SETTINGS = "/settings",

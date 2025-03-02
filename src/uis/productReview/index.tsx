@@ -1,13 +1,14 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import ReviewForm from "./components/ReviewForm";
 import ReviewList from "./components/ReviewList";
+import { initialReviews, Review } from "./components/data";
 
 const ProductReview: React.FC = () => {
-  const [reviews, setReviews] = useState<{ rating: number; comment: string }[]>([]);
+  const [reviews, setReviews] = useState<Review[]>(initialReviews);
 
-  const handleNewReview = (review: { rating: number; comment: string }) => {
-    setReviews([...reviews, review]);
+  const handleNewReview = (review: Review) => {
+    setReviews([review, ...reviews]);
   };
 
   return (
