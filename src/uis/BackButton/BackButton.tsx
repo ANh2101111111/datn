@@ -9,7 +9,7 @@ const BackButton: FC = () => {
   return (
     <Button variant="primary"
       onClick={() => router.back()} 
-      className="flex items-center gap-2 text-gray-700  hover:text-black transition-all duration-300 mt-4"
+      className="flex items-center gap-2 text-gray-700  hover:text-black transition-all duration-300 mt-"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
