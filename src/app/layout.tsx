@@ -3,6 +3,7 @@ import { Lato, Quicksand } from "next/font/google";
 import Footer from "../layout/Footer";
 import "./globals.css";
 import Header from "@/layout/Header";
+import BackButton from "@/uis/BackButton/BackButton";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
       >
         <div className="container mx-auto max-w-[1280px] px-4 ">
           <Header />
+          <BackButton />
           {children}
           <Footer />
         </div>
