@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useState } from "react";
 import Link from "next/link";
@@ -24,8 +23,10 @@ const Login = () => {
        setError("Đăng nhập thất bại. Vui lòng thử lại!");
      }
    } catch (err) {
-     setError(err.message || "Đăng nhập thất bại!");
-   }
+    const errorMessage = err instanceof Error ? err.message : "Đăng nhập thất bại!";
+    setError(errorMessage);
+  }
+  
  };
 
   return (
