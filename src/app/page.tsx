@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="mt-0">
       <SystemDesign />
     </div>
   );
