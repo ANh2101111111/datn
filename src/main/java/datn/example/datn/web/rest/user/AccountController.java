@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.Map;
 
-@RequestMapping(value ="/user")
+@RequestMapping(value ="/api/user")
 @RestController("userAccountController")
 @SecurityRequirement(name = "Bearer Authentication")
 public class AccountController {

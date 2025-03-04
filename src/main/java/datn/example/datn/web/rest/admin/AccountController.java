@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 
-@RequestMapping(value ="/admin")
+@RequestMapping(value ="/api/admin")
 @RestController("adminAccountController")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "Bearer Authentication")
