@@ -31,7 +31,9 @@ logging:
     root: info
     org:
       hibernate:
-        SQL_SLOW: info
+        SQL: debug  # Hiển thị câu SQL để debug dễ hơn
+        type.descriptor.sql: trace  # Hiển thị giá trị tham số SQL
+
 application:
   security:
     authentication:
