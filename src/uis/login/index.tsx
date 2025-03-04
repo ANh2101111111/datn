@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Route } from "@/types/route";
-import { loginUser } from "@/layout/api/app"; // Import API từ `api.js`
+import { loginUser } from "@/layout/api/authService.js"; // Import API từ `api.js`
 import Button from "../common/button";
 import Input from "../common/input";
 
@@ -14,15 +14,19 @@ const Login = () => {
   const [error, setError] = useState<string | null>(null); // Fix lỗi TypeScript
   const router = useRouter();
 
-  const handleLogin = async () => {
-    try {
-      const data = await loginUser(username, password);
-      localStorage.setItem("token", data.token); // Lưu token vào localStorage
-      router.push("/dashboard"); // Điều hướng sau khi đăng nhập thành công
-    } catch (err: any) {
-      setError(err.message || "Login failed"); // Ép kiểu err về string
-    }
-  };
+ const handleLogin = async () => {
+   try {
+     const data = await loginUser(username, password);
+     if (data.token) {
+       localStorage.setItem("token", data.token); // Lưu token
+       router.push("/dashboard"); // Chuyển hướng
+     } else {
+       setError("Đăng nhập thất bại. Vui lòng thử lại!");
+     }
+   } catch (err) {
+     setError(err.message || "Đăng nhập thất bại!");
+   }
+ };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 max-w-[850px] w-full mx-auto gap-12 my-16">
