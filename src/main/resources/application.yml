@@ -1,3 +1,7 @@
+server:
+  address: 0.0.0.0   # Cho phép truy cập từ bất kỳ máy nào trong mạng
+  port: 8080
+
 spring:
   application:
     name: datn
