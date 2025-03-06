@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato, Quicksand } from "next/font/google";
 import Footer from "../layout/Footer";
 import "./globals.css";
+import Chatbot from "@/uis/ai/Chatbot";
 import Header from "@/layout/Header";
 import BackButton from "@/uis/BackButton/BackButton";
 
@@ -35,6 +36,8 @@ export default function RootLayout({
         <div className="container mx-auto max-w-[1280px] px-4 ">
           <Header />
           <BackButton />
+                <Chatbot/>
+
           {children}
           <Footer />
         </div>

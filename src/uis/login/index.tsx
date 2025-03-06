@@ -18,7 +18,7 @@ const Login = () => {
      const data = await loginUser(username, password);
      if (data.token) {
        localStorage.setItem("token", data.token); // Lưu token
-       router.push("/dashboard"); // Chuyển hướng
+       router.push("/"); // Chuyển hướng
      } else {
        setError("Đăng nhập thất bại. Vui lòng thử lại!");
      }
