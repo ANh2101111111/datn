@@ -2,7 +2,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // ✅ Import useRouter để điều hướng
+import { useRouter } from "next/navigation";
 import Button from "../common/button";
 import Input from "../common/input";
 import { Route } from "@/types/route";
@@ -16,7 +16,7 @@ const Login = () => {
   const API_URL = "https://apt-electric-oriole.ngrok-free.app/api/user/login";
 
   const handleLogin = async () => {
-    setError(""); // Reset lỗi
+    setError(""); 
 
     try {
       const response = await fetch(API_URL, {
