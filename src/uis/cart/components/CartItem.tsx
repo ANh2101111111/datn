@@ -2,8 +2,7 @@
 import React, { useState } from "react";
 import { CartItem } from "./data";
 import Image from "next/image";
-import { FaTrash } from "react-icons/fa";
-
+ 
 interface CartItemProps {
   item: CartItem;
 }
@@ -34,7 +33,7 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item }) => {
         ${(item.price * quantity).toFixed(2)}
       </span>
       <button className="text-red-500 ml-6">
-        <FaTrash />
+        
       </button>
     </div>
   );
