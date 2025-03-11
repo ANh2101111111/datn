@@ -15,13 +15,14 @@ interface IBoxListProductProps {
   discountedPrice: number;
   type?: string;
   textType?: string;
+  id: number
 }
 
 // Component BoxProduct
 const BoxProduct: FC<IBoxListProductProps> = ({
+  id,
   image,
   name,
-  brand,
   rating,
   weight,
   originalPrice,
@@ -32,7 +33,7 @@ const BoxProduct: FC<IBoxListProductProps> = ({
   const router = useRouter();
 
   const handleImageClick = () => {
-    router.push("/product");
+    router.push("/product/" + id);
   };
 
   const renderStars = (rating: number) => {
@@ -71,7 +72,6 @@ const BoxProduct: FC<IBoxListProductProps> = ({
 
       {/* Chi tiết sản phẩm */}
       <div className="px-4 flex flex-col gap-1">
-        <p className="text-xs font-lato font-normal text-text-body">{brand}</p>
         <h2 className="font-quicksand text-sm font-bold text-text-heading">
           {name}
         </h2>
@@ -91,7 +91,7 @@ const BoxProduct: FC<IBoxListProductProps> = ({
       </div>
 
       {/* Nút Add */}
-      <div className="flex items-center justify-between px-5 mt-[11px]">
+      <div className="flex flex-col px-5 gap-2">
         <div className="flex items-center">
           <span className="text-xl font-semibold text-text-brand1">
             ${discountedPrice.toFixed(2)}

@@ -22,7 +22,6 @@ interface IBoxListProductSellerProps {
 const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
   image,
   name,
-  brand,
   rating,
   weight,
   originalPrice,
@@ -67,9 +66,9 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
       {/* Chi tiết sản phẩm */}
       <div className="mt-4">
         <div className="px-4 flex flex-col gap-1">
-          <p className="text-xs font-lato font-normal text-text-body">
+          {/* <p className="text-xs font-lato font-normal text-text-body">
             {brand}
-          </p>
+          </p> */}
           <h2 className="font-quicksand  text-sm font-bold text-text-heading">
             {name}
           </h2>

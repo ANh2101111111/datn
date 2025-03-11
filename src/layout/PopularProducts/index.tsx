@@ -1,10 +1,14 @@
+'use client';
 import React from "react";
-import productData from "./components/data";
 import BoxProduct from "./components/BoxProduct";
 import BoxListLable from "../lables/BoxListLable";
 import { listLableData } from "../lables/type";
+import { useGetProducts } from "@/api/product";
+import { IProductDetail } from "@/api/product";
 
 const PopularProducts = () => {
+  const { data = [] } = useGetProducts();
+  const productData = data.slice(0, 5);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-[24px] mt-4 mb-4">
       <div className="col-span-full flex flex-row items-center justify-between w-full">
@@ -13,18 +17,19 @@ const PopularProducts = () => {
         </h2>
         <BoxListLable data={listLableData}/>
       </div>
-      {productData.map((product) => (
-        <div key={product.id} className="flex justify-center">
+      {productData.map((product: IProductDetail) => (
+        <div key={product.bicycleId} className="flex justify-center">
           <BoxProduct
-            image={product.imageUrl}
+            id={product.bicycleId}
+            image={product.image}
             name={product.name}
-            brand={product.brand}
+            brand={'Brand'}
             rating={product.rating}
-            weight={product.weight}
+            weight={String(product.quantity)}
             originalPrice={product.originalPrice}
             discountedPrice={product.discountedPrice}
             type={product.type}
-            textType={product.textType}
+            textType={product.type}
           />
         </div>
       ))}

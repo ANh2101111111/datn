@@ -1,6 +1,6 @@
 "use client";
+import { IProductDetail } from "@/api/product";
 import IconStar from "@/layout/assets/icons/IconStar";
-import { IProductDetail } from "@/layout/PopularProducts/components/data";
 import Button from "@/uis/common/button";
 import { FC, useState } from "react";
 
@@ -34,7 +34,7 @@ const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
         <div className="col-span-1 bg-[url(/login.png)] h-[600px] bg-cover"></div>
         <div className="col-span-1">
           <div className="bg-colorButton-brand1 text-text-small font-quicksand text-badge-brand-1 inline-block py-1 px-2 rounded mb-4">
-            {data.textType}
+            {data.type}
           </div>
           <div className="text-heading-2 text-text-heading font-bold mb-4">
             {data.name}
