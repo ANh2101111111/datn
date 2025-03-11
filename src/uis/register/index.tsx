@@ -16,9 +16,8 @@ const Register = () => {
   const API_URL =
     "https://apt-electric-oriole.ngrok-free.app/api/user/register";
   const handleRegister = async () => {
-    setError(""); // Reset lỗi trước khi submit
+    setError("");
 
-    // ✅ Kiểm tra confirmPassword ở frontend
     if (!username || !email || !password || !confirmPassword) {
       setError("Please fill in all fields!");
       return;
