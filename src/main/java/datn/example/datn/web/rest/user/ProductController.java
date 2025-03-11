@@ -22,6 +22,10 @@ public class ProductController {
     public ResponseEntity<List<ProductResponseDto>> getByType(@PathVariable String type) {
         return ResponseEntity.ok(productService.getByType(type));
     }
+    @GetMapping("/{bicycleId}")
+    public ResponseEntity<List<ProductResponseDto>> getById(@PathVariable Long bicycleId) {
+        return ResponseEntity.ok(productService.getBybicycleId(bicycleId));
+    }
     @GetMapping("/all")
     public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());

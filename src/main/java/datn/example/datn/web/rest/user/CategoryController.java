@@ -10,19 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user/categories")
+@RequestMapping("/user/categories")
 @RequiredArgsConstructor
 public class CategoryController {
 
     private final CategoryService categoryService;
-
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<CategoryResponseDto>> getAllCategories() {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
-
-    @PreAuthorize("isAuthenticated()")
     @GetMapping("/{categoryId}")
     public ResponseEntity<CategoryResponseDto> getCategoryById(@PathVariable Long categoryId) {
         return ResponseEntity.ok(categoryService.getCategoryById(categoryId));

@@ -44,6 +44,12 @@ public class ProductService {
                 .map(productMapper::toDto)
                 .collect(Collectors.toList());
     }
+    public List<ProductResponseDto> getBybicycleId(Long bicycleId) {
+        return productRepository.getBybicycleId(bicycleId).stream()
+                .map(productMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
 
     public ProductResponseDto updateProduct(Long bicycleId, ProductRequestDto request) {
         Optional<Product> optionalProduct = productRepository.findById(bicycleId);

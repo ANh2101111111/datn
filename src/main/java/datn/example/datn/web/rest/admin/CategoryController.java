@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController("adminCategoryController")
-@RequestMapping("/api/admin/categories")
+@RequestMapping("/admin/categories")
 public class CategoryController {
 
     @Autowired
@@ -29,25 +29,11 @@ public class CategoryController {
     public ResponseEntity<String> updateCategory(@PathVariable Long categoryId, @RequestBody CategoryRequestDto categoryRequestDto) {
         return ResponseEntity.ok(categoryService.updateCategory(categoryId, categoryRequestDto));
     }
-
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{categoryId}")
-
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
         return ResponseEntity.ok(categoryService.deleteCategory(categoryId));
     }
 
-    // Thêm API lấy danh sách category
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping
-    public ResponseEntity<List<CategoryResponseDto>> getAllCategories() {
-        return ResponseEntity.ok(categoryService.getAllCategories());
-    }
 
-    // API lấy thông tin category theo ID
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/{categoryId}")
-    public ResponseEntity<CategoryResponseDto> getCategoryById(@PathVariable Long categoryId) {
-        return ResponseEntity.ok(categoryService.getCategoryById(categoryId));
-    }
 }
