@@ -23,12 +23,11 @@ public class Order {
     @Column(nullable = false)
     private BigDecimal totalAmount;
 
-    @Column(nullable = false)
-    private String status;
-
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails;

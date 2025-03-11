@@ -1,5 +1,6 @@
 package datn.example.datn.dto.response;
 
+import datn.example.datn.entity.OrderStatus;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ public class OrderResponseDto {
     private Long orderId;
     private Long userId;
     private BigDecimal totalAmount;
-    private String status;
+    private OrderStatus status;
     private Date createdAt;
     private List<OrderDetailResponseDto> orderDetails;
 }

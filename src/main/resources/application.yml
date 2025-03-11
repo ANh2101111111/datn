@@ -1,5 +1,5 @@
 server:
-  address: 0.0.0.0   # Cho phép truy cập từ bất kỳ máy nào trong mạng
+  address: 0.0.0.0
   port: 8080
 
 spring:
@@ -16,7 +16,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -30,19 +30,18 @@ spring:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
       mail.debug: true
+
 logging:
   level:
     root: info
-    org:
-      hibernate:
-        SQL: debug  # Hiển thị câu SQL để debug dễ hơn
-        type.descriptor.sql: trace  # Hiển thị giá trị tham số SQL
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql: trace
 
 application:
   security:
     authentication:
       jwt:
-        base64-secret: OhWwNOhKThUZT+0VUVfQyx6aJWcScDSecgPHfazq1XAMeckjJg+Yj8Guu1SaXH3bFpmbwlcqzFWLMWnAIhSsCz3EXytY1x3aBA07XQBwVNGAes/OD7BQYLIXmFdwCGdUFXHn0IgapXRQWCRWTLq1f/ZB9xUsnObY9CqLE1nPk46eD355MqwvDHMU5Lbd19/dFCFHlVS58xEE6AbudAnZpii65UTGVrcIIyNKmyM36238s98dY8TpqrejcMqttrn+xZnKyylG0it2HDo1JcdiqtNNlwnn/rbqiOtbKcRMetrOeoR6NEKKBmo33kX89dOzQVXwHaORxv8VdjOPzB0ilQ==
+        base64-secret: ${JWT_SECRET:your_secure_generated_key}
         token-validity-in-seconds: 2592000
         token-validity-in-seconds-for-remember-me: 2592000
         refresh-token-validity-in-seconds: 2592000
@@ -50,6 +49,8 @@ application:
     allowed-origins: '*'
     allowed-methods: '*'
     allowed-headers: '*'
+
 springdoc:
   swagger-ui:
     tags-sorter: alpha
+    operations-sorter: alpha

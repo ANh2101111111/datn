@@ -22,14 +22,8 @@ public class ProductController {
     public ResponseEntity<List<ProductResponseDto>> getByType(@PathVariable String type) {
         return ResponseEntity.ok(productService.getByType(type));
     }
-
     @GetMapping("/all")
     public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
-    }
-    @PostMapping("/add-to-order/{orderId}")
-    public ResponseEntity<Void> addToOrder(@PathVariable Long orderId, @RequestBody OrderDetailRequestDto detailDto) {
-        orderService.addProductToOrder(orderId, detailDto);
-        return ResponseEntity.ok().build();
     }
 }

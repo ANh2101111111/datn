@@ -5,6 +5,7 @@ import datn.example.datn.dto.response.OrderDetailResponseDto;
 import datn.example.datn.dto.response.OrderResponseDto;
 import datn.example.datn.entity.Order;
 import datn.example.datn.entity.OrderDetail;
+import datn.example.datn.entity.OrderStatus;
 import datn.example.datn.entity.User;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,7 @@ public class OrderMapper {
         User user = new User();
         user.setUserId(dto.getUserId());
         order.setUser(user);
-        order.setStatus("PENDING");
+        order.setOrderStatus(OrderStatus.PENDING); // ✅ Sử dụng enum đúng cách
         return order;
     }
 
@@ -27,7 +28,7 @@ public class OrderMapper {
         dto.setOrderId(order.getOrderId());
         dto.setUserId(order.getUser().getUserId());
         dto.setTotalAmount(order.getTotalAmount());
-        dto.setStatus(order.getStatus());
+        dto.setStatus(order.getOrderStatus()); // ✅ Chuyển enum thành String
         dto.setCreatedAt(order.getCreatedAt());
         List<OrderDetailResponseDto> orderDetails = order.getOrderDetails().stream()
                 .map(this::toOrderDetailResponseDto)
