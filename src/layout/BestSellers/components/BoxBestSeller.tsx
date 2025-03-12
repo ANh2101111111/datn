@@ -115,7 +115,7 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
         <Button
           variant="primary"
           size="large"
-          className="  h-[40px] w-[238px] hover:bg-colorButton-brand1hover text-brand-thrid "
+          className="  h-[40px] w-full hover:bg-colorButton-brand1hover text-brand-thrid mr-[20px] ml-[20px]"
         >
           <IconCart /> Add to cart
         </Button>
