@@ -1,5 +1,6 @@
 package datn.example.datn.repository;
 
+import datn.example.datn.entity.Category;
 import datn.example.datn.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,4 +13,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product>findByIsDeletedFalse();
     List<Product> getBybicycleId(Long bicycleId);
     List<Product> findByCategory_CategoryIdAndIsDeletedFalse(Long categoryId);
+
+    List<Product> findByCategory(Category category);
 }
