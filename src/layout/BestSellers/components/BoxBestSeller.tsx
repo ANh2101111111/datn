@@ -4,6 +4,7 @@ import IconStar from "@/layout/assets/icons/IconStar";
 import Button from "@/uis/common/button";
 import IconCart from "@/layout/assets/icons/IconCart";
 import BoxBadge from "@/layout/Badge/BoxBadge";
+import { useRouter } from "next/navigation";
 
 interface IBoxListProductSellerProps {
   image: string;
@@ -17,9 +18,11 @@ interface IBoxListProductSellerProps {
   stock: number;
   type?: string;
   textType?: string;
+  id: number;
 }
 
 const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
+  id,
   image,
   name,
   rating,
@@ -31,6 +34,12 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
   type,
   textType,
 }) => {
+  const router = useRouter();
+
+  const handleImageClick = () => {
+    router.push("/product/" + id);
+  };
+
   const renderStars = (rating: number) => {
     return [...Array(5)].map((_, index) => (
       <IconStar
@@ -38,7 +47,6 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
         className={`w-5 h-5 ${
           index < rating ? "text-brand-secondary" : "text-icon-star"
         }`}
-        // fill không thể dùng classname
         fill={index < 5 ? "#FDC040" : "#CDCDCD"}
       />
     ));
@@ -60,6 +68,7 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
           src={image}
           alt="product"
           className="w-[200px] h-[150px] object-cover"
+          onClick={handleImageClick}
         />
       </div>
 
