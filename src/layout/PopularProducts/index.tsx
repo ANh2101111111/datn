@@ -10,7 +10,6 @@ import { ICategory } from "@/api/categories/type";
 const PopularProducts = () => {
   const { data = [] } = useGetProducts();
   const productData = data.slice(0, 5);
-
   const { data: categories = [] } = useGetCategories();
   const listLableData = categories.map((category: ICategory) => ({
     id: category.categoryId,

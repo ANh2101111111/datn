@@ -47,7 +47,6 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
         className={`w-5 h-5 ${
           index < rating ? "text-brand-secondary" : "text-icon-star"
         }`}
-        // fill không thể dùng classname
         fill={index < 5 ? "#FDC040" : "#CDCDCD"}
       />
     ));
