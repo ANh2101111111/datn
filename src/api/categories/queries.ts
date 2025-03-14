@@ -1,5 +1,5 @@
 import { createQuery } from "react-query-kit";
-import { getCategories } from "./requests";
+import { getCategories, getCategoryDetail } from "./requests";
 import { ICategory } from "./type";
 
 export const useGetCategories = createQuery<ICategory[]>({
@@ -7,3 +7,7 @@ export const useGetCategories = createQuery<ICategory[]>({
   queryFn: getCategories,
 });
 
+export const useGetCategoryDetail = createQuery<ICategory | null, number>({
+  primaryKey: "/user/categories/:id",
+  queryFn: ({ queryKey: [, id] }) => getCategoryDetail(id),
+});
