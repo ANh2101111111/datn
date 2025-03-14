@@ -2,13 +2,20 @@
 import React from "react";
 import BoxProduct from "./components/BoxProduct";
 import BoxListLable from "../lables/BoxListLable";
-import { listLableData } from "../lables/type";
 import { useGetProducts } from "@/api/product";
 import { IProductDetail } from "@/api/product";
+import { ICategory, useGetCategories } from "@/api/categories";
 
 const PopularProducts = () => {
   const { data = [] } = useGetProducts();
   const productData = data.slice(0, 5);
+  const { data: categories = [] } = useGetCategories();
+  const listLableData = categories.map((category: ICategory) => ({
+    id: category.categoryId,
+    name: category.name,
+
+  
+  }));
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-[24px] mt-4 mb-4">
       <div className="col-span-full flex flex-row items-center justify-between w-full">
