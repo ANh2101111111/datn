@@ -8,4 +8,5 @@ export interface IProductDetail {
   originalPrice: number;
   discountedPrice: number;
   quantity: number;
+  categoryId: number;
 }

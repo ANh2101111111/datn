@@ -17,7 +17,7 @@ const RelatedProduct = () => {
                 id={product.bicycleId}
                 image={product.image}
                 name={product.name}
-                brand={'Brand'}
+                brand={String(product.categoryId)}
                 rating={product.rating}
                 weight={String(product.quantity)}
                 originalPrice={product.originalPrice}

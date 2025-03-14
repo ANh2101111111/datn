@@ -31,7 +31,8 @@ const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
   return (
     <div className="max-w-[1000px] w-full mx-auto mt-16 mb-10">
       <div className="grid grid-cols-2 gap-10">
-        <div className="col-span-1 bg-[url(/login.png)] h-[600px] bg-cover"></div>
+        <div className="col-span-1 bg-[url(/login.png)] h-[600px] bg-cover">
+        </div>
         <div className="col-span-1">
           <div className="bg-colorButton-brand1 text-text-small font-quicksand text-badge-brand-1 inline-block py-1 px-2 rounded mb-4">
             {data.type}
