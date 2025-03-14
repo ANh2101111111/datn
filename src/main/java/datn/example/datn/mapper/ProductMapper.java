@@ -1,6 +1,7 @@
 package datn.example.datn.mapper;
 
 import datn.example.datn.dto.request.ProductRequestDto;
+import datn.example.datn.dto.response.CategoryResponseDto;
 import datn.example.datn.dto.response.ProductResponseDto;
 import datn.example.datn.entity.Product;
 import datn.example.datn.entity.Category; // Import the Category entity if needed
@@ -34,6 +35,15 @@ public class ProductMapper {
         dto.setOriginalPrice(product.getOriginalPrice());
         dto.setDiscountedPrice(calculateDiscountedPrice(product));
         dto.setQuantity(product.getQuantity());
+        dto.setCategoryId(product.getCategory().getCategoryId()); // Set category ID
+
+        // Set category details
+        if (product.getCategory() != null) {
+            CategoryResponseDto categoryDto = new CategoryResponseDto();
+            categoryDto.setCategoryId(product.getCategory().getCategoryId());
+            categoryDto.setName(product.getCategory().getName());
+            dto.setCategory(categoryDto); // Set category DTO
+        }
         return dto;
     }
 
