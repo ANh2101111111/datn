@@ -3,6 +3,7 @@ package datn.example.datn.web.rest.user;
 import datn.example.datn.dto.request.LoginRequest;
 import datn.example.datn.dto.request.PasswordResetRequestDto;
 import datn.example.datn.dto.request.RegisterRequest;
+import datn.example.datn.dto.request.ResetPasswordDto;
 import datn.example.datn.dto.response.AuthResponse;
 import datn.example.datn.dto.response.PasswordResetResponseDto;
 import datn.example.datn.service.AuthService;
@@ -49,8 +50,8 @@ public class AccountController {
     }
 
     @PostMapping("/reset-password")
-    public PasswordResetResponseDto resetPassword(@RequestParam String token, @RequestParam String newPassword) {
-        passwordResetService.resetPassword(token, newPassword);
+    public PasswordResetResponseDto resetPassword(@RequestBody ResetPasswordDto requestDto) {
+        passwordResetService.resetPassword(requestDto.getToken(), requestDto.getNewPassword());
         PasswordResetResponseDto response = new PasswordResetResponseDto();
         response.setMessage("Your password has been reset successfully.");
         return response;
