@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController("userOderController")
 @RequestMapping("/api/user/orders")
 public class OrderController {
 

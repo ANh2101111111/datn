@@ -12,6 +12,7 @@ public class OrderResponse {
     private Long userId;
     private BigDecimal totalAmount;
     private Date createdAt;
+    private Boolean cancel;
     private String orderStatus;
     private List<OrderDetailResponse> orderDetails;
 }

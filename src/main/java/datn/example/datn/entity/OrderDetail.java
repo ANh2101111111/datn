@@ -10,14 +10,16 @@ import java.math.BigDecimal;
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_detail_id")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
-    @Column(nullable = false)
-    private String productName;
+    @ManyToOne
+    @JoinColumn(name = "bicycle_id", nullable = false)
+    private Product product;
 
     @Column(nullable = false)
     private BigDecimal price;

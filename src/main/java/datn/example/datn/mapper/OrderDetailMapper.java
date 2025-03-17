@@ -2,20 +2,29 @@ package datn.example.datn.mapper;
 
 import datn.example.datn.dto.request.OrderDetailRequest;
 import datn.example.datn.dto.response.OrderDetailResponse;
+import datn.example.datn.entity.Order;
 import datn.example.datn.entity.OrderDetail;
+import datn.example.datn.entity.Product;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+@Component
 public class OrderDetailMapper {
-    public static OrderDetail toEntity(OrderDetailRequest request) {
-        OrderDetail orderDetail = new OrderDetail();
-        orderDetail.setProductName(request.getProductName());
-        orderDetail.setPrice(request.getPrice());
-        orderDetail.setQuantity(request.getQuantity());
-        return orderDetail;
+    public OrderDetail toEntity(OrderDetailRequest request, Order order, Product product) {
+        OrderDetail detail = new OrderDetail();
+        detail.setOrder(order);
+        detail.setProduct(product); // Gán product thay vì name
+        detail.setPrice(product.getOriginalPrice());
+        detail.setQuantity(request.getQuantity());
+        return detail;
     }
 
-    public static OrderDetailResponse toResponse(OrderDetail orderDetail) {
+    public OrderDetailResponse toResponse(OrderDetail orderDetail) {
         OrderDetailResponse response = new OrderDetailResponse();
-        response.setProductName(orderDetail.getProductName());
+        response.setOrderDetailId(orderDetail.getId());
+        response.setOrderId(orderDetail.getOrder().getOrderId());
+        response.setProductName(orderDetail.getProduct().getName()); // Lấy name từ product
         response.setPrice(orderDetail.getPrice());
         response.setQuantity(orderDetail.getQuantity());
         return response;

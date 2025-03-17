@@ -10,17 +10,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController("adminOderController")
 @RequestMapping("/api/admin/orders")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<OrderResponse>> getAllOrders() {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
+
 
     @PutMapping("/{orderId}")
     public ResponseEntity<OrderResponse> updateOrder(@PathVariable Long orderId, @RequestBody OrderRequest request) {

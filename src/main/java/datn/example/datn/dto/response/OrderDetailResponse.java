@@ -5,8 +5,10 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class OrderDetailResponse {
+    public class OrderDetailResponse {
+    private Long orderDetailId;
+    private Long orderId;
     private String productName;
     private BigDecimal price;
     private int quantity;
-}
+    }

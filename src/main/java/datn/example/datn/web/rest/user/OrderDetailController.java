@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController("userOder-detailsController")
 @RequestMapping("/api/user/order-details")
 public class OrderDetailController {
 
