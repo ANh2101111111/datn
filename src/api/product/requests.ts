@@ -18,3 +18,6 @@ export const getProductDetail = async (id: number): Promise<IProductDetail | nul
 
   return data ? data[0] : null;
 };
+
+
+

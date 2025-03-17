@@ -1,8 +1,8 @@
+import { IReview } from "@/api/reviews";
 import React from "react";
-import { Review } from "./data";
 
 interface ReviewListProps {
-  reviews: Review[];
+  reviews: IReview[];
 }
 
 const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
@@ -12,7 +12,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
         <p className="text-gray-500">Chưa có đánh giá nào.</p>
       ) : (
         reviews.map((review) => (
-          <div key={review.id} className="border-b py-3">
+          <div key={review.reviewId} className="border-b py-3">
             <p className="font-semibold text-gray-800">{review.username}</p>
             <div className="flex items-center space-x-1 mb-2">
               {[...Array(5)].map((_, i) => (
