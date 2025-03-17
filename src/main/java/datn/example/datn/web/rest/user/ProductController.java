@@ -1,6 +1,5 @@
 package datn.example.datn.web.rest.user;
 
-import datn.example.datn.dto.request.OrderDetailRequestDto;
 import datn.example.datn.dto.response.ProductResponseDto;
 import datn.example.datn.service.OrderService;
 import datn.example.datn.service.ProductService;
