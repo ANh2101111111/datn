@@ -21,7 +21,10 @@ request.interceptors.response.use(handleSuccess, handleError);
 
 request.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
-    config.headers["ngrok-skip-browser-warning"] = "true";
+    // config.headers["ngrok-skip-browser-warning"] = "true";
+    const token = typeof localStorage !== "undefined" ? localStorage.getItem("token") : null;
+    console.log(token, "token");
+    config.headers.Authorization = `Bearer ${token}`;
 
     return config;
   },

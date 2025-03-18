@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/layout/Header";
 import BackButton from "@/uis/BackButton/BackButton";
 import Providers from "./provider";
+import { Toaster } from "react-hot-toast";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -41,6 +42,8 @@ export default function RootLayout({
             <Footer />
           </div>
         </Providers>
+        <Toaster />
+
       </body>
     </html>
   );

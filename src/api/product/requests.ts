@@ -16,5 +16,5 @@ export const getProductDetail = async (id: number): Promise<IProductDetail | nul
     method: "GET",
   });
 
-  return data ? data[0] : null;
+  return data ? data : null;
 };

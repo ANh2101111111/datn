@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import Button from "../common/button";
 import Input from "../common/input";
 import { Route } from "@/types/route";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "@/api/users";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -13,30 +16,20 @@ const Login = () => {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const API_URL = "https://apt-electric-oriole.ngrok-free.app/api/user/login";
+  const { mutateAsync } = useMutation(login, {
+    onSuccess: (data) => {
+      toast.success("Login successfully");
+      router.push(Route.HOME);
+      localStorage.setItem("token", data.token);
+    },
+    onError: () => {
+      toast.error("Invalid username or password");
+      // setError("Invalid username or password");
+    },
+  });
 
   const handleLogin = async () => {
-    setError(""); 
-
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        localStorage.setItem("authToken", data.token);
-        alert("Login Successful! Redirecting to shop...");
-        router.push("/shop");
-      } else {
-        setError(data.message || "Login failed!");
-      }
-    } catch (error) {
-      setError("Network error! Please try again.");
-    }
+    mutateAsync({ username, password });
   };
 
   return (
