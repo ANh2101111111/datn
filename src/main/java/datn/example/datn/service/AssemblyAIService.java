@@ -1,7 +1,11 @@
 package datn.example.datn.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import datn.example.datn.dto.response.ProductResponseDto;
 import datn.example.datn.entity.Category;
 import datn.example.datn.entity.Product;
+import datn.example.datn.mapper.ProductMapper;
 import datn.example.datn.repository.CategoryRepository;
 import datn.example.datn.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -29,10 +30,25 @@ public class AssemblyAIService {
 
     private String apiKey = "0d5bf615f83145ac80d8b222fbd67640";
     private String geminiApiKey = "AIzaSyBI0jEvIyEw-t2driEcwoc2ZB8MuEtZ5d4";
-
-
     private final RestTemplate restTemplate = new RestTemplate();
+    private static final String NGROK_API_URL = "https://apt-electric-oriole.ngrok-free.app/user/products/all";
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    // Phương thức lấy tất cả sản phẩm từ ngrok
+    public List<ProductResponseDto> getAllProductsFromNgrok() {
+        ResponseEntity<String> response = restTemplate.getForEntity(NGROK_API_URL, String.class);
+        try {
+            // Chuyển đổi JSON thành danh sách sản phẩm
+            List<Product> products = objectMapper.readValue(response.getBody(), new TypeReference<List<Product>>() {});
+            return products.stream().map(productMapper::toDto).toList();
+        } catch (Exception e) {
+            throw new RuntimeException("Lỗi khi chuyển đổi JSON từ ngrok", e);
+        }
+    }
+
+    // Phương thức xử lý âm thanh và phân tích ngữ cảnh
     public String transcribeAudio(MultipartFile file) throws IOException {
         // 1. Upload file lên AssemblyAI
         String uploadUrl = uploadFile(file);
@@ -201,45 +217,46 @@ public class AssemblyAIService {
     @Autowired
     private ProductRepository productRepository;
 
-    public String analyzeWithGeminiAndSearchDB(String text) {
-        // 1. Gọi Gemini AI để lấy danh mục sản phẩm
-        String categoryName = analyzeWithGemini(text);
+    @Autowired
+    private ProductMapper productMapper;
 
-        if (categoryName == null || categoryName.isEmpty()) {
-            return "Error: Unable to get catalog from Gemini AI.";
-        }
-
-        // 2. Chuẩn hóa danh mục (map từ tiếng Việt -> tiếng Anh nếu cần)
-        categoryName = mapCategory(categoryName);
-
-        // 3. Tìm danh mục gần đúng trong database
-        Category category = categoryRepository.findByNameContainingIgnoreCase(categoryName);
-        if (category == null) {
-            return "No category found:" + categoryName;
-        }
-
-        // 4. Lấy danh sách sản phẩm thuộc danh mục
-        List<Product> products = productRepository.findByCategory(category);
-        if (products.isEmpty()) {
-            return "No products found in category: " + categoryName;
-        }
-
-        // 5. Trả về danh sách sản phẩm ngắn gọn
-        return products.stream()
-                .map(p -> p.getName() + " | Giá: " + p.getOriginalPrice() + " USD")
-                .collect(Collectors.joining("\n"));
-    }
-    private static final Map<String, String> CATEGORY_MAPPING = Map.of(
-            "xe đạp leo núi", "mountain bike",
-            "xe đạp đua", "road bike",
-            "xe đạp thành phố", "city bike",
-            "xe đạp gấp", "folding bike",
-            "xe đạp trẻ em", "kids bike"
-    );
-
-    private String mapCategory(String vietnameseCategory) {
-        return CATEGORY_MAPPING.getOrDefault(vietnameseCategory.toLowerCase(), vietnameseCategory);
-    }
+//    public List<ProductResponseDto> analyzeWithGeminiAndSearchDB(String text) {
+//        // 1. Gọi Gemini AI để lấy danh mục sản phẩm
+//        String categoryName = analyzeWithGemini(text);
+//
+//        if (categoryName == null || categoryName.isEmpty()) {
+//            return Collections.emptyList(); // Trả về danh sách rỗng nếu không tìm thấy danh mục
+//        }
+//
+//        // 2. Chuẩn hóa danh mục (map từ tiếng Việt -> tiếng Anh nếu cần)
+//        categoryName = mapCategory(categoryName);
+//
+//        // 3. Tìm danh mục gần đúng trong database
+//        Category category = categoryRepository.findByNameContainingIgnoreCase(categoryName);
+//        if (category == null) {
+//            return Collections.emptyList();
+//        }
+//
+//        // 4. Lấy danh sách sản phẩm thuộc danh mục
+//        List<Product> products = productRepository.findByCategory(category);
+//
+//        // 5. Chuyển danh sách Product thành ProductResponseDto bằng mapper
+//        return products.stream()
+//                .map(productMapper::toDto) // Thay vì tự map thủ công, dùng mapper có sẵn
+//                .collect(Collectors.toList());
+//    }
+//
+//    private static final Map<String, String> CATEGORY_MAPPING = Map.of(
+//            "xe đạp leo núi", "mountain bike",
+//            "xe đạp đua", "road bike",
+//            "xe đạp thành phố", "city bike",
+//            "xe đạp gấp", "folding bike",
+//            "xe đạp trẻ em", "kids bike"
+//    );
+//
+//    private String mapCategory(String vietnameseCategory) {
+//        return CATEGORY_MAPPING.getOrDefault(vietnameseCategory.toLowerCase(), vietnameseCategory);
+//    }
 }
 
 
