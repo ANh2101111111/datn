@@ -257,6 +257,30 @@ public class AssemblyAIService {
 //    private String mapCategory(String vietnameseCategory) {
 //        return CATEGORY_MAPPING.getOrDefault(vietnameseCategory.toLowerCase(), vietnameseCategory);
 //    }
+
+    public List<ProductResponseDto> analyzeWithGeminiAndSearchNgrok(String text) {
+        // 1. Gọi Gemini AI để phân tích từ khóa tìm kiếm
+        String keyword = analyzeWithGemini(text);
+
+        if (keyword == null || keyword.isEmpty()) {
+            return Collections.emptyList(); // Không có từ khóa hợp lệ
+        }
+
+        // 2. Lấy toàn bộ sản phẩm từ Ngrok API
+        List<ProductResponseDto> allProducts = getAllProductsFromNgrok();
+
+        // 3. Lọc sản phẩm chứa từ khóa trong tên, mô tả **hoặc danh mục**
+        return allProducts.stream()
+                .filter(product ->
+                        product.getName().toLowerCase().contains(keyword.toLowerCase()) ||
+                                product.getDescription().toLowerCase().contains(keyword.toLowerCase()) ||
+                                product.getCategory().getName().toLowerCase().contains(keyword.toLowerCase()) // Kiểm tra danh mục
+                )
+                .collect(Collectors.toList());
+    }
+
+
+
 }
 
 

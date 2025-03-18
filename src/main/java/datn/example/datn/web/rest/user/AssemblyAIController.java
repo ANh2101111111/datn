@@ -43,7 +43,7 @@ public class AssemblyAIController {
             String rawText = assemblyAIService.transcribeAudio(file);
 
             // Phân tích nội dung tìm kiếm và tìm sản phẩm từ ngrok API
-            List<ProductResponseDto> result = assemblyAIService.getAllProductsFromNgrok();
+            List<ProductResponseDto> result = assemblyAIService.analyzeWithGeminiAndSearchNgrok(rawText);
 
             return ResponseEntity.ok(result);
         } catch (IOException e) {
