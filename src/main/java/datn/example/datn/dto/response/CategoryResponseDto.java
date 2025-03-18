@@ -6,6 +6,6 @@ import lombok.Data;
 public class CategoryResponseDto {
     private Long categoryId;
     private String name;
-    private String description;
+//    private String description;
 }
 

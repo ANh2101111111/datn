@@ -15,4 +15,6 @@ public class ProductResponseDto {
     private BigDecimal originalPrice;
     private BigDecimal discountedPrice;
     private int quantity;
+    private Long categoryId;
+    private CategoryResponseDto category;
 }

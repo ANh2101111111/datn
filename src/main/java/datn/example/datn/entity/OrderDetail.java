@@ -2,7 +2,6 @@ package datn.example.datn.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.math.BigDecimal;
 
 @Data
@@ -11,7 +10,8 @@ import java.math.BigDecimal;
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderDetailId;
+    @Column(name = "order_detail_id")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
@@ -22,9 +22,8 @@ public class OrderDetail {
     private Product product;
 
     @Column(nullable = false)
-    private int quantity;
+    private BigDecimal price;
 
     @Column(nullable = false)
-    private BigDecimal price;
+    private int quantity;
 }
-

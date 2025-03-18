@@ -15,19 +15,19 @@ import java.util.List;
 public class ReviewController {
     @Autowired
     private ReviewService reviewService;
-    @PreAuthorize("isAuthenticated()")
+
     @GetMapping("/{reviewId}")
     public ResponseEntity<ReviewResponseDTO> getReviewById(@PathVariable Long reviewId) {
         ReviewResponseDTO reviewResponse = reviewService.getReviewById(reviewId);
         return ResponseEntity.ok(reviewResponse);
     }
-    @PreAuthorize("isAuthenticated()")
+
     @PostMapping
     public ResponseEntity<ReviewResponseDTO> createReview(@RequestBody ReviewRequestDTO reviewRequestDTO) {
         ReviewResponseDTO reviewResponse = reviewService.createReview(reviewRequestDTO);
         return ResponseEntity.ok(reviewResponse);
     }
-    @PreAuthorize("isAuthenticated()")
+
     @GetMapping
     public ResponseEntity<List<ReviewResponseDTO>> getAllReviews() {
         List<ReviewResponseDTO> reviews = reviewService.getAllReviews();

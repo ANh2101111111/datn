@@ -1,6 +1,5 @@
 package datn.example.datn.service;
 
-
 import datn.example.datn.dto.request.ProductRequestDto;
 import datn.example.datn.dto.response.ProductResponseDto;
 import datn.example.datn.entity.Category;
@@ -11,6 +10,7 @@ import datn.example.datn.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
+
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -34,49 +35,55 @@ public class ProductService {
     }
 
     public List<ProductResponseDto> getAllProducts() {
-        return productRepository.findByIsDeletedFalse().stream() // Lấy sản phẩm chưa bị xóa
+        return productRepository.findByIsDeletedFalse().stream()
                 .map(productMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     public List<ProductResponseDto> getByType(String type) {
-        return productRepository.findByTypeAndIsDeletedFalse(type).stream() // Tìm theo loại chưa bị xóa
-                .map(productMapper::toDto)
-                .collect(Collectors.toList());
-    }
-    public List<ProductResponseDto> getBybicycleId(Long bicycleId) {
-        return productRepository.getBybicycleId(bicycleId).stream()
+        return productRepository.findByTypeAndIsDeletedFalse(type).stream()
                 .map(productMapper::toDto)
                 .collect(Collectors.toList());
     }
 
+    public List<ProductResponseDto> getByCategory(Long categoryId) {
+        return productRepository.findByCategory_CategoryIdAndIsDeletedFalse(categoryId).stream()
+                .map(productMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public ProductResponseDto getByBicycleId(Long bicycleId) {
+        Product product = productRepository.findByBicycleIdAndIsDeletedFalse(bicycleId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        return productMapper.toDto(product);
+    }
+
+    public List<ProductResponseDto> getByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
+        return productRepository.findByOriginalPriceBetweenAndIsDeletedFalse(minPrice, maxPrice).stream()
+                .map(productMapper::toDto)
+                .collect(Collectors.toList());
+    }
 
     public ProductResponseDto updateProduct(Long bicycleId, ProductRequestDto request) {
-        Optional<Product> optionalProduct = productRepository.findById(bicycleId);
-        if (optionalProduct.isPresent()) {
-            Product product = optionalProduct.get();
-            product.setName(request.getName());
-            product.setDescription(request.getDescription());
-            product.setImage(request.getImage());
-            product.setRating(request.getRating());
-            product.setType(request.getType());
-            product.setOriginalPrice(request.getOriginalPrice());
-            product.setQuantity(request.getQuantity());
-            Product updatedProduct = productRepository.save(product);
-            return productMapper.toDto(updatedProduct);
-        } else {
-            throw new RuntimeException("Product not found");
-        }
+        Product product = productRepository.findByBicycleIdAndIsDeletedFalse(bicycleId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        product.setName(request.getName());
+        product.setDescription(request.getDescription());
+        product.setImage(request.getImage());
+        product.setRating(request.getRating());
+        product.setType(request.getType());
+        product.setOriginalPrice(request.getOriginalPrice());
+        product.setQuantity(request.getQuantity());
+
+        Product updatedProduct = productRepository.save(product);
+        return productMapper.toDto(updatedProduct);
     }
 
-    public void deleteProduct(Long id) {
-        Optional<Product> optionalProduct = productRepository.findById(id);
-        if (optionalProduct.isPresent()) {
-            Product product = optionalProduct.get();
-            product.setDeleted(true); // Đánh dấu sản phẩm là đã xóa mềm
-            productRepository.save(product);
-        } else {
-            throw new RuntimeException("Product not found");
-        }
+    public void deleteProduct(Long bicycleId) {
+        Product product = productRepository.findByBicycleIdAndIsDeletedFalse(bicycleId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+        product.setDeleted(true);
+        productRepository.save(product);
     }
 }

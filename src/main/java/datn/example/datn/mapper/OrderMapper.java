@@ -1,11 +1,8 @@
 package datn.example.datn.mapper;
 
-import datn.example.datn.dto.request.OrderRequestDto;
-import datn.example.datn.dto.response.OrderDetailResponseDto;
-import datn.example.datn.dto.response.OrderResponseDto;
+import datn.example.datn.dto.request.OrderRequest;
+import datn.example.datn.dto.response.OrderResponse;
 import datn.example.datn.entity.Order;
-import datn.example.datn.entity.OrderDetail;
-import datn.example.datn.entity.OrderStatus;
 import datn.example.datn.entity.User;
 import org.springframework.stereotype.Component;
 
@@ -14,35 +11,31 @@ import java.util.stream.Collectors;
 
 @Component
 public class OrderMapper {
-    public Order toEntity(OrderRequestDto dto) {
+
+    private final OrderDetailMapper orderDetailMapper;
+
+    public OrderMapper(OrderDetailMapper orderDetailMapper) {
+        this.orderDetailMapper = orderDetailMapper;
+    }
+
+    public Order toEntity(OrderRequest request, User user) {
         Order order = new Order();
-        User user = new User();
-        user.setUserId(dto.getUserId());
         order.setUser(user);
-        order.setOrderStatus(OrderStatus.PENDING); // ✅ Sử dụng enum đúng cách
+        order.setOrderDetails(null); // Để xử lý ở OrderDetailMapper
         return order;
     }
 
-    public OrderResponseDto toDto(Order order) {
-        OrderResponseDto dto = new OrderResponseDto();
-        dto.setOrderId(order.getOrderId());
-        dto.setUserId(order.getUser().getUserId());
-        dto.setTotalAmount(order.getTotalAmount());
-        dto.setStatus(order.getOrderStatus()); // ✅ Chuyển enum thành String
-        dto.setCreatedAt(order.getCreatedAt());
-        List<OrderDetailResponseDto> orderDetails = order.getOrderDetails().stream()
-                .map(this::toOrderDetailResponseDto)
-                .collect(Collectors.toList());
-        dto.setOrderDetails(orderDetails);
-        return dto;
-    }
-
-    private OrderDetailResponseDto toOrderDetailResponseDto(OrderDetail orderDetail) {
-        OrderDetailResponseDto dto = new OrderDetailResponseDto();
-        dto.setOrderDetailId(orderDetail.getOrderDetailId());
-        dto.setBicycleId(orderDetail.getProduct().getBicycleId());
-        dto.setQuantity(orderDetail.getQuantity());
-        dto.setPrice(orderDetail.getPrice());
-        return dto;
+    public OrderResponse toResponse(Order order) {
+        OrderResponse response = new OrderResponse();
+        response.setOrderId(order.getOrderId());
+        response.setUserId(order.getUser().getUserId());
+        response.setTotalAmount(order.getTotalAmount());
+        response.setCreatedAt(order.getCreatedAt());
+        response.setCancel(order.getCancel());
+        response.setOrderStatus(order.getOrderStatus().name());
+        response.setOrderDetails(order.getOrderDetails().stream()
+                .map(orderDetailMapper::toResponse)
+                .collect(Collectors.toList()));
+        return response;
     }
 }

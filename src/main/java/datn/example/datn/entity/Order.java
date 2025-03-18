@@ -1,9 +1,8 @@
 package datn.example.datn.entity;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.Data;
-
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -25,15 +24,19 @@ public class Order {
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private Date createdAt = new Date();
+
+    private Boolean cancel = false;
+
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetails;
+
     public void calculateTotalAmount() {
         totalAmount = orderDetails.stream()
-                .map(OrderDetail::getPrice)
+                .map(detail -> detail.getPrice().multiply(BigDecimal.valueOf(detail.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
