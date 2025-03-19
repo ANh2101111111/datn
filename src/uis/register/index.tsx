@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // ✅ Import useRouter để điều hướng
+import { useRouter } from "next/navigation";
 import Button from "../common/button";
 import Input from "../common/input";
+import { useMutation } from "@tanstack/react-query";
+import { register } from "@/api/users";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -13,8 +17,17 @@ const Register = () => {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const API_URL =
-    "https://apt-electric-oriole.ngrok-free.app/api/user/register";
+  const { mutateAsync } = useMutation(register, {
+    onSuccess: (data) => {
+      toast.success("Registration Successful!");
+      router.push("/login");
+    },
+    onError: (error: any) => {
+      setError(error.response?.data?.message || "Registration failed!");
+      toast.error("Registration failed!");
+    },
+  });
+
   const handleRegister = async () => {
     setError("");
 
@@ -31,24 +44,7 @@ const Register = () => {
       return;
     }
 
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password, confirmPassword }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert("Registration Successful! Redirecting to login...");
-        router.push("/login");
-      } else {
-        setError(data.message || "Registration failed!");
-      }
-    } catch (error) {
-      setError("Network error! Please try again.");
-    }
+    await mutateAsync({ username, email, password, confirmPassword });
   };
 
   return (
@@ -57,41 +53,13 @@ const Register = () => {
         <p className="text-heading-2 text-text-heading font-semibold mb-8 font-quicksand">
           Create an Account
         </p>
-        <p className="text-text-muted text-xs mb-8">
-          Your personal data will be used to support your experience throughout
-          this website, to manage access to your account, and for other purposes
-          described in our privacy policy.
-        </p>
         <div className="flex flex-col gap-6">
-          <Input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <Input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+          <Input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
           {error && <p className="text-red-500">{error}</p>}
-          <Button
-            className="h-16 text-text-medium text-brand-thrid"
-            onClick={handleRegister}
-          >
+          <Button className="h-16 text-text-medium text-brand-thrid" onClick={handleRegister}>
             Submit & Register
           </Button>
         </div>
