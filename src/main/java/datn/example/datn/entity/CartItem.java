@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 @Data
 @Entity
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "cartItems")
 public class CartItem {
     @Id
