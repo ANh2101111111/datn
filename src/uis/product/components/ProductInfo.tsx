@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { IProductDetail } from "@/api/product";
 import IconStar from "@/layout/assets/icons/IconStar";
 import Button from "@/uis/common/button";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
+import { useGetReviews } from "@/api/reviews";
 
 interface IProductInfoProps {
   data: IProductDetail;
@@ -10,6 +12,18 @@ interface IProductInfoProps {
 
 const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
   const [quantity, setQuantity] = useState(1);
+  const [activeTab, setActiveTab] = useState<"description" | "review">(
+    "description"
+  );
+
+  // Gọi API khi chuyển sang tab "Reviews"
+  const { data: reviews, refetch, isLoading, isError } = useGetReviews();
+
+  useEffect(() => {
+    if (activeTab === "review") {
+      refetch(); // Fetch dữ liệu khi chuyển sang tab review
+    }
+  }, [activeTab, refetch]);
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
@@ -23,68 +37,141 @@ const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
         className={`w-5 h-5 ${
           index < rating ? "text-brand-secondary" : "text-icon-star"
         }`}
-        fill={index < 4 ? "#FDC040" : "#CDCDCD"}
+        fill={index < rating ? "#FDC040" : "#CDCDCD"}
       />
     ));
   };
 
   return (
-    <div className="max-w-[1000px] w-full mx-auto mt-16 mb-10">
-      <div className="grid grid-cols-2 gap-10">
-        <div
-          className="col-span-1 h-[600px] bg-cover"
-          style={{ backgroundImage: `url(${data.image})` }}
-        ></div>
-        <div className="col-span-1">
-          <div className="bg-colorButton-brand1 text-text-small font-quicksand text-badge-brand-1 inline-block py-1 px-2 rounded mb-4">
-            {data.type}
-          </div>
-          <div className="text-heading-2 text-text-heading font-bold mb-4">
-            {data.name}
-          </div>
-          <div className="flex items-center space-x-1 mr-2 mb-4">
-            {renderStars(data.rating)}
-          </div>
-          <div className="flex items-center gap-5">
-            <p className="text-display-2 text-text-brand1 font-quicksand font-bold">
-              ${data.discountedPrice}
-            </p>
-            <p className="text-text-muted text-heading-3 font-quicksand font-bold line-through">
-              ${data.originalPrice}
-            </p>
-          </div>
-          <div className="text-text-large text-text-body font-lato mb-8 h-[230px] overflow-hidden">
-            {data.description}
-          </div>
-          <div className="flex items-center  ">
-            {/* Phần tăng giảm số lượng */}
-            <div className="flex items-center mr-7 ">
-              <input
-                type="number"
-                className="w-[60px] text-center border rounded-md px-2 py-1"
-                value={quantity}
-                onChange={handleQuantityChange}
-              />
+    <div className="max-w-[1100px] w-full mx-auto mt-12 mb-10 px-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {/* Hình ảnh sản phẩm */}
+        <div className="h-[500px] md:h-[600px] overflow-hidden rounded-lg shadow-md">
+          <img
+            src={data.image}
+            alt={data.name}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Thông tin sản phẩm */}
+        <div className="flex flex-col justify-between">
+          <div>
+            <div className="bg-brand-primary text-white text-sm font-bold uppercase py-1 px-3 rounded-md mb-4 w-fit">
+              {data.type}
+            </div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+              {data.name}
+            </h2>
+
+            {/* Đánh giá sao */}
+            <div className="flex items-center space-x-1 mb-4">
+              {renderStars(data.rating)}
             </div>
 
-            {/* Nút Add to Cart */}
-            <div className="">
-              <Button size="medium" variant="primary" className="text-white">
-                Add To Cart
-              </Button>
+            {/* Giá sản phẩm */}
+            <div className="flex items-center gap-4 mb-4">
+              <p className="text-3xl text-brand-primary font-bold">
+                ${data.discountedPrice}
+              </p>
+              <p className="text-xl text-gray-400 line-through">
+                ${data.originalPrice}
+              </p>
             </div>
+
+            {/* Mô tả sản phẩm */}
+            <div className="text-gray-600 text-base leading-relaxed h-[180px] overflow-hidden">
+              {data.description}
+            </div>
+          </div>
+
+          {/* Input số lượng + Nút thêm giỏ hàng */}
+          <div className="flex items-center mt-6">
+            <input
+              type="number"
+              className="w-[60px] text-center border border-gray-300 rounded-md px-2 py-1 mr-4"
+              value={quantity}
+              onChange={handleQuantityChange}
+            />
+            <Button
+              size="medium"
+              variant="primary"
+              className="text-white px-6 py-2 rounded-md shadow-md transition hover:bg-brand-secondary"
+            >
+              Add To Cart
+            </Button>
           </div>
         </div>
       </div>
 
-      {/* Phần mô tả sản phẩm */}
-      <div className="border border-border-grey p-10 rounded-2xl mt-10">
-        <div className="text-text-heading text-heading-4 font-quicksand font-bold mb-4">
-          Description
+      {/* Tabs chuyển đổi giữa mô tả & đánh giá */}
+      <div className="border border-gray-200 p-8 rounded-2xl mt-12 shadow-md bg-white">
+        <div className="flex border-b mb-6">
+          <button
+            className={`px-6 py-3 text-lg font-semibold transition ${
+              activeTab === "description"
+                ? "text-brand-primary border-b-2 border-brand-primary"
+                : "text-gray-500 hover:text-gray-800"
+            }`}
+            onClick={() => setActiveTab("description")}
+          >
+            Description
+          </button>
+          <button
+            className={`px-6 py-3 text-lg font-semibold transition ${
+              activeTab === "review"
+                ? "text-brand-primary border-b-2 border-brand-primary"
+                : "text-gray-500 hover:text-gray-800"
+            }`}
+            onClick={() => setActiveTab("review")}
+          >
+            Reviews
+          </button>
         </div>
-        <div className="text-text-body text-text-medium font-lato">
-          {data.description}
-        </div>
+
+        {/* Nội dung của từng tab */}
+        {activeTab === "description" && (
+          <div className="text-gray-700 text-base leading-relaxed">
+            {data.description}
+          </div>
+        )}
+
+        {activeTab === "review" && (
+          <div className="p-6 bg-white shadow-md rounded-lg mt-6">
+            {isLoading ? (
+              <p className="text-gray-500">Đang tải đánh giá...</p>
+            ) : isError ? (
+              <p className="text-red-500">
+                Lỗi khi tải đánh giá. Vui lòng thử lại!
+              </p>
+            ) : reviews && reviews.length > 0 ? (
+              reviews.map((review) => (
+                <div key={review.reviewId} className="border-b py-3">
+                  <p className="font-semibold text-gray-800">
+                    {review.username}
+                  </p>
+                  <div className="flex items-center space-x-1 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <span
+                        key={i}
+                        className={`text-lg ${
+                          i < review.rating
+                            ? "text-yellow-400"
+                            : "text-gray-300"
+                        }`}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-gray-700">{review.comment}</p>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500">Chưa có đánh giá nào.</p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

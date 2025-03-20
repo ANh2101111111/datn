@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IProductDetail {
+  id(id: any): unknown;
   bicycleId: number;
   name: string;
   description: string;

@@ -1,7 +1,6 @@
 
 import React from "react";
 import CartSummary from "./components/CartSummary";
-import CouponForm from "./components/CouponForm";
 import { cartItems } from "./components/data";
 import CartItemComponent from "./components/CartItem.tsx";
 
@@ -24,7 +23,6 @@ const Cart = () => {
       </div>
       <div className="flex flex-col gap-4">
         <CartSummary />
-        <CouponForm />
       </div>
     </div>
   );
