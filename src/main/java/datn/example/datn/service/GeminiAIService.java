@@ -12,18 +12,6 @@ public class GeminiAIService {
     private static final String API_KEY = "AIzaSyC90BtBsTYf-zt5DsMVSOap3W9zGhAt8BY"; // Thay API key đúng
 
     public String askGeminiAI(String message) {
-        // Nếu có câu hỏi đơn giản, trả về thông điệp tương ứng
-        if (message.toLowerCase().contains("chào") || message.toLowerCase().contains("hello")) {
-            return "Xin chào! Tôi có thể giúp gì cho bạn?";
-        }
-        if (message.toLowerCase().contains("có bao nhiêu sản phẩm")) {
-            return "Hiện tại có 62 sản phẩm.";
-        }
-        if (message.toLowerCase().contains("có bao nhiêu danh mục")) {
-            return "Hiện tại có 9 danh mục.";
-        }
-
-        // Nếu không phải là câu hỏi đơn giản, gọi đến API
         return callGeminiAPI(message);
     }
 

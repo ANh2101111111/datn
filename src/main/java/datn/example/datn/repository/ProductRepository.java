@@ -25,7 +25,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT p FROM Product p " +
             "WHERE (:name IS NULL OR p.name ILIKE CONCAT('%', CAST(:name AS text), '%')) " +
-            "AND (:type IS NULL OR p.type = :type) " +
+            "AND (:type IS NULL OR p.type ILIKE :type) " +
             "AND (:categoryId IS NULL OR p.category.id = :categoryId) " +
             "AND (:minPrice IS NULL OR p.originalPrice >= :minPrice) " +
             "AND (:maxPrice IS NULL OR p.originalPrice <= :maxPrice) " +
