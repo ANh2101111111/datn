@@ -23,20 +23,10 @@ public class OrderController {
     }
 
 
-    @PutMapping("/{orderId}")
-    public ResponseEntity<OrderResponse> updateOrder(@PathVariable Long orderId, @RequestBody OrderRequest request) {
-        OrderResponse updatedOrder = orderService.updateOrder(orderId, request);
-        return ResponseEntity.ok(updatedOrder);
-    }
-
     @DeleteMapping("/{orderId}")
     public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
         orderService.deleteOrder(orderId);
         return ResponseEntity.noContent().build();
     }
-    @PostMapping("/orders/{orderId}/pay/cod")
-    public ResponseEntity<String> payCOD(@PathVariable Long orderId) {
-        orderService.processCOD(orderId);
-        return ResponseEntity.ok("Payment via COD has been processed for order " + orderId + " and is now in PENDING status.");
-    }
+
 }

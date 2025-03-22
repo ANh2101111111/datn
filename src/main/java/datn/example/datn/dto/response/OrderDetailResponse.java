@@ -11,4 +11,5 @@ import java.math.BigDecimal;
     private String productName;
     private BigDecimal price;
     private int quantity;
+    private String image;
     }
