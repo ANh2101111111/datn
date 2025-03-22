@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
     public class ChatbotResponseDto {
+    private  List<Long> bicycleId;
     private List<String> names;
     private List<String> descriptions;
     private List<String> images;

@@ -66,12 +66,13 @@ import java.util.Optional;
             );
 
             if (name == null && type == null && categoryName == null && minPrice == null && maxPrice == null) {
-                return new ChatbotResponseDto(List.of(notFoundMessage), List.of(), List.of(), List.of(), List.of());
+                return null;
             }
 
             List<ProductResponseDto> productDtos = products.stream().map(productMapper::toDto).collect(Collectors.toList());
 
             return new ChatbotResponseDto(
+                    productDtos.stream().map(ProductResponseDto::getBicycleId).collect(Collectors.toList()),
                     productDtos.stream().map(ProductResponseDto::getName).collect(Collectors.toList()),
                     productDtos.stream().map(ProductResponseDto::getDescription).collect(Collectors.toList()),
                     productDtos.stream().map(ProductResponseDto::getImage).collect(Collectors.toList()),
