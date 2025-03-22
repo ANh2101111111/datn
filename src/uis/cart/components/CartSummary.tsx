@@ -1,7 +1,12 @@
+"use client";
 import React from "react";
+import { useRouter } from "next/navigation"; 
 import { cartItems } from "./data";
+import { Route } from "@/types/route";
 
 const CartSummary: React.FC = () => {
+  const router = useRouter(); 
+
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
@@ -19,7 +24,12 @@ const CartSummary: React.FC = () => {
         <span>Total:</span>
         <span className="text-green-600">${subtotal.toFixed(2)}</span>
       </div>
-      <button className="bg-green-500 text-white w-full p-2 mt-4 rounded">Proceed to Checkout</button>
+      <button
+        className="bg-green-500 text-white w-full p-2 mt-4 rounded"
+        onClick={() => router.push(Route.CHECKOUT)} 
+      >
+        Proceed to Checkout
+      </button>
     </div>
   );
 };

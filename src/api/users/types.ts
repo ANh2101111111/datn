@@ -19,3 +19,12 @@ export interface IUserRegisterRequest {
 export interface IUserRegisterResponse {
   message: string;
 }
+
+export interface UserProfile {
+  id: number;
+  phone: string;
+  avatar: string;
+  address: string;
+  fullName: string;
+  username: string;
+}
