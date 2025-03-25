@@ -2,6 +2,8 @@ package datn.example.datn.config;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Formatter;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class VNPayConfig {
     public static final String vnp_TmnCode = "25BNF1Y5";
@@ -21,6 +23,15 @@ public class VNPayConfig {
             formatter.format("%02x", b);
         }
         return formatter.toString();
+    }
+    public static String getQueryString(Map<String, String> params, String secret) throws Exception {
+        String queryString = params.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .map(entry -> entry.getKey() + "=" + entry.getValue())
+                .collect(Collectors.joining("&"));
+
+        String secureHash = hmacSHA512(secret, queryString);
+        return queryString + "&vnp_SecureHash=" + secureHash;
     }
 }
 

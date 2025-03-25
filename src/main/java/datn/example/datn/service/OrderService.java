@@ -30,17 +30,6 @@ public class OrderService {
         this.orderMapper = orderMapper;
     }
 
-    @Transactional
-    public OrderResponse createOrder(OrderRequest request) {
-        if (request == null) {
-            throw new IllegalArgumentException("Order request cannot be null");
-        }
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        Order order = orderMapper.toEntity(request, user);
-        orderRepository.save(order);
-        return orderMapper.toResponse(order);
-    }
 
     @Transactional
     public OrderResponse updateOrder(Long orderId, OrderRequest request) {
@@ -84,11 +73,37 @@ public class OrderService {
     }
 
     @Transactional
+    public OrderResponse createOrder(OrderRequest request) {
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Order order = orderMapper.toEntity(request, user);
+        order.setOrderStatus(OrderStatus.PENDING); // Mặc định là PENDING
+        orderRepository.save(order);
+        return orderMapper.toResponse(order);
+    }
+
+    @Transactional
+    public void updateOrderStatus(Long orderId, OrderStatus status) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+        order.setOrderStatus(status);
+        orderRepository.save(order);
+    }
+
+    @Transactional
     public void processCOD(Long orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
-
         order.setOrderStatus(OrderStatus.PENDING);
         orderRepository.save(order);
     }
+
+    @Transactional
+    public void processVNPayPayment(Long orderId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+        order.setOrderStatus(OrderStatus.PAID);
+        orderRepository.save(order);
+    }
 }
+

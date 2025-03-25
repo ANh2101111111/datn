@@ -35,10 +35,5 @@ public class ProductController {
         return ResponseEntity.ok(productService.getByCategory(categoryId));
     }
 
-    @GetMapping("/by-price-range")
-    public ResponseEntity<List<ProductResponseDto>> getByPriceRange(
-            @RequestParam BigDecimal minPrice,
-            @RequestParam BigDecimal maxPrice) {
-        return ResponseEntity.ok(productService.getByPriceRange(minPrice, maxPrice));
-    }
+
 }

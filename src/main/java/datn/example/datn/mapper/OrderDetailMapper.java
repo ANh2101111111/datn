@@ -27,6 +27,7 @@ public class OrderDetailMapper {
         response.setProductName(orderDetail.getProduct().getName()); // Lấy name từ product
         response.setPrice(orderDetail.getPrice());
         response.setQuantity(orderDetail.getQuantity());
+        response.setImage(orderDetail.getProduct().getImage());
         return response;
     }
 }

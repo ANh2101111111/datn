@@ -47,7 +47,7 @@ public class ProductMapper {
         return dto;
     }
 
-    private BigDecimal calculateDiscountedPrice(Product product) {
+    public BigDecimal calculateDiscountedPrice(Product product) {
         // Implement your discount logic here
         BigDecimal discountRate = BigDecimal.valueOf(0.1); // Example: 10% discount
         return product.getOriginalPrice().multiply(BigDecimal.ONE.subtract(discountRate));

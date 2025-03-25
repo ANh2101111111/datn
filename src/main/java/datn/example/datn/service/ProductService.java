@@ -58,11 +58,6 @@ public class ProductService {
         return productMapper.toDto(product);
     }
 
-    public List<ProductResponseDto> getByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
-        return productRepository.findByOriginalPriceBetweenAndIsDeletedFalse(minPrice, maxPrice).stream()
-                .map(productMapper::toDto)
-                .collect(Collectors.toList());
-    }
 
     public ProductResponseDto updateProduct(Long bicycleId, ProductRequestDto request) {
         Product product = productRepository.findByBicycleIdAndIsDeletedFalse(bicycleId)
