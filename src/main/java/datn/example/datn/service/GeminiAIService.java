@@ -122,7 +122,7 @@ import java.util.*;
 @Service
 public class GeminiAIService {
     private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent";
-    private static final String API_KEY = "Y"; // Thay bằng API Key thật
+    private static final String API_KEY = "AIzaSyC90BtBsTYf-zt5DsMVSOap3W9zGhAt8BY"; // Thay bằng API Key thật
 
     public String askGeminiAI(String message, String lang) {
         String response = callGeminiAPI(message);

@@ -39,7 +39,7 @@ import java.util.Optional;
             Locale locale = getLocale(lang);
             String notFoundMessage = messageSource.getMessage("chatbot.response.not_found", null, locale);
 
-            String name = extractKeyword(message, "(?i)(product)\\s*[:=]?\\s*([^,]+)");
+            String name = extractKeyword(message, "(?i)(information)\\s*[:=]?\\s*([^,]+)");
             String type = extractKeyword(message, "(?i)(type)\\s*[:=]?\\s*([^,]+)");
             String categoryName = extractKeyword(message, "(?i)(category)\\s*[:=]?\\s*([^,]+)");
             BigDecimal minPrice = extractPrice(message, "(?i)(from|min)\\s*(\\d+)");
