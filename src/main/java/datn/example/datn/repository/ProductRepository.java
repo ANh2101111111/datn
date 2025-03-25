@@ -37,5 +37,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("categoryId") Long categoryId,
             @Param("minPrice") BigDecimal minPrice,
             @Param("maxPrice") BigDecimal maxPrice);
-
+    Optional<Product> findTopByOrderByOriginalPriceDesc();
+    Optional<Product> findTopByOrderByOriginalPriceAsc();
 }
