@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import Link from "next/link";
 import { useState } from "react";
@@ -19,17 +18,24 @@ const Login = () => {
   const { mutateAsync } = useMutation(login, {
     onSuccess: (data) => {
       toast.success("Login successfully");
-      router.push(Route.HOME);
+
+      // Lưu token vào localStorage trước khi chuyển trang
       localStorage.setItem("token", data.token);
+
+      // Kích hoạt sự kiện để cập nhật UI ngay lập tức
+      window.dispatchEvent(new Event("storage"));
+
+      // Chuyển hướng về trang chủ
+      router.push(Route.HOME);
     },
     onError: () => {
       toast.error("Invalid username or password");
-      // setError("Invalid username or password");
+      setError("Invalid username or password");
     },
   });
 
   const handleLogin = async () => {
-    mutateAsync({ username, password });
+    await mutateAsync({ username, password });
   };
 
   return (

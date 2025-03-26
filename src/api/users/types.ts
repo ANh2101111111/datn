@@ -5,6 +5,7 @@ export interface IUSerLoginRequest {
 
 export interface IUserLoginResponse {
   token: string;
+  userId: number; 
 }
 
 
@@ -20,7 +21,7 @@ export interface IUserRegisterResponse {
   message: string;
 }
 
-export interface UserProfile {
+export interface IUserProfile {
   id: number;
   phone: string;
   avatar: string;
@@ -28,3 +29,4 @@ export interface UserProfile {
   fullName: string;
   username: string;
 }
+

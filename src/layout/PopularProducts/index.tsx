@@ -21,7 +21,7 @@ const PopularProducts = () => {
         <h2 className="md:text-text-heading-4 text-heading-3 text-text-heading font-quicksand font-bold">
           Popular Products
         </h2>
-        <BoxListLable data={listLableData.slice(0, 5)} />
+        <BoxListLable data={listLableData.slice(0, 9)} />
       </div>
       {productData.map((product: IProductDetail) => (
         <div key={product.bicycleId} className="flex justify-center">
