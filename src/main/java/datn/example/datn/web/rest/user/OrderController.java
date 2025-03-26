@@ -3,13 +3,18 @@ package datn.example.datn.web.rest.user;
 import datn.example.datn.config.VNPayConfig;
 import datn.example.datn.dto.request.OrderRequest;
 import datn.example.datn.dto.response.OrderResponse;
+import datn.example.datn.dto.response.UserProfileResponse;
 import datn.example.datn.entity.Order;
 import datn.example.datn.entity.OrderStatus;
+import datn.example.datn.entity.User;
 import datn.example.datn.repository.OrderRepository;
+import datn.example.datn.repository.UserRepository;
 import datn.example.datn.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -25,10 +30,12 @@ public class OrderController {
 
     private final OrderService orderService;
     private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
     @Autowired
-    public OrderController(OrderService orderService, OrderRepository orderRepository) {
+    public OrderController(OrderService orderService, OrderRepository orderRepository, UserRepository userRepository) {
         this.orderService = orderService;
         this.orderRepository = orderRepository;
+        this.userRepository = userRepository;
     }
     @PostMapping
     public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest request) {
@@ -36,10 +43,17 @@ public class OrderController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<OrderResponse>> getUserOrders(@PathVariable Long userId) {
-        List<OrderResponse> orders = orderService.getUserOrders(userId);
-        return ResponseEntity.ok(orders);
+//    @GetMapping("/{userId}")
+//    public ResponseEntity<List<OrderResponse>> getUserOrders(@PathVariable Long userId) {
+//        List<OrderResponse> orders = orderService.getUserOrders(userId);
+//        return ResponseEntity.ok(orders);
+//    }
+
+    @GetMapping
+    public ResponseEntity<List<OrderResponse>> getUserOrders(@AuthenticationPrincipal UserDetails userDetails) {
+        User user = userRepository.findByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User không tồn tại"));
+        return ResponseEntity.ok(orderService.getUserOrders(user.getUserId()));
     }
 
     @PutMapping("/{orderId}")
