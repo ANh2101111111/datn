@@ -4,9 +4,11 @@ import datn.example.datn.config.VNPayConfig;
 import datn.example.datn.dto.request.OrderRequest;
 import datn.example.datn.dto.response.OrderResponse;
 import datn.example.datn.dto.response.UserProfileResponse;
+import datn.example.datn.entity.Cart;
 import datn.example.datn.entity.Order;
 import datn.example.datn.entity.OrderStatus;
 import datn.example.datn.entity.User;
+import datn.example.datn.repository.CartRepository;
 import datn.example.datn.repository.OrderRepository;
 import datn.example.datn.repository.UserRepository;
 import datn.example.datn.service.OrderService;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -31,30 +34,29 @@ public class OrderController {
     private final OrderService orderService;
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
+    private final CartRepository cartRepository;
     @Autowired
-    public OrderController(OrderService orderService, OrderRepository orderRepository, UserRepository userRepository) {
+    public OrderController(OrderService orderService, OrderRepository orderRepository, UserRepository userRepository, CartRepository cartRepository) {
         this.orderService = orderService;
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
+        this.cartRepository = cartRepository;
     }
     @PostMapping
     public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest request) {
-        OrderResponse response = orderService.createOrder(request);
-        return ResponseEntity.ok(response);
+        Cart cart = cartRepository.findByUser_UserId(request.getUserId());
+        if (cart == null || cart.getCartDetails().isEmpty()) {
+            throw new RuntimeException("Cart is empty");
+        }
+        OrderResponse orderResponse = orderService.createOrder(request);
+        return ResponseEntity.ok(orderResponse);
+    }
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<OrderResponse>> getUserOrders(@PathVariable Long userId) {
+        List<OrderResponse> orders = orderService.getUserOrders(userId);
+        return ResponseEntity.ok(orders);
     }
 
-//    @GetMapping("/{userId}")
-//    public ResponseEntity<List<OrderResponse>> getUserOrders(@PathVariable Long userId) {
-//        List<OrderResponse> orders = orderService.getUserOrders(userId);
-//        return ResponseEntity.ok(orders);
-//    }
-
-    @GetMapping
-    public ResponseEntity<List<OrderResponse>> getUserOrders(@AuthenticationPrincipal UserDetails userDetails) {
-        User user = userRepository.findByUsername(userDetails.getUsername())
-                .orElseThrow(() -> new RuntimeException("User không tồn tại"));
-        return ResponseEntity.ok(orderService.getUserOrders(user.getUserId()));
-    }
 
     @PutMapping("/{orderId}")
     public ResponseEntity<OrderResponse> updateOrder(@PathVariable Long orderId, @RequestBody OrderRequest request) {

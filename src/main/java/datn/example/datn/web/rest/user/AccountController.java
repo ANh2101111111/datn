@@ -38,8 +38,8 @@ public class AccountController {
     }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
-        String token = authService.login(request.get("username"), request.get("password"));
-        return ResponseEntity.ok(Map.of("token", token));
+        Map<String, Object> response = authService.login(request.get("username"), request.get("password"));
+        return ResponseEntity.ok(response);
     }
     @PostMapping("/reset-password/request")
     public PasswordResetResponseDto requestPasswordReset(@RequestBody PasswordResetRequestDto requestDto) {

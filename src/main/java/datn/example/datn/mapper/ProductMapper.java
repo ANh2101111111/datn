@@ -4,7 +4,7 @@ import datn.example.datn.dto.request.ProductRequestDto;
 import datn.example.datn.dto.response.CategoryResponseDto;
 import datn.example.datn.dto.response.ProductResponseDto;
 import datn.example.datn.entity.Product;
-import datn.example.datn.entity.Category; // Import the Category entity if needed
+import datn.example.datn.entity.Category;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -35,6 +35,7 @@ public class ProductMapper {
         dto.setOriginalPrice(product.getOriginalPrice());
         dto.setDiscountedPrice(calculateDiscountedPrice(product));
         dto.setQuantity(product.getQuantity());
+        dto.setStock(product.getStock());
         dto.setCategoryId(product.getCategory().getCategoryId()); // Set category ID
 
         // Set category details
