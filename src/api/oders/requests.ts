@@ -1,33 +1,22 @@
-import { request } from "../axios";
-import { Order } from "./types";
+// import { request } from "../axios";
+// import { Order } from "./types";
 
-// API Lấy đơn hàng theo userId
-export const getUserOrders = async (userId: number): Promise<Order[]> => {
-  const { data } = await request({
-    url: `/api/user/orders/${userId}`,
-    method: "GET",
-  });
-  return data;
-};
+// // API Lấy đơn hàng theo userId
+// export const getUserOrders = async (userId: number): Promise<Order[]> => {
+//   const { data } = await request({
+//     url: `/api/user/orders/${userId}`,
+//     method: "GET",
+//   });
+//   return data;
+// };
 
-// API Thêm sản phẩm vào giỏ hàng
-export const addToCart = async (userId: number, productId: number, quantity: number) => {
-  const { data } = await request({
-    url: `/api/user/orders/${userId}`,
-    method: "POST",
-    data: {
-      productId,
-      quantity,
-    },
-  });
-  return data;
-};
 
-// API Xóa sản phẩm khỏi giỏ hàng
-export const removeFromCart = async (orderDetailId: number) => {
-  const { data } = await request({
-    url: `/api/user/order-details/${orderDetailId}`,
-    method: "DELETE",
-  });
-  return data;
-};
+
+// // API Xóa sản phẩm khỏi giỏ hàng
+// export const removeFromCart = async (orderDetailId: number) => {
+//   const { data } = await request({
+//     url: `/api/user/order-details/${orderDetailId}`,
+//     method: "DELETE",
+//   });
+//   return data;
+// };

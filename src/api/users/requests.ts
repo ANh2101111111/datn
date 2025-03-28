@@ -1,5 +1,5 @@
 import { request } from "../axios";
-import { IUSerLoginRequest, IUserLoginResponse, IUserProfile, IUserRegisterRequest, IUserRegisterResponse } from "./types";
+import { IUSerLoginRequest, IUserLoginResponse, IUserRegisterRequest, IUserRegisterResponse } from "./types";
 
 export const login = async (params: IUSerLoginRequest): Promise<IUserLoginResponse> => {
   const { data } = await request({
@@ -21,14 +21,4 @@ export const register = async (params: IUserRegisterRequest): Promise<IUserRegis
   return data;
 }; 
 
-export const getUserProfile = async (userId: number): Promise<IUserProfile> => {
-  const { data } = await request({
-    url: `api/user/profile/${userId}`,
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
 
-  return data;
-};
