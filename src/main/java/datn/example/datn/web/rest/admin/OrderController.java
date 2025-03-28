@@ -24,14 +24,18 @@ public class OrderController {
     }
 
 
+    @PutMapping("/{orderId}/status")
+    public ResponseEntity<OrderResponse> updateOrderStatus(
+            @PathVariable Long orderId,
+            @RequestBody OrderRequest request) {
+        OrderResponse response = orderService.updateOrderStatus(orderId, request.getOrderStatus());
+        return ResponseEntity.ok(response);
+    }
+
     @DeleteMapping("/{orderId}")
     public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
         orderService.deleteOrder(orderId);
         return ResponseEntity.noContent().build();
     }
-    @PutMapping("/{orderId}/status")
-    public String updateOrderStatus(@PathVariable Long orderId, @RequestParam OrderStatus status) {
-        orderService.updateOrderStatus(orderId, status);
-        return "Order status updated to " + status;
-    }
+
 }

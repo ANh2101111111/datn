@@ -83,11 +83,27 @@ public class OrderService {
     }
 
     @Transactional
-    public void updateOrderStatus(Long orderId, OrderStatus status) {
+    public OrderResponse updateOrderStatus(Long orderId, OrderStatus newStatus) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
-        order.setOrderStatus(status);
+
+        if (order.getOrderStatus() == OrderStatus.COMPLETED || order.getOrderStatus() == OrderStatus.CANCELLED) {
+            throw new RuntimeException("Cannot update status of completed or cancelled orders");
+        }
+        if (!isValidStatusTransition(order.getOrderStatus(), newStatus)) {
+            throw new RuntimeException("Invalid status transition from " + order.getOrderStatus() + " to " + newStatus);
+        }
+        order.setOrderStatus(newStatus);
         orderRepository.save(order);
+        return orderMapper.toResponse(order);
+    }
+    private boolean isValidStatusTransition(OrderStatus current, OrderStatus next) {
+        return switch (current) {
+            case PENDING -> next == OrderStatus.CONFIRMED || next == OrderStatus.CANCELLED;
+            case CONFIRMED -> next == OrderStatus.PAID || next == OrderStatus.CANCELLED;
+            case PAID -> next == OrderStatus.COMPLETED;
+            case CANCELLED, COMPLETED -> false;
+        };
     }
 
     @Transactional
