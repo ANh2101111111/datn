@@ -44,13 +44,16 @@ public class OrderController {
     }
     @PostMapping
     public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest request) {
-        Cart cart = cartRepository.findByUser_UserId(request.getUserId());
-        if (cart == null || cart.getCartDetails().isEmpty()) {
+        Cart cart = cartRepository.findByUser_UserId(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
+
+        if (cart.getCartDetails().isEmpty()) {
             throw new RuntimeException("Cart is empty");
         }
         OrderResponse orderResponse = orderService.createOrder(request);
         return ResponseEntity.ok(orderResponse);
     }
+
     @GetMapping("/{userId}")
     public ResponseEntity<List<OrderResponse>> getUserOrders(@PathVariable Long userId) {
         List<OrderResponse> orders = orderService.getUserOrders(userId);

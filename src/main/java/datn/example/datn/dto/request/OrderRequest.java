@@ -11,6 +11,5 @@ public class OrderRequest {
     private Long userId;
     private List<OrderDetailRequest> orderDetails;
     private String paymentMethod;
-    private BigDecimal totalAmount;
     private OrderStatus orderStatus;
 }

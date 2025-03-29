@@ -12,12 +12,8 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByTypeAndIsDeletedFalse(String type);
-
     List<Product> findByCategory_CategoryIdAndIsDeletedFalse(Long categoryId);
-
     Optional<Product> findByBicycleIdAndIsDeletedFalse(Long bicycleId);
-
-
     List<Product> findByIsDeletedFalse();
 
     @Query("SELECT p FROM Product p WHERE p.name LIKE %:name%")

@@ -2,10 +2,10 @@ package datn.example.datn.service;
 
 import datn.example.datn.dto.request.OrderRequest;
 import datn.example.datn.dto.response.OrderResponse;
-import datn.example.datn.entity.Order;
-import datn.example.datn.entity.OrderStatus;
-import datn.example.datn.entity.User;
+import datn.example.datn.entity.*;
 import datn.example.datn.mapper.OrderMapper;
+import datn.example.datn.repository.CartDetailRepository;
+import datn.example.datn.repository.CartRepository;
 import datn.example.datn.repository.OrderRepository;
 
 import datn.example.datn.repository.UserRepository;
@@ -22,12 +22,16 @@ public class OrderService {
     private  UserRepository userRepository;
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
+    private final CartRepository cartRepository;
+    private final CartDetailRepository cartDetailRepository;
 
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, UserRepository userRepository) {
+    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, UserRepository userRepository, CartDetailRepository cartDetailRepository, CartRepository cartRepository) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
+        this.cartRepository = cartRepository;
+        this.cartDetailRepository =cartDetailRepository;
     }
 
 
@@ -35,11 +39,6 @@ public class OrderService {
     public OrderResponse updateOrder(Long orderId, OrderRequest request) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
-
-        // Cập nhật thông tin đơn hàng từ request
-        order.setTotalAmount(request.getTotalAmount());
-        order.setOrderStatus(request.getOrderStatus());
-
         orderRepository.save(order);
         return orderMapper.toResponse(order);
     }
@@ -72,15 +71,36 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
     public OrderResponse createOrder(OrderRequest request) {
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        Order order = orderMapper.toEntity(request, user);
-        order.setOrderStatus(OrderStatus.PENDING); // Mặc định là PENDING
+        Cart cart = cartRepository.findByUser_UserId(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
+
+        if (cart.getCartDetails().isEmpty()) {
+            throw new RuntimeException("Cart is empty, cannot create order.");
+        }
+
+        Order order = new Order();
+        order.setUser(cart.getUser());
+        order.setOrderStatus(OrderStatus.PENDING);
+        order.setOrderDetails(cart.getCartDetails().stream().map(detail -> {
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setOrder(order);
+            orderDetail.setProduct(detail.getProduct());
+            orderDetail.setQuantity(detail.getQuantity());
+            orderDetail.setPrice(detail.getProduct().getOriginalPrice());
+            return orderDetail;
+        }).collect(Collectors.toList()));
+
+        order.calculateTotalAmount(); // Tính tổng tiền
         orderRepository.save(order);
+
+        // Sau khi tạo đơn hàng, xoá giỏ hàng
+        cartDetailRepository.deleteAll(cart.getCartDetails());
+        cartRepository.delete(cart);
+
         return orderMapper.toResponse(order);
     }
+
 
     @Transactional
     public OrderResponse updateOrderStatus(Long orderId, OrderStatus newStatus) {

@@ -1,89 +1,82 @@
 package datn.example.datn.service;
 
+import datn.example.datn.dto.request.CartRequest;
 import datn.example.datn.dto.request.CartDetailRequest;
 import datn.example.datn.dto.response.CartResponse;
 import datn.example.datn.entity.Cart;
 import datn.example.datn.entity.CartDetail;
 import datn.example.datn.entity.Product;
+import datn.example.datn.entity.User;
+import datn.example.datn.mapper.CartMapper;
 import datn.example.datn.repository.CartRepository;
+import datn.example.datn.repository.CartDetailRepository;
 import datn.example.datn.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import datn.example.datn.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartService {
+    private final CartRepository cartRepository;
+    private final CartDetailRepository cartDetailRepository;
+    private final ProductRepository productRepository;
+    private final UserRepository userRepository;
+    private final CartMapper cartMapper;
 
-    @Autowired
-    private CartRepository cartRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Transactional
-    public void addProductToCart(Long userId, CartDetailRequest request) {
-        Cart cart = cartRepository.findByUser_UserId(userId);
-        if (cart == null) {
-            cart = new Cart();
-            // Set user and save cart
-        }
-
-        Product product = productRepository.findById(request.getBicycleId())
-                .orElseThrow(() -> new RuntimeException("Product not found"));
-
-        CartDetail cartDetail = new CartDetail();
-        cartDetail.setCart(cart);
-        cartDetail.setProduct(product);
-        cartDetail.setQuantity(request.getQuantity());
-
-        cart.getCartDetails().add(cartDetail);
-        cartRepository.save(cart);
+    public CartService(CartRepository cartRepository, CartDetailRepository cartDetailRepository,
+                       ProductRepository productRepository, UserRepository userRepository, CartMapper cartMapper) {
+        this.cartRepository = cartRepository;
+        this.cartDetailRepository = cartDetailRepository;
+        this.productRepository = productRepository;
+        this.userRepository = userRepository;
+        this.cartMapper = cartMapper;
     }
 
-    public CartResponse updateCart(Long userId, List<CartDetailRequest> cartDetails) {
-        Cart cart = cartRepository.findByUser_UserId(userId);
-        if (cart == null) {
-            throw new RuntimeException("Cart not found for user ID: " + userId);
-        }
-
-        cart.getCartDetails().clear(); // Xóa tất cả các chi tiết giỏ hàng hiện tại
-
-        for (CartDetailRequest detail : cartDetails) {
-            Product product = productRepository.findById(detail.getBicycleId())
-                    .orElseThrow(() -> new RuntimeException("Product not found with ID: " + detail.getBicycleId()));
-
-            if (product.getStock() < detail.getQuantity()) {
-                throw new RuntimeException("Insufficient stock for product: " + product.getName());
-            }
-
-            CartDetail cartDetail = new CartDetail();
-            cartDetail.setCart(cart);
-            cartDetail.setProduct(product);
-            cartDetail.setQuantity(detail.getQuantity());
-            cart.getCartDetails().add(cartDetail);
-        }
-
-        cartRepository.save(cart); // Lưu giỏ hàng đã cập nhật
-        return null;
+    public CartResponse getCartByUser(Long userId) {
+        return cartRepository.findByUser_UserId(userId)
+                .map(cartMapper::toResponse)
+                .orElse(null);
     }
 
     @Transactional
-    public void removeProductFromCart(Long userId, Long productId) {
-        Cart cart = cartRepository.findByUser_UserId(userId);
-        if (cart == null) {
-            throw new RuntimeException("Cart not found for user ID: " + userId);
+    public CartResponse addToCart(Long userId, CartRequest request) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Cart cart = cartRepository.findByUser_UserId(userId).orElseGet(() -> {
+            Cart newCart = new Cart();
+            newCart.setUser(user);
+            return cartRepository.save(newCart);
+        });
+
+        for (CartDetailRequest item : request.getCartDetails()) {
+            Product product = productRepository.findByBicycleIdAndIsDeletedFalse(item.getBicycleId())
+                    .orElseThrow(() -> new RuntimeException("Product not found"));
+
+            CartDetail detail = cartDetailRepository.findByCartAndProduct(cart, product)
+                    .orElseGet(() -> {
+                        CartDetail newDetail = new CartDetail();
+                        newDetail.setCart(cart);
+                        newDetail.setProduct(product);
+                        newDetail.setQuantity(0); // Khởi tạo số lượng ban đầu
+                        return newDetail;
+                    });
+
+            detail.setQuantity(detail.getQuantity() + item.getQuantity());
+            cartDetailRepository.save(detail);
+
         }
 
-        cart.getCartDetails().removeIf(detail -> detail.getProduct().getBicycleId().equals(productId));
-        cartRepository.save(cart); // Lưu giỏ hàng sau khi xóa sản phẩm
+        return cartMapper.toResponse(cart);
     }
 
-    @Transactional(readOnly = true)
-    public CartResponse getCart(Long userId) {
-        Cart cart = cartRepository.findByUser_UserId(userId);
-        // Convert cart to CartResponse and return
-        return new CartResponse(); // Placeholder
+    @Transactional
+    public void clearCart(Long userId) {
+        cartRepository.findByUser_UserId(userId).ifPresent(cart -> {
+            cartDetailRepository.deleteAll(cart.getCartDetails());
+            cartRepository.delete(cart);
+        });
     }
 }
