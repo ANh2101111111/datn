@@ -9,5 +9,5 @@ public class UserResponse {
     private Long userId;
     private String username;
     private String email;
-    private Set<String> roles;
+    private boolean isActive;
 }

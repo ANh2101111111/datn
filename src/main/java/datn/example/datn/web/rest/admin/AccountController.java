@@ -7,6 +7,7 @@ import datn.example.datn.dto.request.RegisterRequest;
 import datn.example.datn.dto.request.ResetPasswordDto;
 import datn.example.datn.dto.response.AuthResponse;
 import datn.example.datn.dto.response.PasswordResetResponseDto;
+import datn.example.datn.dto.response.UserResponse;
 import datn.example.datn.entity.User;
 import datn.example.datn.service.AuthService;
 import datn.example.datn.service.CustomUserDetailsService;
@@ -23,6 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -63,6 +65,10 @@ public class AccountController {
     public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
         return ResponseEntity.ok("User deleted successfully");
+    }
+    @GetMapping
+    public List<UserResponse> getAllUsers() {
+        return userService.getAllUsers();
     }
 }
 
