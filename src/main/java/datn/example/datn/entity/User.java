@@ -24,7 +24,7 @@ public class User {
     private String email;
 
     private boolean status;
-
+    private boolean isActive = true;
     @Column(nullable = true) // Cho phép null
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

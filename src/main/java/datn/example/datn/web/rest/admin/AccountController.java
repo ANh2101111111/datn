@@ -11,6 +11,7 @@ import datn.example.datn.entity.User;
 import datn.example.datn.service.AuthService;
 import datn.example.datn.service.CustomUserDetailsService;
 import datn.example.datn.service.PasswordResetService;
+import datn.example.datn.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,8 @@ public class AccountController {
     private final AuthService authService;
     @Autowired
     private PasswordResetService passwordResetService;
-
+    @Autowired
+    private UserService userService;
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
         Map<String, Object> response = authService.login(request.get("username"), request.get("password"));
@@ -54,6 +56,13 @@ public class AccountController {
         PasswordResetResponseDto response = new PasswordResetResponseDto();
         response.setMessage("Your password has been reset successfully.");
         return response;
+    }
+
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
+        return ResponseEntity.ok("User deleted successfully");
     }
 }
 
