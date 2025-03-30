@@ -9,11 +9,12 @@ export const getCategories = async (): Promise<ICategory[]> => {
 
   return data.map(({ categoryId, name }: ICategory) => ({ categoryId, name }));
 };
-export const getCategoryDetail = async (id: number): Promise<ICategory | null> => {
+export const getCategoryDetail = async (
+  id: number
+): Promise<ICategory | null> => {
   const { data } = await request({
     url: `/user/categories/${id}`,
     method: "GET",
   });
-
   return data ? data : null;
 };

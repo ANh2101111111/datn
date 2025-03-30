@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import Link from "next/link";
 import { useState } from "react";
@@ -8,34 +9,31 @@ import { Route } from "@/types/route";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/api/users";
 import toast from "react-hot-toast";
+import { LOCAL_STORAGE } from "@/lib/const";
+import { useAuth } from "@/app/context";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const { loginSuccess } = useAuth();
 
   const { mutateAsync } = useMutation(login, {
     onSuccess: (data) => {
       toast.success("Login successfully");
-
-      // Lưu token vào localStorage trước khi chuyển trang
-      localStorage.setItem("token", data.token);
-
-      // Kích hoạt sự kiện để cập nhật UI ngay lập tức
-      window.dispatchEvent(new Event("storage"));
-
-      // Chuyển hướng về trang chủ
+      loginSuccess?.(data.userId);
       router.push(Route.HOME);
+
     },
     onError: () => {
       toast.error("Invalid username or password");
-      setError("Invalid username or password");
+      // setError("Invalid username or password");
     },
   });
 
   const handleLogin = async () => {
-    await mutateAsync({ username, password });
+    mutateAsync({ username, password });
   };
 
   return (

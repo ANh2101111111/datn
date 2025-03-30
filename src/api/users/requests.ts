@@ -1,7 +1,16 @@
 import { request } from "../axios";
-import { IUSerLoginRequest, IUserLoginResponse, IUserRegisterRequest, IUserRegisterResponse } from "./types";
+import {
+  IUSerLoginRequest,
+  IUserLoginResponse,
+  IUserProfileRequest,
+  IUserProfileResponse,
+  IUserRegisterRequest,
+  IUserRegisterResponse,
+} from "./types";
 
-export const login = async (params: IUSerLoginRequest): Promise<IUserLoginResponse> => {
+export const login = async (
+  params: IUSerLoginRequest
+): Promise<IUserLoginResponse> => {
   const { data } = await request({
     url: "api/user/login",
     method: "POST",
@@ -11,7 +20,9 @@ export const login = async (params: IUSerLoginRequest): Promise<IUserLoginRespon
   return data;
 };
 
-export const register = async (params: IUserRegisterRequest): Promise<IUserRegisterResponse> => {
+export const register = async (
+  params: IUserRegisterRequest
+): Promise<IUserRegisterResponse> => {
   const { data } = await request({
     url: "api/user/register",
     method: "POST",
@@ -19,6 +30,15 @@ export const register = async (params: IUserRegisterRequest): Promise<IUserRegis
   });
 
   return data;
-}; 
+};
 
+export const getUserInfo = async (
+  params: IUserProfileRequest
+): Promise<IUserProfileResponse> => {
+  const { data } = await request({
+    url: `api/user/profile/${params.id}`,
+    method: "GET",
+  });
 
+  return data;
+};

@@ -6,7 +6,9 @@ import Header from "@/layout/Header";
 import BackButton from "@/uis/BackButton/BackButton";
 import Providers from "./provider";
 import { Toaster } from "react-hot-toast";
-import Chatbot from "@/uis/ai/components/Chatbot"; // Import chatbot
+import Chatbot from "@/uis/ai/components/Chatbot"; 
+
+import { AuthProvider } from "./context";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -35,17 +37,17 @@ export default function RootLayout({
       <body
         className={`${lato.variable} ${quicksand.variable} antialiased container overflow-x-hidden`}
       >
-        <Providers>
-          <div className="container mx-auto max-w-[1280px] px-4">
-            <Header />
-            <BackButton />
-            {children}
-            <Footer />
-          </div>
-        </Providers>
+        <AuthProvider>
+          <Providers>
+            <div className="container mx-auto max-w-[1280px] px-4 ">
+              <Header />
+              <BackButton />
+              {children}
+              <Footer />
+            </div>
+          </Providers>
+        </AuthProvider>
         <Toaster />
-        
-        {/* Tích hợp Chatbot vào */}
         <Chatbot />
       </body>
     </html>

@@ -5,11 +5,10 @@ export interface IUSerLoginRequest {
 
 export interface IUserLoginResponse {
   token: string;
-  userId: number; 
+  userId: number;
 }
 
-
-// dang ki 
+// dang ki
 export interface IUserRegisterRequest {
   username: string;
   email: string;
@@ -21,7 +20,11 @@ export interface IUserRegisterResponse {
   message: string;
 }
 
-export interface IUserProfile {
+export interface IUserProfileRequest {
+  id: number;
+}
+
+export interface IUserProfileResponse {
   id: number;
   phone: string;
   avatar: string;
@@ -29,4 +32,3 @@ export interface IUserProfile {
   fullName: string;
   username: string;
 }
-
