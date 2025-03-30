@@ -39,6 +39,61 @@ public class CartService {
                 .map(cartMapper::toResponse)
                 .orElse(null);
     }
+    @Transactional
+    public CartResponse updateCartDetail(Long userId, CartDetailRequest request) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Cart cart = cartRepository.findByUser_UserId(userId)
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
+
+        Product product = productRepository.findByBicycleIdAndIsDeletedFalse(request.getBicycleId())
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        CartDetail detail = cartDetailRepository.findByCartAndProduct(cart, product)
+                .orElseThrow(() -> new RuntimeException("Product not found in cart"));
+
+        if (request.getQuantity() <= 0) {
+            cartDetailRepository.delete(detail);
+        } else {
+            detail.setQuantity(request.getQuantity());
+            cartDetailRepository.save(detail);
+        }
+
+        return cartMapper.toResponse(cart);
+    }
+
+//    @Transactional
+//    public CartResponse addToCart(Long userId, CartRequest request) {
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        Cart cart = cartRepository.findByUser_UserId(userId).orElseGet(() -> {
+//            Cart newCart = new Cart();
+//            newCart.setUser(user);
+//            return cartRepository.save(newCart);
+//        });
+//
+//        for (CartDetailRequest item : request.getCartDetails()) {
+//            Product product = productRepository.findByBicycleIdAndIsDeletedFalse(item.getBicycleId())
+//                    .orElseThrow(() -> new RuntimeException("Product not found"));
+//
+//            CartDetail detail = cartDetailRepository.findByCartAndProduct(cart, product)
+//                    .orElseGet(() -> {
+//                        CartDetail newDetail = new CartDetail();
+//                        newDetail.setCart(cart);
+//                        newDetail.setProduct(product);
+//                        newDetail.setQuantity(0); // Khởi tạo số lượng ban đầu
+//                        return newDetail;
+//                    });
+//
+//            detail.setQuantity(detail.getQuantity() + item.getQuantity());
+//            cartDetailRepository.save(detail);
+//
+//        }
+//
+//        return cartMapper.toResponse(cart);
+//    }
 
     @Transactional
     public CartResponse addToCart(Long userId, CartRequest request) {
@@ -66,10 +121,10 @@ public class CartService {
 
             detail.setQuantity(detail.getQuantity() + item.getQuantity());
             cartDetailRepository.save(detail);
-
         }
 
-        return cartMapper.toResponse(cart);
+        // Trả về giỏ hàng với cartDetails
+        return cartMapper.toResponse(cart); // Đảm bảo cartMapper đã bao gồm cartDetails
     }
 
     @Transactional

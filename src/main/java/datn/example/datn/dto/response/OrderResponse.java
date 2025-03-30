@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 public class OrderResponse {
     private Long orderId;
+    private Long bicycleId;
     private Long userId;
     private BigDecimal totalAmount;
     private Date createdAt;
