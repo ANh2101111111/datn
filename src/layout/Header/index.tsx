@@ -1,16 +1,30 @@
 "use client";
-import React from "react";
-import { DATA, SEARCH_DATA, HEADER_MOBILE_DATA } from "./components/data";
-import HeaderLogo from "./components/HeaderLogo";
-import HeaderInput from "./components/HeaderInput";
-import useWindowSize from "./hooks/useWindowSize";
-import HeaderIcons from "./components/HeaderIcon";
-import Link from "next/link";
+import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { Route } from "@/types/route";
+import Link from "next/link";
+import React, { useMemo } from "react";
+import { DATA, HEADER_MOBILE_DATA, SEARCH_DATA } from "./components/data";
+import HeaderIcons from "./components/HeaderIcon";
+import HeaderInput from "./components/HeaderInput";
+import HeaderLogo from "./components/HeaderLogo";
+import useWindowSize from "./hooks/useWindowSize";
 
 const Header: React.FC = () => {
   const { width } = useWindowSize();
   const isMobile = width <= 768;
+  const { data } = useGetUserInfo();
+  const listNavBar = useMemo(() => {
+    return DATA.icons.map((icon) => {
+      if (icon.label === "Account") {
+        return {
+          ...icon,
+          label: data?.username || "Account",
+        };
+      }
+      return icon;
+    });
+  }, [data]);
+  console.log(data, "1221", listNavBar);
 
   return (
     <header className="flex items-center justify-between px-4 py-2 border-b border-gray-200 bg-white">
@@ -47,11 +61,11 @@ const Header: React.FC = () => {
             />
           </div>
           {/* Các Icon */}
-          <HeaderIcons icons={DATA.icons} />
+          <HeaderIcons icons={listNavBar} />
         </div>
       ) : (
         <div className="flex items-center space-x-4">
-          {DATA.icons
+          {listNavBar
             .filter((icon) => ["Wishlist", "Cart"].includes(icon.label))
             .map((icon, index) => {
               const IconHamburger = icon.icon;

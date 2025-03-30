@@ -9,18 +9,22 @@ import { Route } from "@/types/route";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/api/users";
 import toast from "react-hot-toast";
+import { LOCAL_STORAGE } from "@/lib/const";
+import { useAuth } from "@/app/context";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const { loginSuccess } = useAuth();
 
   const { mutateAsync } = useMutation(login, {
     onSuccess: (data) => {
       toast.success("Login successfully");
+      loginSuccess?.(data.userId);
       router.push(Route.HOME);
-      localStorage.setItem("token", data.token);
+
     },
     onError: () => {
       toast.error("Invalid username or password");

@@ -2,7 +2,7 @@
 import type { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import axios from "axios";
 
-import { env } from "@/lib/const";
+import { env, LOCAL_STORAGE } from "@/lib/const";
 
 export const request = axios.create({
   baseURL: env.API_URL,
@@ -22,7 +22,10 @@ request.interceptors.response.use(handleSuccess, handleError);
 request.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
     // config.headers["ngrok-skip-browser-warning"] = "true";
-    const token = typeof localStorage !== "undefined" ? localStorage.getItem("token") : null;
+    const token =
+      typeof localStorage !== "undefined"
+        ? localStorage.getItem(LOCAL_STORAGE.TOKEN)
+        : null;
     console.log(token, "token");
     config.headers.Authorization = `Bearer ${token}`;
 
