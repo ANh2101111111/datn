@@ -11,7 +11,7 @@ export interface ICartDetail {
   productName: string;
   quantity: number;
   image: string;
-  totalAmount: number;
+  price: number;
 }
 
 export interface IAddCart {
