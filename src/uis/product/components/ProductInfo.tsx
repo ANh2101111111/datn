@@ -5,12 +5,18 @@ import IconStar from "@/layout/assets/icons/IconStar";
 import Button from "@/uis/common/button";
 import { FC, useState, useEffect } from "react";
 import { useGetReviews } from "@/api/reviews";
+import { useMutation } from "@tanstack/react-query";
+import { addCart } from "@/api/cart";
+import toast from "react-hot-toast";
+import { useAuth } from "@/app/context";
 
 interface IProductInfoProps {
   data: IProductDetail;
 }
 
 const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
+  const { isLogged, userId } = useAuth();
+
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<"description" | "review">(
     "description"
@@ -24,6 +30,28 @@ const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
       refetch(); // Fetch dữ liệu khi chuyển sang tab review
     }
   }, [activeTab, refetch]);
+
+  const addCartMutation = useMutation(addCart, {
+    onSuccess: () => {
+      toast.success("Add to cart successfully");
+      setQuantity(1);
+    },
+    onError: () => {
+      toast.error("Add to cart failed");
+    },
+  });
+
+  const handleAddCart = () => {
+    if (!isLogged) {
+      toast.error("Please login to add to cart");
+      return;
+    }
+
+    addCartMutation.mutate({
+      userId: Number(userId),
+      payload: [{ bicycleId: data.bicycleId, quantity }],
+    });
+  };
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
@@ -97,6 +125,7 @@ const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
               size="medium"
               variant="primary"
               className="text-white px-6 py-2 rounded-md shadow-md transition hover:bg-brand-secondary"
+              onClick={handleAddCart}
             >
               Add To Cart
             </Button>

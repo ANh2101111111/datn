@@ -5,18 +5,25 @@ import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext<{
   userId: number | null;
-  loginSuccess?: (id: number) => void;
+  loginSuccess?: (data: { id: number; token: string }) => void;
   logout?: () => void;
-}>({ userId: null });
+  isLogged: boolean;
+}>({ userId: null, isLogged: false });
 
 import { ReactNode } from "react";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [userId, setUserId] = useState<number | null>(null);
+  const initialUserId =
+    typeof window !== "undefined" && localStorage.getItem(LOCAL_STORAGE.ID)
+      ? Number(localStorage.getItem(LOCAL_STORAGE.ID))
+      : null;
 
-  const loginSuccess = (id: number) => {
+  const [userId, setUserId] = useState<number | null>(initialUserId);
+
+  const loginSuccess = ({ id, token }: { id: number; token: string }) => {
     setUserId(id);
     localStorage.setItem(LOCAL_STORAGE.ID, String(id));
+    localStorage.setItem(LOCAL_STORAGE.TOKEN, token);
   };
 
   const logout = () => {
@@ -25,7 +32,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ userId, loginSuccess, logout }}>
+    <AuthContext.Provider
+      value={{ userId, loginSuccess, logout, isLogged: !!userId }}
+    >
       {children}
     </AuthContext.Provider>
   );

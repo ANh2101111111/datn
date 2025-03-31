@@ -4,6 +4,10 @@ import React, { FC } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter
 import IconStar from "@/layout/assets/icons/IconStar";
 import BoxBadge from "@/layout/Badge/BoxBadge";
+import { useAuth } from "@/app/context";
+import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { addCart } from "@/api/cart";
 
 interface IBoxListProductProps {
   image: string;
@@ -15,7 +19,7 @@ interface IBoxListProductProps {
   discountedPrice: number;
   type?: string;
   textType?: string;
-  id: number
+  id: number;
 }
 
 // Component BoxProduct
@@ -30,7 +34,30 @@ const BoxProduct: FC<IBoxListProductProps> = ({
   type,
   textType,
 }) => {
+  const { isLogged, userId } = useAuth();
+
   const router = useRouter();
+
+  const addCartMutation = useMutation(addCart, {
+    onSuccess: () => {
+      toast.success("Add to cart successfully");
+    },
+    onError: () => {
+      toast.error("Add to cart failed");
+    },
+  });
+
+  const handleAddCart = () => {
+    if (!isLogged) {
+      toast.error("Please login to add to cart");
+      return;
+    }
+
+    addCartMutation.mutate({
+      userId: Number(userId),
+      payload: [{ bicycleId: id, quantity: 1 }],
+    });
+  };
 
   const handleImageClick = () => {
     router.push("/product/" + id);
@@ -100,7 +127,10 @@ const BoxProduct: FC<IBoxListProductProps> = ({
             ${originalPrice.toFixed(2)}
           </span>
         </div>
-        <button className="bg-colorButton-brand1 hover:bg-colorButton-brand1hover text-text-brand1 text-sm font-bold py-2 px-4 rounded-[4px] transition-all duration-300">
+        <button
+          onClick={handleAddCart}
+          className="bg-colorButton-brand1 hover:bg-colorButton-brand1hover text-text-brand1 text-sm font-bold py-2 px-4 rounded-[4px] transition-all duration-300"
+        >
           Add +
         </button>
       </div>

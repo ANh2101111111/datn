@@ -9,6 +9,7 @@ import { useAuth } from "@/app/context";
 interface Icon {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
   label: string;
+  path: string;
 }
 
 interface IconsProps {
@@ -26,7 +27,7 @@ const HeaderIcons: React.FC<IconsProps> = ({ icons }) => {
         return (
           <Link
             key={index}
-            href={item.label === "Cart" ? "/cart" : "#"}
+            href={item.path}
             className="flex items-center gap-2 group cursor-pointer"
           >
             <span className="text-base md:text-lg">
