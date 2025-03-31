@@ -57,9 +57,7 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item, refetch }) => {
       />
       <div className="flex-1 ml-4">
         <p className="font-semibold">{item.productName}</p>
-        <p className="text-gray-500">
-          ${(item.totalAmount / item.quantity).toFixed(2)}
-        </p>
+        <p className="text-gray-500">${item.price.toFixed(2)}</p>
       </div>
       <div className="flex items-center">
         <button
@@ -79,7 +77,7 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item, refetch }) => {
         </button>
       </div>
       <span className="font-bold text-green-600 ml-6">
-        ${item.totalAmount.toFixed(2)}
+        ${(item.price * item.quantity).toFixed(2)}
       </span>
       <button className="text-red-500 ml-6"></button>
     </div>
