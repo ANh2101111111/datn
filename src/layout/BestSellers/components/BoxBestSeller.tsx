@@ -5,6 +5,10 @@ import Button from "@/uis/common/button";
 import IconCart from "@/layout/assets/icons/IconCart";
 import BoxBadge from "@/layout/Badge/BoxBadge";
 import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { addCart } from "@/api/cart";
+import toast from "react-hot-toast";
+import { useAuth } from "@/app/context";
 
 interface IBoxListProductSellerProps {
   image: string;
@@ -34,7 +38,30 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
   type,
   textType,
 }) => {
+  const { isLogged, userId } = useAuth();
+
   const router = useRouter();
+
+  const addCartMutation = useMutation(addCart, {
+    onSuccess: () => {
+      toast.success("Add to cart successfully");
+    },
+    onError: () => {
+      toast.error("Add to cart failed");
+    },
+  });
+
+  const handleAddCart = () => {
+    if (!isLogged) {
+      toast.error("Please login to add to cart");
+      return;
+    }
+
+    addCartMutation.mutate({
+      userId: Number(userId),
+      payload: [{ bicycleId: id, quantity: 1 }],
+    });
+  };
 
   const handleImageClick = () => {
     router.push("/product/" + id);
@@ -125,6 +152,7 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
           variant="primary"
           size="large"
           className="  h-[40px] w-full hover:bg-colorButton-brand1hover text-brand-thrid mr-[20px] ml-[20px]"
+          onClick={handleAddCart}
         >
           <IconCart /> Add to cart
         </Button>

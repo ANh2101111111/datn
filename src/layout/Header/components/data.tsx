@@ -12,10 +12,11 @@ export const DATA = {
   logoHeight: 66,
 
   icons: [
-    { icon: IconAccount, label: "Account" },
-    { icon: IconCompare, label: "Compare" },
-    { icon: IconWishlist, label: "Wishlist" },
-    { icon: IconCart, label: "Cart" },
+    { icon: IconAccount, label: "Login", path: "/login" },
+    { icon: IconAccount, label: "Account", path: "/account", isPrivate: true },
+    { icon: IconCompare, label: "Compare", path: "/compare" },
+    { icon: IconWishlist, label: "Wishlist", path: "/wishlist" },
+    { icon: IconCart, label: "Cart", path: "/cart", isPrivate: true },
   ],
 };
 

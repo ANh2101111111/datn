@@ -8,22 +8,33 @@ import HeaderIcons from "./components/HeaderIcon";
 import HeaderInput from "./components/HeaderInput";
 import HeaderLogo from "./components/HeaderLogo";
 import useWindowSize from "./hooks/useWindowSize";
+import { useAuth } from "@/app/context";
 
 const Header: React.FC = () => {
+  const { isLogged } = useAuth();
   const { width } = useWindowSize();
   const isMobile = width <= 768;
   const { data } = useGetUserInfo();
+
   const listNavBar = useMemo(() => {
-    return DATA.icons.map((icon) => {
-      if (icon.label === "Account") {
-        return {
-          ...icon,
-          label: data?.username || "Account",
-        };
-      }
-      return icon;
-    });
-  }, [data]);
+    return DATA.icons
+      .map((icon) => {
+        const cond1 = !isLogged && icon.isPrivate;
+        const cond2 = isLogged && icon.label === "Login";
+        if (cond1 || cond2) {
+          return null;
+        }
+
+        if (icon.label === "Account") {
+          return {
+            ...icon,
+            label: data?.username || "Account",
+          };
+        }
+        return icon;
+      })
+      .filter((item) => item);
+  }, [data?.username, isLogged]);
   console.log(data, "1221", listNavBar);
 
   return (
