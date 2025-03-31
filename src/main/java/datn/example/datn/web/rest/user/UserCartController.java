@@ -20,12 +20,15 @@ public class UserCartController {
     public CartResponse getCart(@PathVariable Long userId) {
         return cartService.getCartByUser(userId);
     }
-    @PutMapping("/update")
-    public ResponseEntity<CartResponse> updateCartDetail(@RequestParam Long userId, @RequestBody CartDetailRequest request) {
+    @PutMapping("/update/{userId}")
+    public ResponseEntity<CartResponse> updateCartDetail(
+            @PathVariable Long userId,
+            @RequestBody CartDetailRequest request) {
         CartResponse cartResponse = cartService.updateCartDetail(userId, request);
         return ResponseEntity.ok(cartResponse);
     }
-    @PostMapping("/{userId}/add")
+
+    @PostMapping("/add/{userId}")
     public CartResponse addToCart(@PathVariable Long userId, @RequestBody CartRequest request) {
         return cartService.addToCart(userId, request);
     }

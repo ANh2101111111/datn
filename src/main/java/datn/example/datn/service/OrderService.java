@@ -4,6 +4,7 @@ import datn.example.datn.dto.request.OrderRequest;
 import datn.example.datn.dto.response.OrderResponse;
 import datn.example.datn.entity.*;
 import datn.example.datn.mapper.OrderMapper;
+import datn.example.datn.mapper.ProductMapper;
 import datn.example.datn.repository.CartDetailRepository;
 import datn.example.datn.repository.CartRepository;
 import datn.example.datn.repository.OrderRepository;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,14 +26,16 @@ public class OrderService {
     private final OrderMapper orderMapper;
     private final CartRepository cartRepository;
     private final CartDetailRepository cartDetailRepository;
+    private final ProductMapper productMapper;
 
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, UserRepository userRepository, CartDetailRepository cartDetailRepository, CartRepository cartRepository) {
+    public OrderService(ProductMapper productMapper ,OrderRepository orderRepository, OrderMapper orderMapper, UserRepository userRepository, CartDetailRepository cartDetailRepository, CartRepository cartRepository) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
         this.cartRepository = cartRepository;
         this.cartDetailRepository =cartDetailRepository;
+        this.productMapper = productMapper ;
     }
 
 
@@ -72,35 +76,48 @@ public class OrderService {
     }
 
     public OrderResponse createOrder(OrderRequest request) {
+        // Tìm giỏ hàng của người dùng
         Cart cart = cartRepository.findByUser_UserId(request.getUserId())
                 .orElseThrow(() -> new RuntimeException("Cart not found"));
 
+        // Kiểm tra xem giỏ hàng có trống không
         if (cart.getCartDetails().isEmpty()) {
             throw new RuntimeException("Cart is empty, cannot create order.");
         }
 
-        Order order = new Order();
-        order.setUser(cart.getUser());
-        order.setOrderStatus(OrderStatus.PENDING);
-        order.setOrderDetails(cart.getCartDetails().stream().map(detail -> {
+        // Sử dụng OrderMapper để chuyển đổi request thành Order
+        Order order = orderMapper.toEntity(request, cart.getUser());
+        order.setOrderStatus(OrderStatus.PENDING); // Thiết lập trạng thái đơn hàng
+
+        // Tạo danh sách chi tiết đơn hàng từ giỏ hàng
+        List<OrderDetail> orderDetails = cart.getCartDetails().stream().map(detail -> {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setOrder(order);
             orderDetail.setProduct(detail.getProduct());
             orderDetail.setQuantity(detail.getQuantity());
-            orderDetail.setPrice(detail.getProduct().getOriginalPrice());
-            return orderDetail;
-        }).collect(Collectors.toList()));
 
-        order.calculateTotalAmount(); // Tính tổng tiền
+            // Lấy giá gốc và giá sau khi giảm
+            BigDecimal originalPrice = detail.getProduct().getOriginalPrice();
+            BigDecimal discountedPrice = productMapper.calculateDiscountedPrice(detail.getProduct());
+
+            orderDetail.setPrice(discountedPrice); // Lưu giá đã giảm
+            return orderDetail;
+        }).collect(Collectors.toList());
+
+        // Thiết lập chi tiết đơn hàng và tính tổng tiền
+        order.setOrderDetails(orderDetails);
+        order.calculateTotalAmount(); // Tính tổng tiền dựa trên giá đã giảm
+
+        // Lưu đơn hàng vào cơ sở dữ liệu
         orderRepository.save(order);
 
-        // Sau khi tạo đơn hàng, xoá giỏ hàng
+        // Xóa giỏ hàng sau khi tạo đơn hàng
         cartDetailRepository.deleteAll(cart.getCartDetails());
         cartRepository.delete(cart);
 
+        // Trả về phản hồi
         return orderMapper.toResponse(order);
     }
-
 
     @Transactional
     public OrderResponse updateOrderStatus(Long orderId, OrderStatus newStatus) {

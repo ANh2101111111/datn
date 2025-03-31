@@ -19,11 +19,10 @@ public class UserProfileController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping
-    public ResponseEntity<UserProfileResponse> getUserProfile(@AuthenticationPrincipal UserDetails userDetails) {
-        User user = userRepository.findByUsername(userDetails.getUsername())
-                .orElseThrow(() -> new RuntimeException("User không tồn tại"));
-        return ResponseEntity.ok(userProfileService.getUserProfile(user.getUserId()));
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserProfileResponse> getUserProfile(@PathVariable Long userId) {
+        UserProfileResponse userProfileResponse = userProfileService.getUserProfile(userId);
+        return ResponseEntity.ok(userProfileResponse);
     }
 
     @PostMapping("/{userId}")

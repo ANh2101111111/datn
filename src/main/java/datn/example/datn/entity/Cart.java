@@ -19,7 +19,13 @@ public class Cart {
     private User user;
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CartDetail> cartDetails = new ArrayList<>();
+    @Column(nullable = false)
+    private BigDecimal totalAmount;
 
-
+    public void calculateTotalAmount() {
+        totalAmount = cartDetails.stream()
+                .map(detail -> detail.getPrice().multiply(BigDecimal.valueOf(detail.getQuantity())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 }
 

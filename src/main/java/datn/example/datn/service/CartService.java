@@ -8,6 +8,7 @@ import datn.example.datn.entity.CartDetail;
 import datn.example.datn.entity.Product;
 import datn.example.datn.entity.User;
 import datn.example.datn.mapper.CartMapper;
+import datn.example.datn.mapper.ProductMapper;
 import datn.example.datn.repository.CartRepository;
 import datn.example.datn.repository.CartDetailRepository;
 import datn.example.datn.repository.ProductRepository;
@@ -15,6 +16,7 @@ import datn.example.datn.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -24,14 +26,16 @@ public class CartService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final CartMapper cartMapper;
+    private final ProductMapper productMapper;
 
-    public CartService(CartRepository cartRepository, CartDetailRepository cartDetailRepository,
+    public CartService( ProductMapper productMapper,CartRepository cartRepository, CartDetailRepository cartDetailRepository,
                        ProductRepository productRepository, UserRepository userRepository, CartMapper cartMapper) {
         this.cartRepository = cartRepository;
         this.cartDetailRepository = cartDetailRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
         this.cartMapper = cartMapper;
+        this.productMapper = productMapper;
     }
 
     public CartResponse getCartByUser(Long userId) {
@@ -103,6 +107,7 @@ public class CartService {
         Cart cart = cartRepository.findByUser_UserId(userId).orElseGet(() -> {
             Cart newCart = new Cart();
             newCart.setUser(user);
+            newCart.setTotalAmount(BigDecimal.ZERO);
             return cartRepository.save(newCart);
         });
 
@@ -115,17 +120,22 @@ public class CartService {
                         CartDetail newDetail = new CartDetail();
                         newDetail.setCart(cart);
                         newDetail.setProduct(product);
-                        newDetail.setQuantity(0); // Khởi tạo số lượng ban đầu
+                        newDetail.setQuantity(0);
                         return newDetail;
                     });
 
+            // Đảm bảo price luôn có giá trị
+            detail.setPrice(productMapper.calculateDiscountedPrice(product));
             detail.setQuantity(detail.getQuantity() + item.getQuantity());
             cartDetailRepository.save(detail);
         }
 
-        // Trả về giỏ hàng với cartDetails
-        return cartMapper.toResponse(cart); // Đảm bảo cartMapper đã bao gồm cartDetails
+        cart.calculateTotalAmount();
+        cartRepository.save(cart);
+
+        return cartMapper.toResponse(cart);
     }
+
 
     @Transactional
     public void clearCart(Long userId) {

@@ -3,6 +3,7 @@ package datn.example.datn.mapper;
 import datn.example.datn.dto.request.OrderRequest;
 import datn.example.datn.dto.response.OrderResponse;
 import datn.example.datn.entity.Order;
+import datn.example.datn.entity.PaymentMethod;
 import datn.example.datn.entity.User;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +22,13 @@ public class OrderMapper {
     public Order toEntity(OrderRequest request, User user) {
         Order order = new Order();
         order.setUser(user);
-        order.setOrderDetails(null); // Để xử lý ở OrderDetailMapper
+        order.setFullName(request.getFullName());       // Ánh xạ fullName
+        order.setPhoneNumber(request.getPhoneNumber()); // Ánh xạ phoneNumber
+        order.setEmail(request.getEmail());             // Ánh xạ email
+        order.setAddress(request.getAddress());         // Ánh xạ address
+        order.setNote(request.getNote());               // Ánh xạ note
+        order.setPaymentMethod(PaymentMethod.valueOf(request.getPaymentMethod())); // Ánh xạ paymentMethod
+        order.setOrderDetails(null);                     // Để xử lý ở OrderDetailMapper
         return order;
     }
 
@@ -36,6 +43,12 @@ public class OrderMapper {
         response.setOrderDetails(order.getOrderDetails().stream()
                 .map(orderDetailMapper::toResponse)
                 .collect(Collectors.toList()));
+        response.setFullName(order.getFullName());                // Ánh xạ fullName
+        response.setPhoneNumber(order.getPhoneNumber());          // Ánh xạ phoneNumber
+        response.setEmail(order.getEmail());                      // Ánh xạ email
+        response.setAddress(order.getAddress());                  // Ánh xạ address
+        response.setNote(order.getNote());                        // Ánh xạ note
+        response.setPaymentMethod(order.getPaymentMethod().name()); // Ánh xạ paymentMethod
         return response;
     }
 }

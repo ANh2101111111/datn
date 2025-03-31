@@ -3,6 +3,8 @@ package datn.example.datn.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 @Table(name = "cart_details")
@@ -21,4 +23,7 @@ public class CartDetail {
 
     @Column(nullable = false)
     private int quantity;
+
+    @Column(nullable = false)
+    private BigDecimal price;
 }
