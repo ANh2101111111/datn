@@ -3,10 +3,8 @@
 import React from "react";
 import CartSummary from "./components/CartSummary";
 import CartItemComponent from "./components/CartItem.tsx";
-import { removeCart, useGetCarts } from "@/api/cart";
+import { useGetCarts } from "@/api/cart";
 import { useAuth } from "@/app/context";
-import { useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 import { Route } from "@/types/route";
 import { useRouter } from "next/navigation";
 
@@ -20,27 +18,6 @@ const Cart = () => {
     enabled: !!userId,
     refetchOnMount: true,
   });
-
-  const deleteCartMutation = useMutation(removeCart, {
-    onSuccess: () => {
-      toast.success("Remove cart successfully");
-
-      refetch();
-    },
-    onError: () => {
-      toast.error("Remove cart failed");
-    },
-  });
-
-  const onRemoveCart = (cartDetailId: number) => {
-    const isConfirm = confirm("Are you sure to remove cart?");
-    if (!isConfirm) return;
-  
-    deleteCartMutation.mutate({ 
-      userId: Number(userId), 
-      cartDetailId: Number(cartDetailId) 
-    });
-  };
 
   return (
     <div className="container mx-auto p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -66,15 +43,6 @@ const Cart = () => {
           >
             Continue Shopping
           </button>
-
-          {data?.cartDetails && data?.cartDetails?.length > 0 && (
-            <button
-            className="bg-red-500 text-white px-4 py-2 rounded"
-            onClick={() => onRemoveCart(data?.cartDetails[0]?.cartDetailId)}
-          >
-            Remove Cart
-          </button>
-          )}
         </div>
       </div>
       <div className="flex flex-col gap-4">

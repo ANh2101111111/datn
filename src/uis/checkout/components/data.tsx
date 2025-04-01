@@ -36,7 +36,7 @@ export const orders: OrderItem[] = [
 ];
 
 export const paymentMethods: PaymentMethod[] = [
-  { id: "bank", name: "Direct bank transfer" },
-  { id: "cash", name: "Cash on delivery" },
-  { id: "vnpay", name: "VNPay" },
+  // { id: "bank", name: "Direct bank transfer" },
+  { id: "COD", name: "Cash on delivery" },
+  { id: "VNPAY", name: "VNPay" },
 ];

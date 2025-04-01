@@ -6,7 +6,7 @@ import Header from "@/layout/Header";
 import BackButton from "@/uis/BackButton/BackButton";
 import Providers from "./provider";
 import { Toaster } from "react-hot-toast";
-import Chatbot from "@/uis/ai/components/Chatbot"; 
+import Chatbot from "@/uis/ai/components/Chatbot";
 
 import { AuthProvider } from "./context";
 

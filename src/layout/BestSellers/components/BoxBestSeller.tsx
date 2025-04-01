@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { addCart } from "@/api/cart";
 import toast from "react-hot-toast";
 import { useAuth } from "@/app/context";
+import { queryClient } from "@/app/provider";
 
 interface IBoxListProductSellerProps {
   image: string;
@@ -45,6 +46,7 @@ const BoxListProductSeller: FC<IBoxListProductSellerProps> = ({
   const addCartMutation = useMutation(addCart, {
     onSuccess: () => {
       toast.success("Add to cart successfully");
+      queryClient.invalidateQueries(["CART"]);
     },
     onError: () => {
       toast.error("Add to cart failed");

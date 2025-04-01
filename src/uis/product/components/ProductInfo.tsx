@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { addCart } from "@/api/cart";
 import toast from "react-hot-toast";
 import { useAuth } from "@/app/context";
+import { queryClient } from "@/app/provider";
 
 interface IProductInfoProps {
   data: IProductDetail;
@@ -18,7 +19,9 @@ const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
   const { isLogged, userId } = useAuth();
 
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState<"description" | "review">("description");
+  const [activeTab, setActiveTab] = useState<"description" | "review">(
+    "description"
+  );
 
   // Gọi API khi chuyển sang tab "Reviews"
   const { data: reviews, refetch, isLoading, isError } = useGetReviews();
@@ -33,6 +36,7 @@ const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
     onSuccess: () => {
       toast.success("Add to cart successfully");
       setQuantity(1);
+      queryClient.invalidateQueries(["CART"]);
     },
     onError: () => {
       toast.error("Add to cart failed");
