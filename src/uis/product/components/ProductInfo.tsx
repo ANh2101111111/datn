@@ -18,9 +18,7 @@ const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
   const { isLogged, userId } = useAuth();
 
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState<"description" | "review">(
-    "description"
-  );
+  const [activeTab, setActiveTab] = useState<"description" | "review">("description");
 
   // Gọi API khi chuyển sang tab "Reviews"
   const { data: reviews, refetch, isLoading, isError } = useGetReviews();
@@ -117,14 +115,14 @@ const ProductInfo: FC<IProductInfoProps> = ({ data }) => {
           <div className="flex items-center mt-6">
             <input
               type="number"
-              className="w-[60px] text-center border border-gray-300 rounded-md px-2 py-1 mr-4"
+              className="w-[80px] text-center border border-gray-300 rounded-md px-3 py-2 mr-4 transition focus:ring-2 focus:ring-brand-primary focus:outline-none"
               value={quantity}
               onChange={handleQuantityChange}
             />
             <Button
               size="medium"
               variant="primary"
-              className="text-white px-6 py-2 rounded-md shadow-md transition hover:bg-brand-secondary"
+              className="text-white px-8 py-3 rounded-lg shadow-lg transition transform hover:bg-brand-secondary hover:scale-105 focus:ring-2 focus:ring-brand-primary"
               onClick={handleAddCart}
             >
               Add To Cart
