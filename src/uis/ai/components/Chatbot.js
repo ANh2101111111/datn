@@ -197,7 +197,7 @@ export default function Chatbot() {
                          if (
                                 input.toLowerCase().includes("list categories") || 
                                 input.toLowerCase().includes("danh sách danh mục") || 
-                                input.toLowerCase().includes("quelles sont les catégories")
+                                input.toLowerCase().includes("quelles sont les categories")
                             ) {
                                 const categories = [
                                     "Folding Bike", 

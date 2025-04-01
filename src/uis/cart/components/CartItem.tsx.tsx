@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { ICartDetail, updateQuantity } from "@/api/cart";
 import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "@/app/context";
@@ -48,7 +48,7 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item, refetch }) => {
   return (
     <div className="flex items-center justify-between border-b py-4 px-4 bg-gray-50 rounded-lg shadow-sm mb-4">
       <input type="checkbox" className="mr-4" />
-      <Image
+      <img
         src={item.image}
         alt={item.productName}
         width={50}

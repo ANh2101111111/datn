@@ -32,11 +32,14 @@ const Cart = () => {
     },
   });
 
-  const onRemoveCart = () => {
+  const onRemoveCart = (cartDetailId: number) => {
     const isConfirm = confirm("Are you sure to remove cart?");
     if (!isConfirm) return;
-
-    deleteCartMutation.mutate({ userId: Number(userId) });
+  
+    deleteCartMutation.mutate({ 
+      userId: Number(userId), 
+      cartDetailId: Number(cartDetailId) 
+    });
   };
 
   return (
@@ -66,11 +69,11 @@ const Cart = () => {
 
           {data?.cartDetails && data?.cartDetails?.length > 0 && (
             <button
-              className="bg-red-500 text-white px-4 py-2 rounded"
-              onClick={onRemoveCart}
-            >
-              Remove Cart
-            </button>
+            className="bg-red-500 text-white px-4 py-2 rounded"
+            onClick={() => onRemoveCart(data?.cartDetails[0]?.cartDetailId)}
+          >
+            Remove Cart
+          </button>
           )}
         </div>
       </div>

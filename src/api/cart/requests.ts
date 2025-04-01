@@ -6,7 +6,6 @@ export const getCarts = async (userId: number): Promise<ICart> => {
     url: `/api/user/cart/${userId}`,
     method: "GET",
   });
-
   return data;
 };
 
@@ -28,9 +27,9 @@ export const addCart = async ({
   return data;
 };
 
-export const removeCart = async ({ userId }: { userId: number }) => {
+export const removeCart = async ({ userId, cartDetailId }: { userId: number; cartDetailId: number }) => {
   const { data } = await request({
-    url: `/api/user/cart/${userId}/clear`,
+    url: `/api/user/cart/remove-items/${userId}/${cartDetailId}`,
     method: "DELETE",
   });
 
