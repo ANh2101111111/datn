@@ -20,6 +20,7 @@ import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -82,12 +83,16 @@ public class OrderController {
     public ResponseEntity<String> createVNPayPayment(@PathVariable Long orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
+        BigDecimal totalAmount = order.getTotalAmount(); // BigDecimal
+        double usdAmount = totalAmount.doubleValue(); // Giá tiền USD
+        double exchangeRate = 25000; // Giả sử tỷ giá 1 USD = 25,000 VND
+        long vndAmount = Math.round(usdAmount * exchangeRate * 100);
 
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", "2.1.0");
         vnp_Params.put("vnp_Command", "pay");
         vnp_Params.put("vnp_TmnCode", VNPayConfig.vnp_TmnCode);
-        vnp_Params.put("vnp_Amount", String.valueOf(order.getTotalAmount()));
+        vnp_Params.put("vnp_Amount", String.valueOf(vndAmount));
         vnp_Params.put("vnp_CurrCode", "VND");
         vnp_Params.put("vnp_TxnRef", String.valueOf(orderId));
         vnp_Params.put("vnp_OrderInfo", "Thanh toán đơn hàng " + orderId);
@@ -106,10 +111,20 @@ public class OrderController {
     @GetMapping("/payment/vnpay_return")
     public ResponseEntity<String> handleVNPayReturn(@RequestParam Map<String, String> vnp_Params) {
         if ("00".equals(vnp_Params.get("vnp_ResponseCode"))) {
+            // Lấy số tiền từ VNPay (đơn vị VND * 100)
+            long vndAmount = Long.parseLong(vnp_Params.get("vnp_Amount"));
+
+            // Chuyển đổi từ VND về USD để hiển thị cho người dùng
+            double exchangeRate = 25000; // Tỷ giá USD -> VND
+            double amountInUSD = (vndAmount / 100.0) / exchangeRate;
+
+            // Cập nhật trạng thái đơn hàng
             orderService.processVNPayPayment(Long.valueOf(vnp_Params.get("vnp_TxnRef")));
-            return ResponseEntity.ok("Payment via VNPAY successful. Order status updated to PAID.");
+
+            return ResponseEntity.ok("Payment successful. Amount paid: $" + amountInUSD);
         }
         return ResponseEntity.badRequest().body("Payment via VNPAY failed.");
     }
+
 }
 

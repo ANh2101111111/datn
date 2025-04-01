@@ -25,6 +25,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "AND (:categoryId IS NULL OR p.category.id = :categoryId) " +
             "AND (:minPrice IS NULL OR p.originalPrice >= :minPrice) " +
             "AND (:maxPrice IS NULL OR p.originalPrice <= :maxPrice) " +
+            "AND (:description IS NULL OR p.description ILIKE CONCAT('%', CAST(:description AS text), '%')) " +
             "AND p.isDeleted = false " +
             "ORDER BY p.originalPrice DESC")
     List<Product> searchProducts(
@@ -32,7 +33,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("type") String type,
             @Param("categoryId") Long categoryId,
             @Param("minPrice") BigDecimal minPrice,
-            @Param("maxPrice") BigDecimal maxPrice);
+            @Param("maxPrice") BigDecimal maxPrice,
+            @Param("description") String description);
+
     Optional<Product> findTopByOrderByOriginalPriceDesc();
     Optional<Product> findTopByOrderByOriginalPriceAsc();
 }

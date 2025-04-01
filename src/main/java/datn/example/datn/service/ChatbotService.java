@@ -46,6 +46,7 @@ public class ChatbotService {
         String name = extractKeyword(message, "(?i)(information)\\s*[:=]?\\s*([^,]+)");
         String type = extractKeyword(message, "(?i)(type)\\s*[:=]?\\s*([^,]+)");
         String categoryName = extractKeyword(message, "(?i)(category)\\s*[:=]?\\s*([^,]+)");
+        String description = extractKeyword(message, "(?i)(carbon|steel|aluminum|titanium|magnesium)\\s*[:=]?\\s*([^,]+)");
         BigDecimal minPrice = extractPrice(message, "(?i)(from|min)\\s*(\\d+)");
         BigDecimal maxPrice = extractPrice(message, "(?i)(to|max)\\s*(\\d+)");
 
@@ -66,11 +67,14 @@ public class ChatbotService {
                 (type != null && !type.isBlank()) ? type.trim() : null,
                 categoryId,
                 minPrice,
-                maxPrice
+                maxPrice,
+                (description != null && !description.isBlank()) ? description.trim() : null  // Thêm mô tả vào tìm kiếm
         );
-            if (name == null && type == null && categoryName == null && minPrice == null && maxPrice == null) {
-                return null;
-            }
+
+        if (name == null && type == null && categoryName == null && minPrice == null && maxPrice == null && description == null) {
+            return null;
+        }
+
 
         List<ProductResponseDto> productDtos = products.stream().map(productMapper::toDto).collect(Collectors.toList());
 
