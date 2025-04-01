@@ -4,8 +4,12 @@ import datn.example.datn.dto.request.CartDetailRequest;
 import datn.example.datn.dto.request.CartRequest;
 import datn.example.datn.dto.response.CartResponse;
 import datn.example.datn.service.CartService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user/cart")
@@ -33,8 +37,14 @@ public class UserCartController {
         return cartService.addToCart(userId, request);
     }
 
-    @DeleteMapping("/{userId}/clear")
-    public void clearCart(@PathVariable Long userId) {
-        cartService.clearCart(userId);
-    }
+//    @DeleteMapping("/{userId}/clear")
+//    public void clearCart(@PathVariable Long userId) {
+//        cartService.clearCart(userId);
+//    }
+@DeleteMapping("/remove-items/{userId}/{cartDetailId}")
+public ResponseEntity<?> removeItemFromCart(@PathVariable Long userId, @PathVariable Long cartDetailId) {
+    return cartService.removeItemFromCart(userId, cartDetailId)
+            ? ResponseEntity.ok().build()
+            : ResponseEntity.notFound().build();
+}
 }
