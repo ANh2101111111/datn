@@ -27,7 +27,6 @@ const HeaderIcons: React.FC<IconsProps> = ({ icons }) => {
     enabled: !!userId,
     refetchOnMount: true,
   });
-  console.log("🚀 352 ~ cart:", cart);
 
   return (
     <div className="flex items-center gap-4 md:gap-6">
