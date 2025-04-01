@@ -33,7 +33,7 @@ const Header: React.FC = () => {
         }
         return icon;
       })
-      .filter((item) => item);
+      .filter((item) => !!item);
   }, [data?.username, isLogged]);
   console.log(data, "1221", listNavBar);
 

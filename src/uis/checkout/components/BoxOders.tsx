@@ -1,12 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
+
+"use client";
+
 import React from "react";
-import { OrderItem } from "./data";
+import { useAuth } from "@/app/context";
+import { useGetCarts } from "@/api/cart";
 
-interface BoxOrdersProps {
-  orders: OrderItem[];
-}
+const BoxOrders: React.FC = () => {
+  const { userId } = useAuth();
 
-const BoxOrders: React.FC<BoxOrdersProps> = ({ orders }) => {
+  const { data } = useGetCarts({
+    variables: Number(userId),
+    enabled: !!userId,
+    refetchOnMount: true,
+  });
+
   return (
     <div className="border p-6 shadow-lg rounded-lg bg-brand-thrid">
       {/* Header */}
@@ -18,20 +26,20 @@ const BoxOrders: React.FC<BoxOrdersProps> = ({ orders }) => {
       </div>
 
       <div className="space-y-4">
-        {orders.map((item) => (
+        {data?.cartDetails.map((item) => (
           <div
-            key={item.id}
+            key={item.cartDetailId}
             className="flex items-center border-b last:border-b-0 pb-3"
           >
             <img
               src={item.image}
-              alt={item.name}
+              alt={item.productName}
               className="w-16 h-16 rounded-lg object-cover shadow-md"
             />
 
             <div className="flex-1 pl-4">
               <p className=" text-text-medium font-bold font-quicksand text-text-heading leading-tight">
-                {item.name}
+                {item.productName}
               </p>
             </div>
 
@@ -40,7 +48,7 @@ const BoxOrders: React.FC<BoxOrdersProps> = ({ orders }) => {
             </div>
 
             <span className="font-bold text-heading-4 font-quicksand text-scale-color5">
-              ${item.price.toFixed(2)}
+              ${(item.price * item.quantity).toFixed(2)}
             </span>
           </div>
         ))}

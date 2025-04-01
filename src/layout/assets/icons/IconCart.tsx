@@ -1,10 +1,10 @@
 import * as React from "react";
 
 const IconCart: React.FC<React.SVGProps<SVGSVGElement>> = () => (
-    <svg
+  <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16px"
-    height="16px"
+    width="24px"
+    height="24px"
     fill="none"
     viewBox="0 0 25 25"
   >
