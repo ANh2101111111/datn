@@ -12,6 +12,7 @@ import { useAuth } from "@/app/context";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { queryClient } from "@/app/provider";
+import { Route } from "@/types/route";
 
 type FiledValues = {
   fullName: string;
@@ -38,7 +39,7 @@ const Checkout = () => {
   const createOrderMutation = useMutation(createOrder, {
     onSuccess: () => {
       toast.success("Order success");
-      router.push("/");
+      router.push(Route.DASHBOARD);
       queryClient.invalidateQueries(["CART"]);
     },
     onError: () => {

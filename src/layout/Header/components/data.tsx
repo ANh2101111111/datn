@@ -13,7 +13,12 @@ export const DATA = {
 
   icons: [
     { icon: IconAccount, label: "Login", path: "/login" },
-    { icon: IconAccount, label: "Account", path: "/account", isPrivate: true },
+    {
+      icon: IconAccount,
+      label: "Account",
+      path: "/dashboard",
+      isPrivate: true,
+    },
     { icon: IconCompare, label: "Compare", path: "/compare" },
     { icon: IconWishlist, label: "Wishlist", path: "/wishlist" },
     { icon: IconCart, label: "Cart", path: "/cart", isPrivate: true },

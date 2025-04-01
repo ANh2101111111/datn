@@ -1,12 +1,21 @@
 "use client";
 
 import React from "react";
-import { Order } from "./data";
 import { useRouter } from "next/navigation";
+import { IOrder } from "@/api/order";
+import dayjs from "dayjs";
 
 interface OrderRowProps {
-  order: Order;
+  order: IOrder;
 }
+
+const ORDER_STATUS_MAPPING: Record<string, string> = {
+  PENDING: "Processing",
+  CONFIRMED: "Confirmed",
+  CANCELLEd: "Cancelled",
+  PAID: "Paid",
+  COMPLETED: "Completed",
+};
 
 const OrderRow: React.FC<OrderRowProps> = ({ order }) => {
   const router = useRouter();
@@ -17,19 +26,23 @@ const OrderRow: React.FC<OrderRowProps> = ({ order }) => {
 
   return (
     <tr className="border text-text-medium p-[30px]">
-      <td className="py-2 px-4 text-text-body">#{order.id}</td>
-      <td className="py-2 px-4 text-text-body">{order.date}</td>
+      <td className="py-2 px-4 text-text-body">#{order.orderId}</td>
+      <td className="py-2 px-4 text-text-body">
+        {dayjs(order.createdAt).format("DD/MM/YYYY HH:mm:ss")}
+      </td>
       <td
         className={`py-2 px-4 text-text-medium ${
-          order.status === "Processing"
+          order.orderStatus === "PENDING"
             ? "text-colorButton-brand1hover"
             : "text-brand-primary"
         }`}
       >
-        {order.status}
+        {ORDER_STATUS_MAPPING[order.orderStatus]}
       </td>
       <td className="py-2 px-4 text-text-body">
-        {order.total} for {order.items} item{order.items > 1 ? "s" : ""}
+        {order.totalAmount.toLocaleString()} VND for {order.orderDetails.length}{" "}
+        item
+        {order.orderDetails.length > 1 ? "s" : ""}
       </td>
       <td
         onClick={handleGoToReview}
