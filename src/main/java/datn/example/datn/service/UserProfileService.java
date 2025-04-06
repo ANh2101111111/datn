@@ -29,8 +29,17 @@ public class UserProfileService {
     // Lấy UserProfile theo userId
     public UserProfileResponse getUserProfile(Long userId) {
         Optional<UserProfile> userProfileOptional = userProfileRepository.findByUser_UserId(userId);
-        return userProfileOptional.map(userProfileMapper::toResponseDTO).orElse(null);
+
+        if (userProfileOptional.isPresent()) {
+            return userProfileMapper.toResponseDTO(userProfileOptional.get());
+        }
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            return userProfileMapper.toResponseFromUserOnly(userOptional.get());
+        }
+        return null;
     }
+
 
     // Tạo UserProfile mới
     public UserProfileResponse createUserProfile(Long userId, UserProfileRequest requestDTO) {

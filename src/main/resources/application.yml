@@ -1,5 +1,5 @@
 gemini:
-  api-key: AIzaSyC90BtBsTYf-zt5DsMVSOap3W9zGhAt8BY
+  api-key: AIzaSyB4iCJcNBs4-4KiJnhLqMwfnLhXLXpyMsM
 server:
   address: 0.0.0.0
   port: 8080

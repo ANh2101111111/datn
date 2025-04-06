@@ -4,7 +4,7 @@ import lombok.Data;
 @Data
 public class ReviewResponseDTO {
     private Long reviewId;
-    private String username; // Tên người dùng
+    private String username;
     private int rating;
     private String comment;
 }

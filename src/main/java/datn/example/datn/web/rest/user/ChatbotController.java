@@ -22,12 +22,12 @@ public class ChatbotController {
             @RequestParam String message,
             @RequestParam(defaultValue = "en") String lang
     ) {
-        return ResponseEntity.ok(chatbotService.getChatbotResponse(message, lang));
+        return ResponseEntity.ok(chatbotService.getChatbotResponse(message));
     }
 
     @PostMapping(value = "/ask", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ChatbotResponseDto> askChatbot(@RequestBody ChatbotRequestDto request) {
-        String lang = "en";
-        return ResponseEntity.ok(chatbotService.getChatbotResponse(request.getMessage(), lang));
+        String message = request.getMessage(); // Lấy tin nhắn từ request
+        return ResponseEntity.ok(chatbotService.getChatbotResponse(message));
     }
 }

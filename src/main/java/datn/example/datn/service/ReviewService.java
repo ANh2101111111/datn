@@ -57,7 +57,7 @@ public class ReviewService {
 
         ReviewResponseDTO responseDTO = new ReviewResponseDTO();
         responseDTO.setReviewId(review.getReviewId());
-        responseDTO.setUsername(review.getUser().getUsername()); // Giả sử User có phương thức getUsername()
+        responseDTO.setUsername(review.getUser().getUsername());
         responseDTO.setRating(review.getRating());
         responseDTO.setComment(review.getComment());
 
@@ -69,14 +69,27 @@ public class ReviewService {
         return reviews.stream().map(review -> {
             ReviewResponseDTO responseDTO = new ReviewResponseDTO();
             responseDTO.setReviewId(review.getReviewId());
-            responseDTO.setUsername(review.getUser().getUsername()); // Giả sử User có phương thức getUsername()
+            responseDTO.setUsername(review.getUser().getUsername());
             responseDTO.setRating(review.getRating());
             responseDTO.setComment(review.getComment());
             return responseDTO;
         }).collect(Collectors.toList());
     }
+    public List<ReviewResponseDTO> getReviewsByBicycleId(Long bicycleId) {
+        List<Review> reviews = reviewRepository.findByProduct_BicycleId(bicycleId);
 
-    public void deleteReview(Long reviewId) {
+        return reviews.stream().map(review -> {
+            ReviewResponseDTO dto = new ReviewResponseDTO();
+            dto.setReviewId(review.getReviewId());
+            dto.setRating(review.getRating());
+            dto.setComment(review.getComment());
+            dto.setUsername(review.getUser().getUsername());
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+
+public void deleteReview(Long reviewId) {
         if (!reviewRepository.existsById(reviewId)) {
             throw new RuntimeException("Review not found");
         }

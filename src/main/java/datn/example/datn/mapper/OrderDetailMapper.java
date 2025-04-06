@@ -36,7 +36,7 @@ public class OrderDetailMapper {
     public OrderDetailResponse toResponse(OrderDetail orderDetail) {
         OrderDetailResponse response = new OrderDetailResponse();
         response.setOrderDetailId(orderDetail.getId());
-        response.setOrderId(orderDetail.getOrder().getOrderId());
+        response.setBicycleId(orderDetail.getProduct().getBicycleId());
         response.setProductName(orderDetail.getProduct().getName()); // Lấy name từ product
 
         // Lấy giá đã giảm

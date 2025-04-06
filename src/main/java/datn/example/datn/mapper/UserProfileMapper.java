@@ -1,6 +1,5 @@
 package datn.example.datn.mapper;
 
-
 import datn.example.datn.dto.request.UserProfileRequest;
 import datn.example.datn.dto.response.UserProfileResponse;
 import datn.example.datn.entity.User;
@@ -48,5 +47,15 @@ public class UserProfileMapper {
         userProfile.setPhone(requestDTO.getPhone());
         userProfile.setAvatar(requestDTO.getAvatar());
         userProfile.setAddress(requestDTO.getAddress());
+    }
+
+    // Trường hợp UserProfile chưa có, chỉ trả về username từ User
+    public UserProfileResponse toResponseFromUserOnly(User user) {
+        if (user == null) {
+            return null;
+        }
+        UserProfileResponse dto = new UserProfileResponse();
+        dto.setUsername(user.getUsername());
+        return dto;
     }
 }
