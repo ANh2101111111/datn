@@ -15,6 +15,10 @@ import RecentOrders from "@/components/Dashboard/eCommerce/RecentOrders";
 import TeamMembersList from "@/components/Dashboard/eCommerce/TeamMembersList";
 import BestSellingProducts from "@/components/Dashboard/eCommerce/BestSellingProducts";
 import LiveVisitsOnOurSite from "@/components/Dashboard/eCommerce/LiveVisitsOnOurSite";
+import ProductDescription from '@/components/eCommerce/ProductDetails/ProductDescription';
+import ProductDetails from './ecommerce/product-details';
+import Products from './ecommerce/products';
+import OrdersList from './ecommerce/orders-list';
 
 export default function eCommerce() {
   return (
@@ -41,7 +45,7 @@ export default function eCommerce() {
       </Grid>
 
       {/* Recent Orders */}
-      <RecentOrders />
+      <OrdersList />
     </>
   );
 }

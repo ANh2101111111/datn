@@ -36,8 +36,7 @@ const LockScreenForm = () => {
                     <div className={styles.headerContent}>
                       <h1>Welcome to admash Dashboard!</h1>
                       <p>
-                        Hello Andrew Burns, enter your password to unlock the
-                        screen !
+                        Hello !
                       </p>
                     </div>
                     <img

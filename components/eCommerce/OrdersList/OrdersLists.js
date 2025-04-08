@@ -126,7 +126,6 @@ const OrdersLists = () => {
           <TableHead sx={{ background: "#F7FAFF" }}>
             <TableRow>
               <TableCell>Order ID</TableCell>
-              <TableCell>Customer</TableCell>
               <TableCell>Product</TableCell>
               <TableCell>Quantity</TableCell>
               <TableCell>Price</TableCell>
@@ -142,7 +141,6 @@ const OrdersLists = () => {
               .map((order) => (
                 <TableRow key={order.orderId}>
                   <TableCell>{order.orderId}</TableCell>
-                  <TableCell>{getUserName(order.userId)}</TableCell>
                   <TableCell>{order.orderDetails?.[0].productName}</TableCell>
                   <TableCell>{order.orderDetails?.[0].quantity}</TableCell>
                   <TableCell>{order.totalAmount}</TableCell>
@@ -178,7 +176,7 @@ const OrdersLists = () => {
           <TableFooter>
             <TableRow>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 count={orders.length}
                 rowsPerPage={rowsPerPage}
                 page={page}

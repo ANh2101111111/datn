@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
     <>
       <Head>
         <title>
-          Admash - Material Design React Next Admin Dashboard Template
+         bicycle website with AI
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>

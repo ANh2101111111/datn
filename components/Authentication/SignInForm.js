@@ -86,15 +86,7 @@ const SignInForm = () => {
                   mb: "30px",
                 }}
               >
-                <Link href="#" className={styles.googleBtn}>
-                  <img src="/images/google-icon.png" />
-                  Sign in with Google
-                </Link>
-
-                <Link href="#" className={styles.fbBtn}>
-                  <img src="/images/fb-icon.png" />
-                  Sign in with Facebook
-                </Link>
+               
               </Box>
 
               <div className={styles.or}>
