@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import CartSummary from "./components/CartSummary";
 import CartItemComponent from "./components/CartItem.tsx";
 import { useGetCarts } from "@/api/cart";
@@ -18,6 +18,12 @@ const Cart = () => {
     enabled: !!userId,
     refetchOnMount: true,
   });
+
+  const totalPrice = useMemo(() => {
+    return data?.cartDetails?.reduce((acc, item) => {
+      return acc + item.price * item.quantity;
+    }, 0);
+  }, [data?.cartDetails]);
 
   return (
     <div className="container mx-auto p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -46,7 +52,7 @@ const Cart = () => {
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        <CartSummary totalPrice={data?.totalAmount ?? 0} />
+        <CartSummary totalPrice={totalPrice ?? 0} />
       </div>
     </div>
   );
