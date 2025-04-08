@@ -14,6 +14,7 @@ export interface IOrder {
   totalAmount: number;
   orderStatus: "PENDING" | "CONFIRMED" | "CANCELED" | "PAID" | "COMPLETED";
   orderDetails: {
+    bicycleId: number;
     orderDetailId: number;
     orderId: number;
     productName: string;
@@ -23,4 +24,11 @@ export interface IOrder {
   }[];
   fullName: string;
   createdAt: string;
+}
+
+export interface IReview {
+  bicycleId: number;
+  userId: number;
+  rating: number;
+  comment: string;
 }

@@ -1,17 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RatingStars from "./RatingStars";
-import { Review } from "./data";
 import Button from "@/uis/common/button";
 import Input from "@/uis/common/input";
+import { useGetUserInfo } from "@/hooks/useGetUserInfo";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter, useSearchParams } from "next/navigation";
+import { reviewProduct } from "@/api/order";
+import { useAuth } from "@/app/context";
 
-interface ReviewFormProps {
-  onSubmit: (review: Review) => void;
-}
+const ReviewForm: React.FC = () => {
+  const { data } = useGetUserInfo();
+  const { userId } = useAuth();
 
-const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit }) => {
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const productIds = searchParams.get("productIds");
+
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-  const [username, setUsername] = useState("Người dùng ẩn danh");
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    if (data) {
+      setUserName(data.username);
+    }
+  }, [data]);
+
+  const reviewMutation = useMutation({
+    mutationFn: async () => {
+      const productIdsArray = productIds?.split(",").map((id) => Number(id));
+      const reviewPromises = productIdsArray?.map((productId) =>
+        reviewProduct({
+          bicycleId: productId,
+          userId: Number(userId),
+          rating,
+          comment,
+        })
+      );
+
+      if (reviewPromises) {
+        await Promise.all(reviewPromises);
+        return true;
+      }
+
+      return false;
+    },
+    onSuccess: () => {
+      alert("Đánh giá thành công!");
+
+      router.back();
+    },
+    onError: (error) => {
+      console.error("Error submitting review:", error);
+      alert("Đã xảy ra lỗi khi gửi đánh giá.");
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,16 +64,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit }) => {
       return;
     }
 
-    const newReview: Review = {
-      id: Date.now(),
-      username,
-      rating,
-      comment,
-    };
-
-    onSubmit(newReview);
-    setRating(0);
-    setComment("");
+    reviewMutation.mutate();
   };
 
   return (
@@ -41,8 +76,8 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit }) => {
         type="text"
         className="w-full p-2 border rounded-md mb-3"
         placeholder="Nhập tên của bạn..."
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        value={userName}
+        readOnly
       />
 
       <RatingStars rating={rating} onRatingChange={setRating} />
