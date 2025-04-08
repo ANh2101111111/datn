@@ -16,7 +16,7 @@ export const DATA = {
     {
       icon: IconAccount,
       label: "Account",
-      path: "/dashBoard",
+      path: "/dashboard",
       isPrivate: true,
     },
     { icon: IconCompare, label: "Compare", path: "/compare" },

@@ -21,7 +21,12 @@ const OrderRow: React.FC<OrderRowProps> = ({ order }) => {
   const router = useRouter();
 
   const handleGoToReview = () => {
-    router.push("/productReview");
+    const productIds = order.orderDetails
+      .map((item) => item.bicycleId)
+      .join(",");
+
+    const queryStr = `?productIds=${productIds}`;
+    router.push(`/productReview${queryStr}`);
   };
 
   return (
@@ -44,13 +49,16 @@ const OrderRow: React.FC<OrderRowProps> = ({ order }) => {
         item
         {order.orderDetails.length > 1 ? "s" : ""}
       </td>
-      <td
-        onClick={handleGoToReview}
-        className="py-2 px-4 text-badge-brand-1 cursor-pointer hover:underline"
-        role="button"
-      >
-        Go To Review
-      </td>
+
+      {order.orderStatus === "COMPLETED" && (
+        <td
+          onClick={handleGoToReview}
+          className="py-2 px-4 text-badge-brand-1 cursor-pointer hover:underline"
+          role="button"
+        >
+          Go To Review
+        </td>
+      )}
     </tr>
   );
 };
