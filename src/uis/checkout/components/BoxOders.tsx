@@ -26,7 +26,7 @@ const BoxOrders: React.FC = () => {
       </div>
 
       <div className="space-y-4">
-        {data?.cartDetails.map((item) => (
+      {(data?.cartDetails ?? []).map((item) =>(
           <div
             key={item.cartDetailId}
             className="flex items-center border-b last:border-b-0 pb-3"

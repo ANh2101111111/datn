@@ -1,4 +1,4 @@
-import Dashboard from "@/uis/dashboard";
+import Dashboard from "@/uis/dashBoard";
 import React from "react";
 
 export default function DashboardPage() {
