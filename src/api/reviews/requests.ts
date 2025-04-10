@@ -7,8 +7,8 @@ export const getReviews = async (): Promise<IReview[]> => {
       url: "/api/user/reviews",
       method: "GET",
     });
-    console.log("API response:", data); // Kiểm tra phản hồi từ API.
-    return data; // Trả về danh sách review.
+    console.log("API response:", data); 
+    return data; 
   } catch (error) {
     console.error("Error fetching reviews:", error);
     throw error;
