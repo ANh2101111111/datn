@@ -42,7 +42,7 @@ const SignUpForm = () => {
                 />
               </Typography>
 
-              <Typography fontSize="15px" mb="30px">
+              <Typography fontSize="30px" mb="30px">
                 Already have an account?{" "}
                 <Link
                   href="/authentication/sign-in/"

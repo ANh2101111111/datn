@@ -114,7 +114,7 @@ const SignInForm = () => {
                           display: "block",
                         }}
                       >
-                        Email
+                        Username
                       </Typography>
 
                       <TextField
