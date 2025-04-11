@@ -525,7 +525,7 @@ const BrowserUsedAndTrafficReports = () => {
                   count={rows.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
-                  SelectProps={{
+                  SelectProps={{ 
                     inputProps: {
                       "aria-label": "rows per page",
                     },

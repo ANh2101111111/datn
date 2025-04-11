@@ -23,7 +23,7 @@ import OrdersList from './ecommerce/orders-list';
 export default function eCommerce() {
   return (
     <>
-      {/* Page title */}
+      {/* Page title
       <div className={styles.pageTitle}>
         <h1>Thống kê</h1>
         <ul>
@@ -34,7 +34,7 @@ export default function eCommerce() {
             Thống kê
           </li>
         </ul>
-      </div>
+      </div> */}
 
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 2 }}>
         <Grid item xs={12} md={12} lg={12} xl={8}>

@@ -121,7 +121,7 @@ const SignInForm = () => {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label=" Username"
                         name="email"
                         autoComplete="email"
                         InputProps={{
