@@ -24,6 +24,50 @@ export default function Chatbot() {
         setInput("");
 
         try {
+            if (input.toLowerCase().includes("hello") || input.toLowerCase().includes("xin chào")) {
+                const greetingResponse = "Hello! How can I assist you today?";
+                setMessages([...newMessages, { sender: "bot", text: greetingResponse }]);
+                setLoading(false);
+                setInput("");
+                return;
+            }
+            
+            if (input.toLowerCase().includes("how many products") || input.toLowerCase().includes("có bao nhiêu sản phẩm") || input.toLowerCase().includes("combien de produits")) {
+                                const productCountResponse = "There are 62 products available."; // Thay 'X' bằng số sản phẩm thực tế
+                                setMessages([...newMessages, { sender: "bot", text: productCountResponse }]);
+                                setLoading(false);
+                                setInput("");
+                                return;
+                            }
+                
+            if (input.toLowerCase().includes("how many categories") || input.toLowerCase().includes("có bao nhiêu danh mục") || input.toLowerCase().includes("combien de catégories")) {
+                                const categoryCountResponse = "There are 9 categories available."; // Thay 'Y' bằng số danh mục thực tế
+                                setMessages([...newMessages, { sender: "bot", text: categoryCountResponse }]);
+                                setLoading(false);
+                                setInput("");
+                                return;
+                            }
+                         if (
+                                input.toLowerCase().includes("list categories") || 
+                                input.toLowerCase().includes("danh sách danh mục") || 
+                                input.toLowerCase().includes("quelles sont les categories")
+                            ) {
+                                const categories = [
+                                    "Folding Bike", 
+                                    "Electric Bike", 
+                                    "Mountain Bikes", 
+                                    "Kids Bikes", 
+                                    "Sports Bikes", 
+                                    "Road Racing Bikes", 
+                                    "Classic Bikes"
+                                ];
+                                
+                                const categoryListResponse = `The available categories are: ${categories.join(", ")}.`;
+                                setMessages([...newMessages, { sender: "bot", text: categoryListResponse }]);
+                                setLoading(false);
+                                setInput("");
+                                return;
+                            }
             const response = await axios.post(
                 `${API_URL}/user/chatbot/ask`,
                 { message: input },
