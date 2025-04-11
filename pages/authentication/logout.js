@@ -26,7 +26,7 @@ export default function Logout() {
           >
             <Box>
               <img 
-                src="/images/logo.png" 
+                src="/images/LogoBike.svg" 
                 alt="Black logo" 
                 className="black-logo" 
               />

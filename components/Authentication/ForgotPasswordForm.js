@@ -34,7 +34,7 @@ const ForgotPasswordForm = () => {
               <Typography as="h1" fontSize="28px" fontWeight="700" mb="5px">
                 Forgot Password?{" "}
                 <img
-                  src="/images/favicon.png"
+                  src="/images/LogoBike.svg"
                   alt="favicon"
                   className={styles.favicon}
                 />

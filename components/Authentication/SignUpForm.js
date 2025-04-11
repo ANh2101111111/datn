@@ -36,7 +36,7 @@ const SignUpForm = () => {
               <Typography as="h1" fontSize="28px" fontWeight="700" mb="5px">
                 Get’s started.{" "}
                 <img
-                  src="/images/favicon.png"
+                  src="/images/LogoBike.svg"
                   alt="favicon"
                   className={styles.favicon}
                 />

@@ -46,7 +46,7 @@ const Sidebar = ({ toogleActive }) => {
             >
               <Link href='/'>
                 <img 
-                  src="/images/logo.png" alt="Logo" 
+                  src="/images/LogoBike.svg" alt="Logo" 
                   className='black-logo' 
                 />
 
