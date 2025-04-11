@@ -19,7 +19,7 @@ export const DATA = {
       path: "/dashboard",
       isPrivate: true,
     },
-    { icon: IconCompare, label: "Compare", path: "/compare" },
+    { icon: IconCompare, label: "shop", path: "/shop" },
     { icon: IconWishlist, label: "Wishlist", path: "/wishlist" },
     { icon: IconCart, label: "Cart", path: "/cart", isPrivate: true },
   ],
